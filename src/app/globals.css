@@ -3,11 +3,19 @@
 @theme {
   --color-cloutera-black: #1b1818;
 
+  --color-grey-100: #f0f2f5;
+  --color-grey-300: #d0d5dd;
+  --color-grey-500: #667185;
+  --color-grey-700: #344054;
+  --color-grey-800: #292d32;
+
   --color-office-brown-75: #f0e6e6;
   --color-office-brown-100: #e4dbdb;
   --color-office-brown-400: #a29999;
+  --color-office-brown-700: #645d5d;
   --color-office-brown-900: #3e3838;
 
+  --color-foundation-red-normal: #de3746;
   --color-foundation-red-light: #fcebed;
 
   --radius-20: 20px;
