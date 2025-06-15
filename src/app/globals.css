@@ -1,0 +1,15 @@
+@import "tailwindcss";
+
+@theme {
+  --color-cloutera-black: #1b1818;
+
+  --color-office-brown-75: #f0e6e6;
+  --color-office-brown-100: #e4dbdb;
+  --color-office-brown-400: #a29999;
+  --color-office-brown-900: #3e3838;
+
+  --color-foundation-red-light: #fcebed;
+
+  --radius-20: 20px;
+  --radius-30: 30px;
+}
