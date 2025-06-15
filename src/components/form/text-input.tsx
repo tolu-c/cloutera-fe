@@ -37,12 +37,13 @@ const TextInput = ({ name, label, type, error, ...props }: TextInputProps) => {
             {...props}
           />
           {isPassword && (
-            <span
+            <button
+              type="button"
               className="absolute top-1/2 right-4 -translate-y-1/2"
               onClick={togglePasswordVisibility}
             >
               <EyeSlashIcon className="text-color-grey-500 size-5" />
-            </span>
+            </button>
           )}
         </div>
         {error && (
