@@ -9,7 +9,7 @@ import { usePathname } from "next/navigation";
 
 const TopBar = () => {
   const pathname = usePathname();
-  const pageTitle = pathname.replace("/", "");
+  const pageTitle = pathname.split("/").filter(Boolean).pop() || "";
 
   return (
     <div className="bg-foundation-red-normal flex h-22 w-full items-center justify-center">
