@@ -29,9 +29,9 @@ const AuthLayoutContainer = ({ children }: AuthLayoutContainerProps) => {
           <p className="text-office-brown-75 text-base">
             Rayna has transformed the way our team approaches design. The sheer
             range of components and the seamless integration of the design
-            system into our workflow have been game-changers. It's like having a
-            toolkit filled with magic that accelerates our projects without
-            compromising on quality.
+            system into our workflow have been game-changers. It&apos;s like
+            having a toolkit filled with magic that accelerates our projects
+            without compromising on quality.
           </p>
 
           <div className="flex items-center gap-3">
