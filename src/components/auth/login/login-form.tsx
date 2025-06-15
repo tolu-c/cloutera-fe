@@ -5,7 +5,7 @@ import Link from "next/link";
 import { TextInput } from "@/components/form";
 import { Button } from "@/components/ui";
 import { loginSchema } from "@/types/schema";
-import { z, ZodError } from "zod";
+import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -15,25 +15,13 @@ const LoginForm = () => {
   const {
     register,
     handleSubmit,
-    setError,
     formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(loginSchema),
   });
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    try {
-      const validData = await loginSchema.safeParseAsync(data);
-      if (validData.success) {
-        console.log(validData.data);
-      }
-    } catch (error) {
-      if (error instanceof ZodError) {
-        error.issues.forEach((issue) => {
-          setError(issue.path[0] as keyof FormData, { message: issue.message });
-        });
-      }
-    }
+    console.log(data);
   };
 
   return (
