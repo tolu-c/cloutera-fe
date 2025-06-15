@@ -7,7 +7,17 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\""
+    "format": "prettier --write \"src/**/*.{js,jsx,ts,tsx,json,css,md}\"",
+    "prepare": "husky"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.{json,css,md}": [
+      "prettier --write"
+    ]
   },
   "dependencies": {
     "next": "15.3.3",
@@ -22,6 +32,8 @@
     "@types/react-dom": "^19",
     "eslint": "^9",
     "eslint-config-next": "15.3.3",
+    "husky": "^9.1.7",
+    "lint-staged": "^16.1.2",
     "prettier": "^3.5.3",
     "prettier-plugin-tailwindcss": "^0.6.12",
     "tailwindcss": "^4",
