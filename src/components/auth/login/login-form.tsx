@@ -8,6 +8,7 @@ import { loginSchema } from "@/types/schema";
 import { z } from "zod";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useRouter } from "next/navigation";
 
 type FormData = z.infer<typeof loginSchema>;
 
@@ -19,9 +20,11 @@ const LoginForm = () => {
   } = useForm<FormData>({
     resolver: zodResolver(loginSchema),
   });
+  const router = useRouter();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log(data);
+    router.push("/order");
   };
 
   return (
