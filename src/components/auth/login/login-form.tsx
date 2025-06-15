@@ -1,0 +1,72 @@
+"use client";
+
+import Link from "next/link";
+
+import { TextInput } from "@/components/form";
+import { Button } from "@/components/ui";
+import { loginSchema } from "@/types/schema";
+import { z, ZodError } from "zod";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+
+type FormData = z.infer<typeof loginSchema>;
+
+const LoginForm = () => {
+  const {
+    register,
+    handleSubmit,
+    setError,
+    formState: { errors },
+  } = useForm<FormData>({
+    resolver: zodResolver(loginSchema),
+  });
+
+  const onSubmit: SubmitHandler<FormData> = async (data) => {
+    try {
+      const validData = await loginSchema.safeParseAsync(data);
+      if (validData.success) {
+        console.log(validData.data);
+      }
+    } catch (error) {
+      if (error instanceof ZodError) {
+        error.issues.forEach((issue) => {
+          setError(issue.path[0] as keyof FormData, { message: issue.message });
+        });
+      }
+    }
+  };
+
+  return (
+    <form
+      onSubmit={handleSubmit(onSubmit)}
+      className="flex w-full flex-col gap-8"
+    >
+      <div className="flex w-full flex-col gap-4">
+        <TextInput
+          label="Email Address"
+          error={errors.email?.message}
+          {...register("email")}
+        />
+
+        <TextInput
+          label="Password"
+          type="password"
+          error={errors.password?.message}
+          {...register("password")}
+        />
+      </div>
+
+      <div className="flex flex-col items-center gap-6">
+        <Button type="submit">Sign in</Button>
+        <p className="text-office-brown-700 flex items-center gap-1 text-sm">
+          Forgot password?{" "}
+          <Link href="/" className="text-foundation-red-normal font-semibold">
+            Recover
+          </Link>
+        </p>
+      </div>
+    </form>
+  );
+};
+
+export default LoginForm;
