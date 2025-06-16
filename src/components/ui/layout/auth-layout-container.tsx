@@ -9,7 +9,7 @@ interface AuthLayoutContainerProps {
 
 const AuthLayoutContainer = ({ children }: AuthLayoutContainerProps) => {
   return (
-    <div className="grid h-screen w-full grid-cols-1 p-5 lg:grid-cols-2">
+    <div className="grid h-full w-full grid-cols-1 p-5 lg:grid-cols-2">
       <div className="rounded-30 bg-cloutera-black relative flex h-full w-full flex-col items-start justify-between overflow-hidden p-15">
         {/*<div className="absolute inset-0 top-0 z-10 size-full bg-[url(/images/auth-background-overlay.png)] bg-cover bg-center bg-no-repeat" />*/}
 

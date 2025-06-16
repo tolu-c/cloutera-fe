@@ -5,9 +5,15 @@ interface AuthCardProps {
   children: ReactNode;
   title: string;
   description: ReactNode;
+  showSocialLogin?: boolean;
 }
 
-const AuthCard = ({ children, title, description }: AuthCardProps) => {
+const AuthCard = ({
+  children,
+  title,
+  description,
+  showSocialLogin = true,
+}: AuthCardProps) => {
   return (
     <div className="flex w-full max-w-[454px] flex-col items-start gap-8">
       <div className="flex flex-col items-start gap-2">
@@ -21,17 +27,19 @@ const AuthCard = ({ children, title, description }: AuthCardProps) => {
 
       {children}
 
-      <div className="flex w-full flex-col items-center gap-6">
-        <div className="bg bg-grey-100 relative h-[1px] w-full">
-          <span className="text-grey-500 absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-sm">
-            OR
-          </span>
-        </div>
+      {showSocialLogin && (
+        <div className="flex w-full flex-col items-center gap-6">
+          <div className="bg bg-grey-100 relative h-[1px] w-full">
+            <span className="text-grey-500 absolute top-1/2 left-1/2 z-50 -translate-x-1/2 -translate-y-1/2 bg-white px-2 text-sm">
+              Or
+            </span>
+          </div>
 
-        <Button state="outline" radius="md">
-          Google
-        </Button>
-      </div>
+          <Button state="outline" radius="md">
+            Google
+          </Button>
+        </div>
+      )}
     </div>
   );
 };

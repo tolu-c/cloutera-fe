@@ -1,7 +1,6 @@
 "use client";
 
 import Link from "next/link";
-
 import { TextInput } from "@/components/form";
 import { Button } from "@/components/ui";
 import { loginSchema } from "@/types/schema";
@@ -51,7 +50,10 @@ const LoginForm = () => {
         <Button type="submit">Sign in</Button>
         <p className="text-office-brown-700 flex items-center gap-1 text-sm">
           Forgot password?{" "}
-          <Link href="/" className="text-foundation-red-normal font-semibold">
+          <Link
+            href="/forgot-password"
+            className="text-foundation-red-normal font-semibold"
+          >
             Recover
           </Link>
         </p>
