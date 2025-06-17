@@ -5,11 +5,13 @@ import { cn } from "@/utils/cn";
 import { OrderService } from "@/types/enums";
 
 export const OrdersServiceList = () => {
-  const [selectedService, setSelectedService] = useState(OrderService.All);
+  const [selectedService, setSelectedService] = useState<OrderService>(
+    OrderService.All,
+  );
 
   const servicesList = Object.values(OrderService);
 
-  const selectService = (service: string) => {
+  const selectService = (service: OrderService) => {
     setSelectedService(service);
   };
 
