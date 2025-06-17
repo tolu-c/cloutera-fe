@@ -1,6 +1,6 @@
 "use client";
 
-import { z } from "zod";
+import { z } from "zod/v4";
 import { newOrderSchema } from "@/types/schema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -14,7 +14,7 @@ export const NewOrderForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isValid },
+    formState: { errors },
   } = useForm<FormData>({
     resolver: zodResolver(newOrderSchema),
   });
@@ -29,9 +29,9 @@ export const NewOrderForm = () => {
       className="flex w-full flex-col items-start gap-6"
     >
       <SelectInput
-        options={Object.entries(OrderCategory).map(([k, v]) => ({
+        options={Object.keys(OrderCategory).map((k) => ({
           label: k,
-          value: v,
+          value: OrderCategory[k as keyof typeof OrderCategory],
         }))}
         label="Category"
         error={errors.category?.message}
@@ -39,9 +39,9 @@ export const NewOrderForm = () => {
       />
 
       <SelectInput
-        options={Object.entries(OrderService).map(([k, v]) => ({
+        options={Object.keys(OrderService).map((k) => ({
           label: k,
-          value: v,
+          value: OrderService[k as keyof typeof OrderService],
         }))}
         label="Service"
         error={errors.service?.message}
@@ -61,9 +61,7 @@ export const NewOrderForm = () => {
         type="number"
         {...register("quantity", { valueAsNumber: true })}
       />
-      <Button type="submit" disabled={!isValid}>
-        Submit
-      </Button>
+      <Button type="submit">Submit</Button>
     </form>
   );
 };
