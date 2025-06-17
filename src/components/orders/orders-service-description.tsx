@@ -46,7 +46,7 @@ export const OrdersServiceDescription = ({
           label={"Speed:"}
           value={speed ?? "-"}
         />
-        p
+
         <DescriptionLabel
           Icon={TimeFilledIcon}
           label={"Average Time:"}
