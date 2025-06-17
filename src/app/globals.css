@@ -1,13 +1,59 @@
 @import "tailwindcss";
 
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type="number"] {
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+input[type="number"]::-ms-clear,
+input[type="number"]::-ms-reveal {
+  display: none;
+}
+
+.card--gradient {
+  background: linear-gradient(
+    80.28deg,
+    #de3746 6.17%,
+    #dd3746 15.72%,
+    #db3645 23.49%,
+    #d73544 29.76%,
+    #d23442 34.79%,
+    #cb3240 38.87%,
+    #c4313e 42.26%,
+    #bd2f3b 45.25%,
+    #b42d39 48.09%,
+    #ab2a36 51.08%,
+    #a22833 54.47%,
+    #992630 58.55%,
+    #90242e 63.58%,
+    #88222b 69.85%,
+    #802028 77.62%,
+    #781e26 87.17%
+  );
+}
+
+@layer components {
+  .shadow-5 {
+    box-shadow: 0 4px 4px 0 #0000004d;
+  }
+}
+
 @theme {
   --color-cloutera-black: #1b1818;
+  --color-fade: #edeeef;
 
   --color-grey-100: #f0f2f5;
   --color-grey-300: #d0d5dd;
   --color-grey-500: #667185;
   --color-grey-700: #344054;
   --color-grey-800: #292d32;
+  --color-grey-900: #1f2226;
 
   --color-office-brown-75: #f0e6e6;
   --color-office-brown-100: #e4dbdb;
@@ -17,6 +63,7 @@
 
   --color-foundation-red-normal: #de3746;
   --color-foundation-red-light: #fcebed;
+  --color-foundation-red-white: #fdf5f6;
 
   --radius-20: 20px;
   --radius-30: 30px;
