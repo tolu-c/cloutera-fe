@@ -10,10 +10,10 @@ export const loginSchema = z.object({
 });
 
 export const newOrderSchema = z.object({
-  category: z.enum(Object.values(OrderCategory), {
+  category: z.enum(Object.values(OrderCategory) as [string, ...string[]], {
     message: "Please select a category",
   }),
-  service: z.enum(Object.values(OrderService), {
+  service: z.enum(Object.values(OrderService) as [string, ...string[]], {
     message: "Please select a service",
   }),
   link: z

@@ -2,7 +2,7 @@ import { ComponentProps } from "react";
 
 type IconProps = ComponentProps<"svg">;
 
-export const ShiedYesFilledIcon = ({ ...props }: Icon) => (
+export const ShiedYesFilledIcon = ({ ...props }: IconProps) => (
   <svg
     width="25"
     height="16"
@@ -48,7 +48,7 @@ export const TimerIcon = ({ ...props }: IconProps) => (
   </svg>
 );
 
-export const TimerRoundedIcon = ({ ...props }: Icon) => (
+export const TimerRoundedIcon = ({ ...props }: IconProps) => (
   <svg
     width="16"
     height="16"

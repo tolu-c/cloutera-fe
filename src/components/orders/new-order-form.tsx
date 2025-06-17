@@ -35,7 +35,6 @@ export const NewOrderForm = () => {
         }))}
         label="Category"
         error={errors.category?.message}
-        placeholder="Select a category"
         {...register("category")}
       />
 
@@ -46,7 +45,6 @@ export const NewOrderForm = () => {
         }))}
         label="Service"
         error={errors.service?.message}
-        placeholder="Select a service"
         {...register("service")}
       />
 
