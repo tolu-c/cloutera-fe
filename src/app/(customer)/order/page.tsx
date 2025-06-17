@@ -9,7 +9,7 @@ const OrderPage = () => {
   return (
     <div className="flex w-full flex-col items-start gap-16">
       <div className="flex w-full flex-col items-start gap-4">
-        <p className="text-2xl font-light">
+        <p className="px-4 text-2xl font-light">
           <span className="text-foundation-red-normal font-medium">
             Hello Oludotun!
           </span>{" "}
