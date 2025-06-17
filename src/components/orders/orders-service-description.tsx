@@ -39,19 +39,23 @@ export const OrdersServiceDescription = ({
         <DescriptionLabel
           Icon={TimerRoundedIcon}
           label={"Start Time:"}
-          value={startTime}
+          value={startTime ?? "-"}
         />
-        <DescriptionLabel Icon={TimerIcon} label={"Speed:"} value={speed} />
-
+        <DescriptionLabel
+          Icon={TimerIcon}
+          label={"Speed:"}
+          value={speed ?? "-"}
+        />
+        p
         <DescriptionLabel
           Icon={TimeFilledIcon}
           label={"Average Time:"}
-          value={avgTime}
+          value={avgTime ?? "-"}
         />
         <DescriptionLabel
           Icon={ShiedYesFilledIcon}
           label={"Guaranteed:"}
-          value={guaranteed}
+          value={guaranteed ?? "-"}
         />
       </div>
 
@@ -65,7 +69,7 @@ export const OrdersServiceDescription = ({
   );
 };
 
-interface DescriptionLabelProps extends LabelValuePair<T> {
+interface DescriptionLabelProps extends LabelValuePair {
   Icon: ElementType;
 }
 
@@ -77,7 +81,7 @@ const DescriptionLabel = ({ label, value, Icon }: DescriptionLabelProps) => {
         <p className="text-grey-800 text-base">{label}</p>
       </div>
 
-      <p>{value ?? "-"}</p>
+      <p>{value}</p>
     </div>
   );
 };
