@@ -4,7 +4,7 @@ import Link from "next/link";
 import { TextInput } from "@/components/form";
 import { Button } from "@/components/ui";
 import { loginSchema } from "@/types/schema";
-import { z } from "zod";
+import { z } from "zod/v4";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useRouter } from "next/navigation";

@@ -29,7 +29,8 @@ const SignupSuccessModal = ({
             <div className="flex w-full flex-col items-center gap-2">
               <h2 className="text-2xl leading-7 font-medium">Success</h2>
               <p className="text-center text-base leading-7">
-                We have just sent an email {email}
+                We have just sent an email to{" "}
+                <span className="font-semibold">{email}</span>
               </p>
             </div>
           </div>

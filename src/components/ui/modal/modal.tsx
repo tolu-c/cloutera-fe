@@ -10,7 +10,7 @@ type ModalProps = PropsWithChildren & {
   className?: string;
 };
 
-export const Modal = ({
+const Modal = ({
   open,
   close,
   children,
@@ -43,3 +43,4 @@ export const Modal = ({
     ? createPortal(content, document.getElementById("modal") as HTMLElement)
     : null;
 };
+export default Modal;
