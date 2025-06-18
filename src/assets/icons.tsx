@@ -2,6 +2,34 @@ import { ComponentProps } from "react";
 
 type IconProps = ComponentProps<"svg">;
 
+export const ExitIcon = ({ ...props }: IconProps) => (
+  <svg
+    width="29"
+    height="30"
+    viewBox="0 0 29 30"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M9.19678 20.0789L19.8028 9.4729"
+      stroke="#1E293B"
+      strokeWidth="2"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M9.19678 9.4729L19.8028 20.0789"
+      stroke="#1E293B"
+      strokeWidth="2"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export const ShiedYesFilledIcon = ({ ...props }: IconProps) => (
   <svg
     width="25"
