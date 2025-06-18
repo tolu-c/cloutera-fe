@@ -1,37 +1,34 @@
-import { z } from "zod";
+import { z } from "zod/v4";
 
 export const loginSchema = z.object({
   email: z
-    .string()
-    .min(1, { message: "Please enter an email" })
-    .email({ message: "Please enter a valid email" }),
-  password: z.string().min(1, { message: "Please enter a password" }),
+    .email({ error: "Please enter a valid email" })
+    .min(1, { error: "Please enter an email" }),
+  password: z.string().min(1, { error: "Please enter a password" }),
 });
 
 export const signupSchema = z
   .object({
-    username: z.string().min(1, { message: "Please enter a username" }),
+    username: z.string().min(1, { error: "Please enter a username" }),
     email: z
-      .string()
-      .min(1, { message: "Please enter an email" })
-      .email({ message: "Please enter a valid email" }),
-    firstName: z.string().min(1, { message: "Please enter your first name" }),
-    lastName: z.string().min(1, { message: "Please enter your last name" }),
+      .email({ error: "Please enter a valid email" })
+      .min(1, { error: "Please enter an email" }),
+    firstName: z.string().min(1, { error: "Please enter your first name" }),
+    lastName: z.string().min(1, { error: "Please enter your last name" }),
     password: z
       .string()
-      .min(8, { message: "Password must be at least 8 characters " }),
+      .min(8, { error: "Password must be at least 8 characters " }),
     confirmPassword: z
       .string()
-      .min(1, { message: "Please confirm your password" }),
+      .min(1, { error: "Please confirm your password" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
-    message: "Passwords do not match",
+    error: "Passwords do not match",
     path: ["confirmPassword"],
   });
 
 export const forgotPasswordSchema = z.object({
   email: z
-    .string()
-    .min(1, { message: "Please enter an email" })
-    .email({ message: "Please enter a valid email" }),
+    .email({ error: "Please enter a valid email" })
+    .min(1, { error: "Please enter an email" }),
 });
