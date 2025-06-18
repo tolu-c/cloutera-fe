@@ -5,7 +5,7 @@ const SignupPage = () => {
   return (
     <AuthCard
       title="Sign Up!"
-      description={<p>Get started in your social media success</p>}
+      description="Get started in your social media success"
     >
       <SignupForm />
     </AuthCard>

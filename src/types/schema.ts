@@ -19,15 +19,19 @@ export const signupSchema = z
     lastName: z.string().min(1, { message: "Please enter your last name" }),
     password: z
       .string()
-      .min(1, { message: "Password must be at least 8 characters " }),
+      .min(8, { message: "Password must be at least 8 characters " }),
     confirmPassword: z
       .string()
       .min(1, { message: "Please confirm your password" }),
   })
   .refine((data) => data.password === data.confirmPassword, {
     message: "Passwords do not match",
+    path: ["confirmPassword"],
   });
 
 export const forgotPasswordSchema = z.object({
-  email: z.string().email("Please enter a valid email address"),
+  email: z
+    .string()
+    .min(1, { message: "Please enter an email" })
+    .email({ message: "Please enter a valid email" }),
 });

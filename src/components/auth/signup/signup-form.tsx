@@ -1,20 +1,22 @@
 "use client";
 
-import Link from "next/link";
 import { Fragment, useState } from "react";
+import Link from "next/link";
+import { SubmitHandler, useForm } from "react-hook-form";
+import { z } from "zod";
+import { zodResolver } from "@hookform/resolvers/zod";
+
 import { TextInput } from "@/components/form";
 import { Button } from "@/components/ui";
 import { signupSchema } from "@/types/schema";
-import { z } from "zod";
-import { SubmitHandler, useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
-import Image from "next/image";
-import { Modal } from "@/components/ui/modal";
+import SignupSuccessModal from "./signup-modal";
 
 type FormData = z.infer<typeof signupSchema>;
 
 const SignupForm = () => {
   const [open, setOpen] = useState(false);
+  const [submittedEmail, setSubmittedEmail] = useState<string>("");
+
   const {
     register,
     handleSubmit,
@@ -25,6 +27,7 @@ const SignupForm = () => {
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
     console.log(data);
+    setSubmittedEmail(data.email);
     setOpen(true);
   };
 
@@ -86,36 +89,15 @@ const SignupForm = () => {
           </p>
         </div>
       </form>
-      <Modal open={open} close={handleClose}>
-        <div className="flex h-full w-full items-center justify-center">
-          <div className="flex flex-col items-center justify-center gap-4">
-            <div className="flex w-full flex-col items-center gap-6">
-              <Image
-                src="/images/success.png"
-                alt="success"
-                width={100}
-                height={100}
-              />
-              <div className="flex w-full flex-col items-center gap-2">
-                <h2 className="leadin</div>g-[120%] text-[25px] font-medium">
-                  Success
-                </h2>
-                <p className="text-center text-[16px] leading-[120%]">
-                  We have just sent an email ogunlesioludotun@gmail.com
-                </p>
-              </div>
-            </div>
-            <div className="flex w-full flex-col gap-2">
-              <p className="text-center text-[16px] leading-[120%]">
-                Didn&#39;t recieve the email?
-              </p>
-              <Button onClick={handleClose} className="">
-                Resend Email
-              </Button>
-            </div>
-          </div>
-        </div>
-      </Modal>
+      <SignupSuccessModal
+        open={open}
+        email={submittedEmail}
+        onClose={handleClose}
+        onResend={() => {
+          console.log("Resend email");
+          handleClose();
+        }}
+      />
     </Fragment>
   );
 };
