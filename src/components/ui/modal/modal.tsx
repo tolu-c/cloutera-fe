@@ -20,7 +20,7 @@ export const Modal = ({
   const content = (
     <div className="fixed inset-0 z-[70] flex items-end justify-center lg:items-center">
       <div
-        className="bg-secondary-600/70 absolute inset-0 z-[60] cursor-pointer backdrop-blur-[2px]"
+        className="absolute inset-0 z-[60] cursor-pointer bg-gray-600/70 backdrop-blur-[2px]"
         onClick={close}
       ></div>
       <div
