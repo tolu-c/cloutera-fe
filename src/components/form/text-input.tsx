@@ -7,9 +7,17 @@ import { EyeSlashIcon } from "@/assets/icons";
 interface TextInputProps extends ComponentProps<"input"> {
   error?: string;
   label?: string;
+  description?: string;
 }
 
-const TextInput = ({ name, label, type, error, ...props }: TextInputProps) => {
+const TextInput = ({
+  name,
+  label,
+  type,
+  description,
+  error,
+  ...props
+}: TextInputProps) => {
   const [inputType, setInputType] = useState(type || "text");
   const isPassword = type === "password";
 
@@ -46,6 +54,9 @@ const TextInput = ({ name, label, type, error, ...props }: TextInputProps) => {
             </button>
           )}
         </div>
+        {description && (
+          <span className="text-xs/4 text-slate-300">{description}</span>
+        )}
         {error && (
           <p className="text-foundation-red-normal mt-1 text-xs font-medium">
             {error}

@@ -3,11 +3,12 @@ import { cva, VariantProps } from "class-variance-authority";
 import { cn } from "@/utils/cn";
 
 const buttonVariants = cva(
-  "h-14 flex items-center justify-center gap-4 rounded-lg w-full text-base font-semibold cursor-pointer",
+  "h-13 flex items-center justify-center gap-4 rounded-lg w-full text-base font-semibold disabled:cursor-not-allowed",
   {
     variants: {
       state: {
-        primary: "bg-foundation-red-normal text-white",
+        primary:
+          "bg-foundation-red-normal disabled:bg-foundation-red-normal/40 text-white",
         outline: "border-[1.5px] text-grey-700 border-grey-300",
       },
       radius: {
