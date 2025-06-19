@@ -72,6 +72,8 @@ input[type="number"]::-ms-reveal {
   --color-success-base: #0f973d;
   --color-success-50: #e7f6ec;
 
+  --color-error: #ae241a;
+
   --radius-20: 20px;
   --radius-30: 30px;
 }
