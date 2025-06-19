@@ -1,4 +1,3 @@
-import { useMemo } from "react";
 import { cn } from "@/utils/cn";
 import { CheckCircleIcon } from "@/assets/icons";
 
@@ -9,11 +8,8 @@ interface UsernameAvailabilityProps {
 export const UsernameAvailability = ({
   username,
 }: UsernameAvailabilityProps) => {
-  const memoizedUsername = useMemo(() => username, [username]);
-
   // TODO: ~> check if username if available
-
-  const isUsernameAvailable = !!memoizedUsername;
+  const isUsernameAvailable = username;
 
   return (
     <div
