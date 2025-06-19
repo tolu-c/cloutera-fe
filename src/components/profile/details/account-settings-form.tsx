@@ -49,7 +49,7 @@ export const AccountSettingsForm = () => {
             {...register("firstName")}
           />
           <TextInput
-            label="last Name"
+            label="Last Name"
             error={errors.lastName?.message}
             {...register("lastName")}
           />
