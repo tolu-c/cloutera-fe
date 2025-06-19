@@ -50,6 +50,9 @@ input[type="number"]::-ms-reveal {
   --color-fade-light: #ededf2;
   --color-neutral-black: #1a1a21;
   --color-placeholder: #98a2b3;
+  --color-white-dark: #6f6f6f;
+
+  --color-gray-200: #e9eaeb;
 
   --color-grey-100: #f0f2f5;
   --color-grey-300: #d0d5dd;
