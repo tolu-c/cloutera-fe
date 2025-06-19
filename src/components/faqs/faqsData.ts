@@ -1,8 +1,13 @@
-export const faqs = [
+export type Faq = {
+  question: string;
+  answer: string;
+};
+
+export const faqs: Faq[] = [
   {
     question: "SMM panels - what are they?",
     answer:
-      "An SMM panel is an online shop that you can visit to puchase SMM services at great prices.",
+      "An SMM panel is an online shop that you can visit to purchase SMM services at great prices.",
   },
   {
     question: "What SMM services can I find on this panel?",
@@ -26,6 +31,6 @@ export const faqs = [
   {
     question: "How do I change my account email?",
     answer:
-      "To change the email address associated with your account, go to your Account Settings and select Change Email. Follow the instructions to updateyour email securely.",
+      "To change the email address associated with your account, go to your Account Settings and select Change Email. Follow the instructions to update your email securely.",
   },
 ];
