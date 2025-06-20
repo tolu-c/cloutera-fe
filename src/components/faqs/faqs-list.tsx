@@ -14,7 +14,7 @@ export const FaqsList = () => {
   return (
     <div className="flex w-full flex-col gap-8 lg:mx-auto lg:max-w-3xl">
       {faqs.map((faq, idx) => (
-        <div key={idx} className="border-b border-gray-200 pb-4">
+        <div key={faq.id} className="border-b border-gray-200 pb-4">
           <div className="flex flex-col gap-6">
             <button
               className="flex w-full items-center justify-between text-left"
