@@ -1,6 +1,14 @@
 import { z } from "zod/v4";
 import { OrderCategory, OrderService } from "@/types/enums";
 
+export const supportFormSchema = z.object({
+  subject: z.string().min(1, "Subject is required"),
+  message: z.string().min(1, "Message is required"),
+  image: z.any().optional(),
+});
+
+export type SupportFormData = z.infer<typeof supportFormSchema>;
+
 export const loginSchema = z.object({
   email: z
     .email({ error: "Please enter a valid email" })
