@@ -31,6 +31,18 @@ export const SupportForm = () => {
   const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
+      const allowedTypes = ["image/jpeg", "image/jpg", "image/png"];
+      const maxSize = 5 * 1024 * 1024; // 5MB
+
+      if (!allowedTypes.includes(file.type)) {
+        alert("Please upload only JPG or PNG files");
+        return;
+      }
+
+      if (file.size > maxSize) {
+        alert("File size must be less than 5MB");
+        return;
+      }
       setImageName(file.name);
       setValue("image", file, { shouldValidate: true });
     }
@@ -39,6 +51,12 @@ export const SupportForm = () => {
   const handleImageRemove = () => {
     setImageName(null);
     setValue("image", undefined, { shouldValidate: true });
+    const fileInput = document.getElementById(
+      "support-image-upload",
+    ) as HTMLInputElement;
+    if (fileInput) {
+      fileInput.value = "";
+    }
   };
 
   const onSubmit = (data: SupportFormData) => {
