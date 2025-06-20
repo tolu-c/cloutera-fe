@@ -1,4 +1,4 @@
-import { Montserrat, Instrument_Sans } from "next/font/google";
+import { Montserrat, Instrument_Sans, Inter } from "next/font/google";
 
 export const montserrat = Montserrat({
   variable: "--font-montserrat",
@@ -7,5 +7,10 @@ export const montserrat = Montserrat({
 
 export const instrumentSans = Instrument_Sans({
   variable: "--font-instrument-sans",
+  subsets: ["latin"],
+});
+
+export const inter = Inter({
+  variable: "--font-inter",
   subsets: ["latin"],
 });

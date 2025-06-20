@@ -41,7 +41,7 @@ const TextInput = ({
             id={name}
             type={inputType}
             name={name}
-            className="border-grey-300 h-13 w-full rounded-lg border bg-white p-4"
+            className="border-grey-300 placeholder:text-placeholder h-13 w-full rounded-lg border bg-white p-4 text-sm/5"
             {...props}
           />
           {isPassword && (

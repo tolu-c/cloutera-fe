@@ -2,6 +2,173 @@ import { ComponentProps } from "react";
 
 type IconProps = ComponentProps<"svg">;
 
+export const MinusIcon = (props: IconProps) => (
+  <svg
+    width="24"
+    height="26"
+    viewBox="0 0 24 26"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M8 14H16M22 14C22 19.5228 17.5228 24 12 24C6.47715 24 2 19.5228 2 14C2 8.47715 6.47715 4 12 4C17.5228 4 22 8.47715 22 14Z"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const PlusIcon = (props: IconProps) => (
+  <svg
+    width="24"
+    height="26"
+    viewBox="0 0 24 26"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M12 10V18M8 14H16M22 14C22 19.5228 17.5228 24 12 24C6.47715 24 2 19.5228 2 14C2 8.47715 6.47715 4 12 4C17.5228 4 22 8.47715 22 14Z"
+      stroke="currentColor"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const DeleteIcon = (props: IconProps) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M21 5.97998C17.67 5.64998 14.32 5.47998 10.98 5.47998C9 5.47998 7.02 5.57998 5.04 5.77998L3 5.97998"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M8.5 4.97L8.72 3.66C8.88 2.71 9 2 10.69 2H13.31C15 2 15.13 2.75 15.28 3.67L15.5 4.97"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M18.85 9.14014L18.2 19.2101C18.09 20.7801 18 22.0001 15.21 22.0001H8.79C6 22.0001 5.91 20.7801 5.8 19.2101L5.15 9.14014"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10.33 16.5H13.66"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M9.5 12.5H14.5"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const UploadIcon = (props: IconProps) => (
+  <svg
+    width="25"
+    height="24"
+    viewBox="0 0 25 24"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M17.9776 9.01106C17.985 9.01102 17.9925 9.01101 18 9.01101C20.4853 9.01101 22.5 11.0294 22.5 13.5193C22.5 15.8398 20.75 17.7508 18.5 18M17.9776 9.01106C17.9924 8.84606 18 8.67896 18 8.51009C18 5.46695 15.5376 3 12.5 3C9.62324 3 7.26233 5.21267 7.02042 8.03192M17.9776 9.01106C17.8753 10.1476 17.4286 11.1846 16.7428 12.0165M7.02042 8.03192C4.48398 8.27373 2.5 10.4139 2.5 13.0183C2.5 15.4417 4.21776 17.4632 6.5 17.9273M7.02042 8.03192C7.17826 8.01687 7.33823 8.00917 7.5 8.00917C8.62582 8.00917 9.66474 8.38194 10.5005 9.01101"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      opacity="0.4"
+      d="M12.5 13L12.5 21M12.5 13C11.7998 13 10.4915 14.9943 10 15.5M12.5 13C13.2002 13 14.5085 14.9943 15 15.5"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const CheckCircleIcon = (props: IconProps) => (
+  <svg
+    width="16"
+    height="17"
+    viewBox="0 0 16 17"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M8 14.5C11.3137 14.5 14 11.8137 14 8.5C14 5.18629 11.3137 2.5 8 2.5C4.68629 2.5 2 5.18629 2 8.5C2 11.8137 4.68629 14.5 8 14.5ZM10.4503 7.6583C10.7218 7.40962 10.7403 6.98792 10.4916 6.7164C10.243 6.44488 9.82125 6.42636 9.54973 6.67503L7.08835 8.92932L6.45027 8.34492C6.17875 8.09625 5.75704 8.11477 5.50837 8.38629C5.25969 8.65781 5.27821 9.07951 5.54973 9.32819L6.63808 10.325C6.8929 10.5583 7.2838 10.5583 7.53862 10.325L10.4503 7.6583Z"
+    />
+  </svg>
+);
+
+export const PasswordCheckIcon = (props: IconProps) => (
+  <svg
+    width="22"
+    height="22"
+    viewBox="0 0 22 22"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M10.1319 17.6663H7.00304C6.45193 17.6663 5.96304 17.6486 5.52748 17.5863C3.1897 17.3286 2.55859 16.2263 2.55859 13.2219V8.77745C2.55859 5.77301 3.1897 4.67079 5.52748 4.41301C5.96304 4.35079 6.45193 4.33301 7.00304 4.33301H10.0786"
+      strokeWidth="2.11765"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M13.6875 4.33301H15.0031C15.5542 4.33301 16.0431 4.35079 16.4786 4.41301C18.8164 4.67079 19.4475 5.77301 19.4475 8.77745V13.2219C19.4475 16.2263 18.8164 17.3286 16.4786 17.5863C16.0431 17.6486 15.5542 17.6663 15.0031 17.6663H13.6875"
+      strokeWidth="2.11765"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M13.6699 2.11084V19.8886"
+      strokeWidth="2.11765"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M10.1974 10.9996H10.2054"
+      strokeWidth="2.11765"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M6.64171 10.9996H6.64969"
+      strokeWidth="2.11765"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export const ExitIcon = ({ ...props }: IconProps) => (
   <svg
     width="29"

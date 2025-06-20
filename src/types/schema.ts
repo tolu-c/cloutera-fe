@@ -1,6 +1,12 @@
 import { z } from "zod/v4";
 import { OrderCategory, OrderService } from "@/types/enums";
 
+export const supportFormSchema = z.object({
+  subject: z.string().min(1, "Subject is required"),
+  message: z.string().min(1, "Message is required"),
+  image: z.any().optional(),
+});
+
 export const loginSchema = z.object({
   email: z
     .email({ error: "Please enter a valid email" })
@@ -54,3 +60,25 @@ export const forgotPasswordSchema = z.object({
     .email({ error: "Please enter a valid email" })
     .min(1, { error: "Please enter an email" }),
 });
+
+export const editAccountSchema = signupSchema.pick({
+  username: true,
+  email: true,
+  firstName: true,
+  lastName: true,
+});
+
+export const changePasswordSchema = z
+  .object({
+    currentPassword: z.string().min(1, { error: "Please enter a password" }),
+    password: z
+      .string()
+      .min(8, { error: "Password must be at least 8 characters " }),
+    confirmPassword: z
+      .string()
+      .min(1, { error: "Please confirm your password" }),
+  })
+  .refine((data) => data.password === data.confirmPassword, {
+    error: "Passwords do not match",
+    path: ["confirmPassword"],
+  });
