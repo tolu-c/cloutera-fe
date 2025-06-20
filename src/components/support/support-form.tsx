@@ -71,7 +71,7 @@ export const SupportForm = () => {
           htmlFor="support-image-upload"
         >
           <span className="text-foundation-red-normal flex flex-col items-center justify-center gap-1 text-center text-xs leading-2.5">
-            <UploadIcon className="text-foundation-red-normal h-5 w-5" />
+            <UploadIcon className="text-foundation-red-normal size-6" />
             Click to upload from your device
           </span>
           <div className="text-grey-800 flex flex-col gap-1 text-center text-[8px] leading-2.5">
@@ -99,7 +99,7 @@ export const SupportForm = () => {
                 className="ml-2 cursor-pointer text-gray-400 transition hover:text-red-500"
                 onClick={handleImageRemove}
               >
-                <DeleteIcon className="text-foundation-red-normal h-5 w-5" />
+                <DeleteIcon className="text-foundation-red-normal size-6" />
               </button>
             </div>
           </div>
