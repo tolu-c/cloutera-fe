@@ -1,10 +1,13 @@
 "use client";
 
 import { IMAGE_MAX_SIZE, ALLOWED_IMAGE_TYPES } from "@/types/constants";
-import { useState } from "react";
+import { ChangeEvent, useState } from "react";
 import { UseFormSetValue } from "react-hook-form";
 import { DeleteIcon, UploadIcon } from "@/assets/icons";
-import { SupportFormData } from "@/types/schema";
+import { z } from "zod/v4";
+import { supportFormSchema } from "@/types/schema";
+
+type SupportFormData = z.infer<typeof supportFormSchema>;
 
 type ImageUploadProps = {
   setValue: UseFormSetValue<SupportFormData>;
@@ -13,7 +16,7 @@ type ImageUploadProps = {
 export const ImageUpload = ({ setValue }: ImageUploadProps) => {
   const [imageName, setImageName] = useState<string | null>(null);
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleImageChange = (e: ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0];
     if (file) {
       if (!ALLOWED_IMAGE_TYPES.includes(file.type)) {

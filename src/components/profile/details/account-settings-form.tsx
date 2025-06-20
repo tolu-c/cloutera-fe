@@ -5,9 +5,9 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
 import { Button, OutlineCard } from "@/components/ui";
-import { editAccountSchema } from "@/types/schema";
 import { TextInput } from "@/components/form";
 import { UsernameAvailability } from "@/components/profile/details/username-availability";
+import { editAccountSchema } from "@/types/schema";
 
 type FormData = z.infer<typeof editAccountSchema>;
 
