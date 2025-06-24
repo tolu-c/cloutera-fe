@@ -51,10 +51,12 @@ input[type="number"]::-ms-reveal {
   --color-neutral-black: #1a1a21;
   --color-placeholder: #98a2b3;
   --color-white-dark: #6f6f6f;
+  --color-heading: #1e1e1e;
 
   --color-gray-200: #e9eaeb;
 
   --color-grey-100: #f0f2f5;
+  --color-grey-200: #eaecf0;
   --color-grey-300: #d0d5dd;
   --color-grey-500: #667185;
   --color-grey-700: #344054;
@@ -76,6 +78,8 @@ input[type="number"]::-ms-reveal {
   --color-success-50: #e7f6ec;
 
   --color-error: #ae241a;
+
+  --color-input-content-medium: #666666;
 
   --radius-20: 20px;
   --radius-30: 30px;

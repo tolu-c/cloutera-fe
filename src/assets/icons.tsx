@@ -2,6 +2,146 @@ import { ComponentProps } from "react";
 
 type IconProps = ComponentProps<"svg">;
 
+export const EyeIcon = ({ ...props }: IconProps) => (
+  <svg
+    width="24"
+    height="24"
+    viewBox="0 0 24 24"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path d="M4.29464 13.9828C4.58029 14.4555 4.42868 15.0702 3.95601 15.3559C3.48333 15.6415 2.86859 15.4899 2.58294 15.0172C2.17684 14.3452 1.90131 13.7662 1.7393 13.3924C1.50731 12.8571 1.54097 12.2545 1.82359 11.7498C2.25486 10.9797 3.34432 9.19934 5.02335 7.59968C6.69852 6.00369 9.05564 4.5 11.9997 4.5C14.9438 4.5 17.301 6.00369 18.9761 7.59968C20.6552 9.19933 21.7446 10.9797 22.1759 11.7498C22.4585 12.2545 22.4922 12.8571 22.2602 13.3924C22.0982 13.7662 21.8226 14.3452 21.4165 15.0172C21.1309 15.4899 20.5161 15.6415 20.0435 15.3559C19.5708 15.0702 19.4192 14.4555 19.7048 13.9828C20.0315 13.4423 20.2581 12.9749 20.3956 12.6644C19.9898 11.9493 19.0289 10.4123 17.5966 9.0477C16.1171 7.63816 14.2297 6.5 11.9997 6.5C9.76978 6.5 7.8824 7.63816 6.40292 9.0477C4.9706 10.4123 4.00964 11.9493 3.60389 12.6644C3.74137 12.9749 3.96802 13.4423 4.29464 13.9828Z" />
+    <path
+      fillRule="evenodd"
+      clipRule="evenodd"
+      d="M11.9997 8C9.23831 8 6.99974 10.2386 6.99974 13C6.99974 15.7614 9.23831 18 11.9997 18C14.7612 18 16.9997 15.7614 16.9997 13C16.9997 10.2386 14.7612 8 11.9997 8ZM8.99974 13C8.99974 11.3431 10.3429 10 11.9997 10C13.6566 10 14.9997 11.3431 14.9997 13C14.9997 14.6569 13.6566 16 11.9997 16C10.3429 16 8.99974 14.6569 8.99974 13Z"
+    />
+  </svg>
+);
+
+export const SettingsIcon = ({ ...props }: IconProps) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M12.6665 14.6667V7.33337"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M12.6665 4.66671V1.33337"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M8 14.6667V11.3334"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M8 8.66671V1.33337"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M3.3335 14.6667V7.33337"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M3.3335 4.66671V1.33337"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M2 7.33337H4.66667"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M11.3335 7.33337H14.0002"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M6.6665 8.66663H9.33317"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const SearchIcon = ({ ...props }: IconProps) => (
+  <svg
+    width="20"
+    height="20"
+    viewBox="0 0 20 20"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path d="M13.1291 11.8792H12.4707L12.2374 11.6542C13.0541 10.7042 13.5457 9.47086 13.5457 8.12919C13.5457 5.13752 11.1207 2.71252 8.12907 2.71252C5.1374 2.71252 2.7124 5.13752 2.7124 8.12919C2.7124 11.1209 5.1374 13.5459 8.12907 13.5459C9.47074 13.5459 10.7041 13.0542 11.6541 12.2375L11.8791 12.4709V13.1292L16.0457 17.2875L17.2874 16.0459L13.1291 11.8792ZM8.12907 11.8792C6.05407 11.8792 4.37907 10.2042 4.37907 8.12919C4.37907 6.05419 6.05407 4.37919 8.12907 4.37919C10.2041 4.37919 11.8791 6.05419 11.8791 8.12919C11.8791 10.2042 10.2041 11.8792 8.12907 11.8792Z" />
+  </svg>
+);
+
+export const VideoIcon = ({ ...props }: IconProps) => (
+  <svg
+    width="22"
+    height="20"
+    viewBox="0 0 22 20"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M11.486 16.6658H5.69266C2.796 16.6658 1.8335 15.0033 1.8335 13.3329V6.66702C1.8335 4.16536 2.796 3.33411 5.69266 3.33411H11.486C14.3827 3.33411 15.3452 4.16536 15.3452 6.66702V13.3329C15.3452 15.8345 14.3735 16.6658 11.486 16.6658Z"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      opacity="0.4"
+      d="M17.8935 14.0375L15.3452 12.4937V7.49832L17.8935 5.95457C19.1402 5.20248 20.1669 5.66165 20.1669 6.98373V13.0162C20.1669 14.3383 19.1402 14.7975 17.8935 14.0375Z"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      opacity="0.4"
+      d="M10.5415 9.20837C11.3009 9.20837 11.9165 8.67671 11.9165 8.02087C11.9165 7.36504 11.3009 6.83337 10.5415 6.83337C9.78211 6.83337 9.1665 7.36504 9.1665 8.02087C9.1665 8.67671 9.78211 9.20837 10.5415 9.20837Z"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export const MinusIcon = (props: IconProps) => (
   <svg
     width="24"
