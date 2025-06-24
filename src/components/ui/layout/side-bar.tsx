@@ -16,6 +16,7 @@ import {
   SupportIcon,
 } from "@/assets/icons";
 import Image from "next/image";
+import Link from "next/link";
 
 const sidebarLinks = [
   { label: "New Orders", href: "/order", icon: <NewOrderIcon /> },
@@ -32,7 +33,6 @@ const sidebarLinks = [
 type SidebarProps = {
   open: boolean;
   close: VoidFunction;
-  hideCloseIcon?: boolean;
   className?: string;
 };
 
@@ -47,8 +47,11 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
       ></div>
       <div
         className={cn(
-          "rounded-r-20 fixed top-0 bottom-0 left-0 z-[70] flex h-full w-[265px] flex-col gap-8 overflow-y-scroll bg-white px-6 py-8 shadow-lg transition-transform duration-300",
-          open ? "translate-x-0" : "-translate-x-full",
+          "rounded-r-20 fixed top-0 bottom-0 left-0 z-[70] flex h-full w-66 flex-col gap-8 overflow-y-scroll bg-white px-6 py-8 shadow-lg transition-transform duration-300",
+          {
+            "translate-x-0": open,
+            "-translate-x-full": !open,
+          },
           className,
         )}
       >
@@ -61,7 +64,7 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
                 alt="user"
                 width={24}
                 height={24}
-                className="object-coverÖ object-center"
+                className="object-cover object-center"
               />
             </div>
             <div className="flex flex-col gap-0.5">
@@ -75,34 +78,34 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
           </div>
         </div>
         <nav className="flex flex-1 flex-col gap-4">
-          {sidebarLinks.map((link) => {
-            const isActive = pathname === link.href;
-            return (
-              <a
-                key={link.href}
-                href={link.href}
-                onClick={close}
+          {sidebarLinks.map(({ href, icon, label }) => (
+            <Link
+              key={href}
+              href={href}
+              aria-label={label}
+              onClick={close}
+              className={cn(
+                "flex items-center gap-3 px-4 py-3 text-xs font-medium text-[#A0AEC0]",
+                {
+                  "rounded-lg pr-5 pl-5 shadow-[0px_5px_14px_0px_#0000000D]":
+                    pathname === href,
+                },
+              )}
+            >
+              <span
                 className={cn(
-                  "flex items-center gap-3 px-4 py-3 text-xs font-medium",
-                  isActive
-                    ? "rounded-lg pr-5 pl-5 shadow-[0px_5px_14px_0px_#0000000D]"
-                    : "text-[#A0AEC0]",
+                  "text-foundation-red-normal inline-flex size-7.5 items-center justify-center",
+                  {
+                    "bg-foundation-red-normal rounded-lg text-white":
+                      pathname === href,
+                  },
                 )}
               >
-                <span
-                  className={cn(
-                    "text-foundation-red-normal inline-flex size-7.5 items-center justify-center",
-                    isActive
-                      ? "bg-foundation-red-normal rounded-lg text-white"
-                      : "",
-                  )}
-                >
-                  {link.icon}
-                </span>
-                {link.label}
-              </a>
-            );
-          })}
+                {icon}
+              </span>
+              {label}
+            </Link>
+          ))}
         </nav>
       </div>
     </div>
