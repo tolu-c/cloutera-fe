@@ -6,8 +6,9 @@ import {
   NotificationIcon,
 } from "@/assets/icons";
 import { usePathname } from "next/navigation";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import Sidebar from "./side-bar";
+import Image from "next/image";
 
 const TopBar = () => {
   const pathname = usePathname();
@@ -15,7 +16,7 @@ const TopBar = () => {
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   return (
-    <>
+    <Fragment>
       <div className="bg-foundation-red-normal flex h-22 w-full items-center justify-center">
         <div className="flex h-10 w-full max-w-7xl items-center justify-between">
           <div className="flex items-center gap-4">
@@ -31,7 +32,15 @@ const TopBar = () => {
             <div className="flex items-center gap-2 px-3">
               <p className="text-base/5 font-medium text-white">Emmanuel</p>
               <div className="flex items-center gap-2">
-                <div className="size-10 rounded-full bg-white"></div>
+                <div className="flex size-10 items-center justify-center rounded-full bg-white">
+                  <Image
+                    src="/images/user.svg"
+                    alt="user"
+                    width={24}
+                    height={24}
+                    className="object-cover object-center"
+                  />
+                </div>
                 <ChevronDownIcon className="size-4 text-white" />
               </div>
             </div>
@@ -39,7 +48,7 @@ const TopBar = () => {
         </div>
       </div>
       <Sidebar open={sidebarOpen} close={() => setSidebarOpen(false)}></Sidebar>
-    </>
+    </Fragment>
   );
 };
 
