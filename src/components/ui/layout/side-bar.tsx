@@ -4,17 +4,29 @@ import { createPortal } from "react-dom";
 import { usePathname } from "next/navigation";
 import ClouteraLogo from "../logo";
 import { cn } from "@/utils/cn";
+import {
+  // AffiliatesIcon,
+  FaqsIcon,
+  FundsIcon,
+  LogoutIcon,
+  // MassOrderIcon,
+  NewOrderIcon,
+  OrdersIcon,
+  ServicesIcon,
+  SupportIcon,
+} from "@/assets/icons";
+import Image from "next/image";
 
 const sidebarLinks = [
-  { label: "New Orders", href: "/new-orders" },
-  { label: "Services", href: "/services" },
-  { label: "Orders", href: "/orders" },
-  { label: "Add Funds", href: "/add-funds" },
-  { label: "Affiliates", href: "/affiliates" },
-  { label: "Mass Order", href: "/mass-order" },
-  { label: "FAQs", href: "/faqs" },
-  { label: "Support", href: "/support" },
-  { label: "Log Out", href: "/logout" },
+  { label: "New Orders", href: "/order", icon: <NewOrderIcon /> },
+  { label: "Services", href: "/services", icon: <ServicesIcon /> },
+  { label: "Orders", href: "/orders", icon: <OrdersIcon /> },
+  { label: "Add Funds", href: "/add-funds", icon: <FundsIcon /> },
+  // { label: "Affiliates", href: "/affiliates", icon: <AffiliatesIcon /> },
+  // { label: "Mass Order", href: "/mass-order", icon: <MassOrderIcon /> },
+  { label: "FAQs", href: "/faq", icon: <FaqsIcon /> },
+  { label: "Support", href: "/support", icon: <SupportIcon /> },
+  { label: "Log Out", href: "/logout", icon: <LogoutIcon /> },
 ];
 
 type SidebarProps = {
@@ -35,22 +47,30 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
       ></div>
       <div
         className={cn(
-          "rounded-r-20 fixed top-0 bottom-0 left-0 z-[70] flex h-full w-[320px] flex-col gap-8 overflow-y-scroll bg-white px-6 py-8 shadow-lg transition-transform duration-300",
+          "rounded-r-20 fixed top-0 bottom-0 left-0 z-[70] flex h-full w-[265px] flex-col gap-8 overflow-y-scroll bg-white px-6 py-8 shadow-lg transition-transform duration-300",
           open ? "translate-x-0" : "-translate-x-full",
           className,
         )}
       >
         <div className="flex flex-col gap-8">
-          <ClouteraLogo />
+          <ClouteraLogo isBlack />
           <div className="flex items-center gap-5">
-            <div className="flex h-10 w-10 items-center justify-center rounded-full bg-gray-200">
-              <span className="text-xl text-gray-400">👤</span>
+            <div className="border-foundation-red-white flex size-10 items-center justify-center rounded-full border-4 bg-white">
+              <Image
+                src="/images/user.svg"
+                alt="user"
+                width={24}
+                height={24}
+                className="object-coverÖ object-center"
+              />
             </div>
             <div className="flex flex-col gap-0.5">
-              <span className="text-sm font-semibold text-gray-900">
+              <span className="text-base font-medium text-gray-900">
                 Oludotun
               </span>
-              <span className="text-xs text-gray-500">#3, 000, 000.00</span>
+              <div className="text-foundation-red-normal text-xs font-bold">
+                #<span className="font-medium">3,000,000.00</span>
+              </div>
             </div>
           </div>
         </div>
@@ -63,12 +83,22 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
                 href={link.href}
                 onClick={close}
                 className={cn(
-                  "text-gray-70 flex items-center gap-3 px-4 py-3 text-xs font-medium transition-colors",
-                  isActive &&
-                    "rounded-lg bg-white shadow-[0px_5px_14px_0px_#0000000D]",
+                  "flex items-center gap-3 px-4 py-3 text-xs font-medium",
+                  isActive
+                    ? "rounded-lg pr-5 pl-5 shadow-[0px_5px_14px_0px_#0000000D]"
+                    : "text-[#A0AEC0]",
                 )}
               >
-                <span className="inline-block h-4 w-4 rounded bg-gray-300" />
+                <span
+                  className={cn(
+                    "text-foundation-red-normal inline-flex size-7.5 items-center justify-center",
+                    isActive
+                      ? "bg-foundation-red-normal rounded-lg text-white"
+                      : "",
+                  )}
+                >
+                  {link.icon}
+                </span>
                 {link.label}
               </a>
             );
