@@ -2,6 +2,44 @@ import { ComponentProps } from "react";
 
 type IconProps = ComponentProps<"svg">;
 
+export const XIcon = ({ ...props }: IconProps) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M2.5 2.5L13.5 13.5M2.5 13.5L13.5 2.5"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const MenuIcon = ({ ...props }: IconProps) => (
+  <svg
+    width="25"
+    height="24"
+    viewBox="0 0 25 24"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M3.5 12H21.5M3.5 6H21.5M3.5 18H21.5"
+      strokeWidth="2"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export const LogoutIcon = ({ ...props }: IconProps) => (
   <svg
     width="25"

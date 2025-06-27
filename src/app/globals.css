@@ -52,6 +52,8 @@ input[type="number"]::-ms-reveal {
   --color-white-dark: #6f6f6f;
   --color-heading: #1e1e1e;
 
+  --color-dark: #140800;
+
   --color-gray-200: #e9eaeb;
 
   --color-grey-100: #f0f2f5;
