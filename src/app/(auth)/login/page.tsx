@@ -1,6 +1,11 @@
 import { AuthCard } from "@/components/ui";
 import Link from "next/link";
 import LoginForm from "@/components/auth/login/login-form";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cloutera | Login",
+};
 
 const LoginPage = () => {
   return (
