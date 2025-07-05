@@ -1,4 +1,5 @@
 import { ServiceListItem } from "@/components/services/service-list-item";
+import { ServiceList } from "@/types";
 
 export const ServicesList = ({ title, services }: ServiceList) => {
   return (

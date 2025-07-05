@@ -9,7 +9,8 @@ const buttonVariants = cva(
       state: {
         primary:
           "bg-foundation-red-normal disabled:bg-foundation-red-normal/40 text-white",
-        outline: "border-[1.5px] text-grey-700 border-grey-300",
+        outline:
+          "border-[1.5px] text-foundation-red-normal border-foundation-red-normal",
       },
       radius: {
         lg: "rounded-lg",

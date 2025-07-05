@@ -5,6 +5,7 @@ import { Fragment } from "react";
 import { DataCell, Modal } from "@/components/ui";
 import { EyeIcon } from "@/assets/icons";
 import { useDisclosure } from "@/hooks/useDisclosure";
+import { Service } from "@/types";
 
 export const ServiceListItem = ({
   id,

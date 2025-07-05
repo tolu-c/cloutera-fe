@@ -14,3 +14,10 @@ export enum OrderCategory {
   Telegram = "Telegram",
   Tiktok = "Tiktok",
 }
+
+export enum Status {
+  Completed = "Completed",
+  Processing = "Processing",
+  InProgress = "In Progress",
+  Cancelled = "Cancelled",
+}

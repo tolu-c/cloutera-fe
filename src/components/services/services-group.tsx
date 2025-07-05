@@ -1,4 +1,5 @@
 import { ServicesList } from "@/components/services/services-list";
+import { ServiceList } from "@/types";
 
 interface ServicesGroupProps {
   serviceList: ServiceList[];

@@ -6,6 +6,11 @@ import { VideoIcon } from "@/assets/icons";
 import { Searchbar } from "@/components/form";
 import { ServicesGroup } from "@/components/services";
 import { serviceListData } from "@/data/services";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cloutera | Services",
+};
 
 const Services = () => {
   return (

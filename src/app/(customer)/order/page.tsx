@@ -4,6 +4,11 @@ import {
   OrdersServiceDescription,
   OrdersServiceList,
 } from "@/components/orders";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cloutera | Order",
+};
 
 const OrderPage = () => {
   return (

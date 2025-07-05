@@ -1,4 +1,9 @@
 import { SupportForm } from "@/components/support";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cloutera | Support",
+};
 
 const SupportPage = () => (
   <div className="flex w-full flex-col gap-16">
