@@ -10,7 +10,7 @@ const tabs = [
   "Processing",
   "Pending",
   "Canceled",
-] as const;
+];
 
 export const HistoryTabs = () => {
   const [activeTab, setActiveTab] = useState(tabs[0]);

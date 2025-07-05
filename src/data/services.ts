@@ -1,3 +1,5 @@
+import { ServiceList } from "@/types";
+
 export const serviceListData: ServiceList[] = [
   {
     title: " Free Services { ❤️ Likes, 👀views }",
