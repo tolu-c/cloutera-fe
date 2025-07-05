@@ -21,13 +21,10 @@ import Link from "next/link";
 const sidebarLinks = [
   { label: "New Orders", href: "/order", icon: <NewOrderIcon /> },
   { label: "Services", href: "/services", icon: <ServicesIcon /> },
-  { label: "Orders", href: "/orders", icon: <OrdersIcon /> },
+  { label: "Orders", href: "/order/history", icon: <OrdersIcon /> },
   { label: "Add Funds", href: "/add-funds", icon: <FundsIcon /> },
-  // { label: "Affiliates", href: "/affiliates", icon: <AffiliatesIcon /> },
-  // { label: "Mass Order", href: "/mass-order", icon: <MassOrderIcon /> },
   { label: "FAQs", href: "/faq", icon: <FaqsIcon /> },
   { label: "Support", href: "/support", icon: <SupportIcon /> },
-  { label: "Log Out", href: "/logout", icon: <LogoutIcon /> },
 ];
 
 type SidebarProps = {
@@ -106,6 +103,11 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
               {label}
             </Link>
           ))}
+
+          <button className="flex items-center gap-3 px-4 py-3 text-xs font-medium text-[#A0AEC0]">
+            <LogoutIcon className="text-foundation-red-normal size-6" />
+            Log out
+          </button>
         </nav>
       </div>
     </div>
