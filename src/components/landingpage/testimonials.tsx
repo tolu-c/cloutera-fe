@@ -35,10 +35,16 @@ export const TestimonialsSection = () => {
               real experiences, real feedback.
             </p>
             <div className="mt-6 flex w-full space-x-4">
-              <button className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-colors duration-200 hover:bg-red-600">
+              <button
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-colors duration-200 hover:bg-red-600"
+                aria-label="Previous testimonial"
+              >
                 <ArrowLeftIcon />
               </button>
-              <button className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-colors duration-200 hover:bg-red-600">
+              <button
+                className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-colors duration-200 hover:bg-red-600"
+                aria-label="Next testimonial"
+              >
                 <ArrowRightIcon />
               </button>
             </div>
