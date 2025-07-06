@@ -27,7 +27,7 @@ export const Navbar = () => {
         {/* Hamburger (Mobile) */}
         <button
           className="ml-auto md:hidden"
-          aria-label="Open menu"
+          aria-label={menuOpen ? "Close menu" : "Open menu"}
           onClick={() => setMenuOpen((v) => !v)}
         >
           {menuOpen ? (
