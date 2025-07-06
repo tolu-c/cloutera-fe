@@ -106,7 +106,7 @@ export const Footer = () => {
             />
             <Image
               src="/images/instagram.svg"
-              alt="facebook"
+              alt="instagram"
               width={43}
               height={43}
             />
