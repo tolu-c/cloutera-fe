@@ -39,7 +39,7 @@ const StatCard = ({ icon, label, value }: Stat) => (
 export const StatsSection = () => (
   <section className="bg-white py-16">
     <div className="mx-auto max-w-5xl px-4 sm:px-6 lg:px-8">
-      <div className="grid grid-cols-1 md:grid-cols-3">
+      <div className="grid grid-cols-1 gap-5 md:grid-cols-3">
         {stats.map((stat, idx) => (
           <StatCard key={idx} {...stat} />
         ))}

@@ -1,3 +1,4 @@
+import { ArrowLeftIcon, ArrowRightIcon } from "@/assets/icons";
 import Image from "next/image";
 
 // Define an interface for testimonial data
@@ -22,20 +23,24 @@ export const TestimonialsSection = () => {
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 items-center gap-12 md:grid-cols-2">
           {/* Left Column: Heading and Navigation */}
-          <div>
-            <p className="mb-2 text-sm font-semibold tracking-wider text-red-500 uppercase">
+          <div className="flex flex-col gap-5">
+            <p className="text-foundation-red-normal text-xs font-semibold tracking-[0.47em]">
               TESTIMONIALS
             </p>
-            <h2 className="mb-4 text-4xl font-extrabold text-gray-900 sm:text-5xl">
+            <h2 className="text-dark text-4xl font-semibold sm:text-3xl">
               Our Customer Stories
             </h2>
-            <p className="mb-8 text-lg text-gray-600">
+            <p className="text-dark max-w-xl pr-6 text-base font-light">
               Here’s what people have to say About ClouTeraHub. Real moments,
               real experiences, real feedback.
             </p>
-            <div className="flex space-x-4">
-              <button className="rounded-full bg-red-500 p-3 text-white transition-colors duration-200 hover:bg-red-600"></button>
-              <button className="rounded-full bg-red-500 p-3 text-white transition-colors duration-200 hover:bg-red-600"></button>
+            <div className="mt-6 flex w-full space-x-4">
+              <button className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-colors duration-200 hover:bg-red-600">
+                <ArrowLeftIcon />
+              </button>
+              <button className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-colors duration-200 hover:bg-red-600">
+                <ArrowRightIcon />
+              </button>
             </div>
           </div>
 
