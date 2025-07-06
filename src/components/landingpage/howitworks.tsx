@@ -47,7 +47,7 @@ export const HowItWorksSection = () => {
                     type="button"
                     className="bg-foundation-red-normal hover:bg-foundation-red-dark rounded-full p-2 shadow-md transition-colors"
                     aria-label="Next Step"
-                    tabIndex={-1}
+                    tabIndex={0}
                   >
                     {/* Right Arrow SVG */}
                     <svg
