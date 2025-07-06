@@ -71,6 +71,7 @@ input[type="number"]::-ms-reveal {
   --color-office-brown-900: #3e3838;
 
   --color-foundation-red-normal: #de3746;
+  --color-foundation-red-normal-hover: #c8323f;
   --color-foundation-red-light: #fcebed;
   --color-foundation-red-white: #fdf5f6;
   --color-foundation-red-light-active: #f5c1c6;
