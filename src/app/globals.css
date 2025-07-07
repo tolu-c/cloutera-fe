@@ -52,6 +52,8 @@ input[type="number"]::-ms-reveal {
   --color-white-dark: #6f6f6f;
   --color-heading: #1e1e1e;
 
+  --color-dark: #140800;
+
   --color-gray-200: #e9eaeb;
 
   --color-grey-10: #9e9e9e;
@@ -70,6 +72,7 @@ input[type="number"]::-ms-reveal {
   --color-office-brown-900: #3e3838;
 
   --color-foundation-red-normal: #de3746;
+  --color-foundation-red-normal-hover: #c8323f;
   --color-foundation-red-light: #fcebed;
   --color-foundation-red-white: #fdf5f6;
   --color-foundation-red-light-active: #f5c1c6;
@@ -94,4 +97,30 @@ input[type="number"]::-ms-reveal {
 
   --radius-20: 20px;
   --radius-30: 30px;
+}
+
+@keyframes blob {
+  0% {
+    transform: translate(0px, 0px) scale(1);
+  }
+  33% {
+    transform: translate(30px, -50px) scale(1.1);
+  }
+  66% {
+    transform: translate(-20px, 20px) scale(0.9);
+  }
+  100% {
+    transform: translate(0px, 0px) scale(1);
+  }
+}
+
+/* Example animation utility classes */
+.animate-blob {
+  animation: blob 7s infinite;
+}
+.animate-blob-delay-2000 {
+  animation: blob 7s infinite 2s;
+}
+.animate-blob-delay-4000 {
+  animation: blob 7s infinite 4s;
 }
