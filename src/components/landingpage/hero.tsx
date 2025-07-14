@@ -1,5 +1,6 @@
 import Image from "next/image";
 import { Button } from "../ui";
+import Link from "next/link";
 
 export const Hero = () => {
   return (
@@ -29,12 +30,15 @@ export const Hero = () => {
             Resellers with High Speed order completion!.
           </p>
           <div className="flex items-center gap-7">
-            <Button
-              width={"max"}
-              className="border-foundation-red-normal-hover rounded-[44px] border-b-4 shadow-[0px_5px_10px_0px_#DE374652]"
-            >
-              Get Started
-            </Button>
+            <Link href="/signup" className="cursor-pointer">
+              <Button
+                width={"max"}
+                className="border-foundation-red-normal-hover rounded-[44px] border-b-4 shadow-[0px_5px_10px_0px_#DE374652]"
+              >
+                Get Started
+              </Button>
+            </Link>
+
             <p className="text-dark text-base underline">Watch Tutorial</p>
           </div>
         </div>

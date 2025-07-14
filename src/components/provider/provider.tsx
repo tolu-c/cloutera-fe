@@ -1,4 +1,4 @@
-import { ReactNode } from "react";
+import { Fragment, ReactNode } from "react";
 import { TawkTo } from "./tawkto";
 
 interface AppProviderProps {
@@ -6,8 +6,9 @@ interface AppProviderProps {
 }
 
 export const AppProvider = ({ children }: AppProviderProps) => (
-  <>
-    <TawkTo />
+  <Fragment>
     {children}
-  </>
+
+    <TawkTo />
+  </Fragment>
 );
