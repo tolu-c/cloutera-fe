@@ -1,13 +1,17 @@
 "use client";
 
-import { ComponentProps, useState } from "react";
+import { ComponentProps, ReactNode, useState } from "react";
 import Label from "./label";
 import { EyeSlashIcon } from "@/assets/icons";
+import { cn } from "@/utils/cn";
 
 interface TextInputProps extends ComponentProps<"input"> {
   error?: string;
   label?: string;
   description?: string;
+  icon?: ReactNode;
+  rightSection?: ReactNode;
+  width?: string;
 }
 
 const TextInput = ({
@@ -16,6 +20,10 @@ const TextInput = ({
   type,
   description,
   error,
+  icon,
+  rightSection,
+  className,
+  width,
   ...props
 }: TextInputProps) => {
   const [inputType, setInputType] = useState(type || "text");
@@ -36,14 +44,35 @@ const TextInput = ({
       {label && name && <Label name={name}>{label}</Label>}
 
       <div className="flex w-full flex-col items-start gap-2">
-        <div className="relative w-full">
+        <div className={cn("relative w-full", width)}>
+          {icon && (
+            <div className="absolute top-1/2 left-3 -translate-y-1/2">
+              {icon}
+            </div>
+          )}
+
           <input
             id={name}
             type={inputType}
             name={name}
-            className="border-grey-300 placeholder:text-placeholder h-13 w-full rounded-lg border bg-white p-4 text-sm/5"
+            className={cn(
+              "border-grey-300 focus:border-grey-800 placeholder:text-placeholder h-13 w-full rounded-lg border bg-white p-4 text-sm/5 focus:ring-0 focus:outline-none",
+              className,
+              {
+                "pr-10": rightSection,
+                "pl-10": icon,
+                "border-foundation-red-normal": error,
+              },
+            )}
             {...props}
           />
+
+          {rightSection && (
+            <div className="absolute top-1/2 right-3 -translate-y-1/2">
+              {rightSection}
+            </div>
+          )}
+
           {isPassword && (
             <button
               type="button"

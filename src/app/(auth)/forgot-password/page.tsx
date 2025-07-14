@@ -1,5 +1,10 @@
 import ForgotPasswordForm from "@/components/auth/forgot-password/forgot-password-form";
 import { AuthCard } from "@/components/ui";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cloutera | Forgot Password",
+};
 
 const ForgotPasswordPage = () => {
   return (

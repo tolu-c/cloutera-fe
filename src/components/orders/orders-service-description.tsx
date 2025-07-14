@@ -6,6 +6,7 @@ import {
   TimerRoundedIcon,
 } from "@/assets/icons";
 import { ElementType } from "react";
+import { LabelValuePair } from "@/types";
 
 interface OrdersServiceDescriptionProps {
   startTime?: string;

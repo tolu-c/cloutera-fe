@@ -1,4 +1,30 @@
+import { Status } from "@/types/enums";
+
 interface LabelValuePair<T = string> {
   label: string;
   value: T;
+}
+
+interface ServiceList {
+  title: string;
+  services: Service[];
+}
+
+interface Service {
+  id: string;
+  service: string;
+  rate: number;
+  minOrder: number;
+  maxOrder: number;
+  description: string;
+}
+
+interface Order {
+  id: string;
+  link: string;
+  charge: number;
+  quantity: number;
+  service: string;
+  date: string;
+  status: Status;
 }

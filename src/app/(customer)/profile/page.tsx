@@ -1,6 +1,11 @@
 import { TwoFactorAuthentication } from "@/components/profile/2fa";
 import { AccountSettingsForm } from "@/components/profile/details/account-settings-form";
 import { ChangePasswordForm } from "@/components/profile/details/change-password-form";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cloutera | Profile",
+};
 
 const ProfilePage = () => {
   return (

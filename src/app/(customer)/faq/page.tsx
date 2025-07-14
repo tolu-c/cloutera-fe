@@ -1,4 +1,9 @@
 import { FaqsFooter, FaqsList } from "@/components/faqs";
+import type { Metadata } from "next";
+
+export const metadata: Metadata = {
+  title: "Cloutera | FAQ",
+};
 
 const FaqsPage = () => (
   <div className="flex w-full flex-col items-center">
