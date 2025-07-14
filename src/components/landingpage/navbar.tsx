@@ -10,8 +10,8 @@ import { MenuIcon, XIcon } from "@/assets/icons";
 const navLinks = [
   { name: "Home", to: "/" },
   { name: "Services", to: "/services" },
-  { name: "Blog", to: "/blog" },
-  { name: "FAQs", to: "/faqs" },
+  { name: "Blog", to: "/blogs" },
+  { name: "FAQs", to: "#faq" },
 ];
 
 export const Navbar = () => {
