@@ -13,7 +13,7 @@ export const TawkTo = () => {
     s1.async = true;
     s1.src = "https://embed.tawk.to/6870e910aff56d19dab5ebba/1ivsgsq96";
     s1.charset = "UTF-8";
-    s1.setAttribute("crossorigin", "*");
+    s1.setAttribute("crossorigin", "anonymous");
 
     const s0 = document.getElementsByTagName("script")[0];
     if (s0 && s0.parentNode) {
