@@ -19,7 +19,6 @@ export default function Home() {
       <HowItWorksSection />
       <TestimonialsSection />
       <FaqSection />
-
       <Footer />
     </div>
   );
