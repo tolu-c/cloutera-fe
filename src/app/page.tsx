@@ -7,7 +7,7 @@ import {
   StatsSection,
   TestimonialsSection,
 } from "@/components/landingpage";
-import FaqsPage from "./(customer)/faq/page";
+import { FaqSection } from "@/components/faqs";
 
 export default function Home() {
   return (
@@ -18,7 +18,7 @@ export default function Home() {
       <FeaturesSection />
       <HowItWorksSection />
       <TestimonialsSection />
-      <FaqsPage />
+      <FaqSection />
       <Footer />
     </div>
   );

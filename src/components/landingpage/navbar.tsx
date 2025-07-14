@@ -10,8 +10,8 @@ import { MenuIcon, XIcon } from "@/assets/icons";
 const navLinks = [
   { name: "Home", to: "/" },
   { name: "Services", to: "/services" },
-  { name: "Blog", to: "/blog" },
-  { name: "FAQs", to: "/faqs" },
+  { name: "Blog", to: "/blogs" },
+  { name: "FAQs", to: "#faq" },
 ];
 
 export const Navbar = () => {
@@ -59,12 +59,18 @@ export const Navbar = () => {
 
         {/* Buttons (Desktop) */}
         <div className="hidden items-center space-x-4 md:flex">
-          <button className="bg-foundation-red-light border-foundation-red-light-active text-foundation-red-normal rounded-[44px] border-b-4 px-6 py-2 text-sm">
+          <Link
+            href="/login"
+            className="bg-foundation-red-light border-foundation-red-light-active text-foundation-red-normal rounded-[44px] border-b-4 px-6 py-2 text-sm"
+          >
             Log In
-          </button>
-          <button className="bg-foundation-red-normal border-foundation-red-light-active rounded-[44px] border-b-4 px-6 py-2 text-sm text-white">
+          </Link>
+          <Link
+            href="/signup"
+            className="bg-foundation-red-normal border-foundation-red-light-active rounded-[44px] border-b-4 px-6 py-2 text-sm text-white"
+          >
             Sign Up
-          </button>
+          </Link>
         </div>
       </div>
 
@@ -92,12 +98,18 @@ export const Navbar = () => {
             ))}
           </ul>
           <div className="mt-4 flex flex-col space-y-2">
-            <button className="bg-foundation-red-light border-foundation-red-light-active text-foundation-red-normal rounded-[44px] border-b-4 px-6 py-2 text-sm">
+            <Link
+              href="/login"
+              className="bg-foundation-red-light border-foundation-red-light-active text-foundation-red-normal rounded-[44px] border-b-4 px-6 py-2 text-sm"
+            >
               Log In
-            </button>
-            <button className="bg-foundation-red-normal border-foundation-red-light-active rounded-[44px] border-b-4 px-6 py-2 text-sm text-white">
+            </Link>
+            <Link
+              href="/signup"
+              className="bg-foundation-red-normal border-foundation-red-light-active rounded-[44px] border-b-4 px-6 py-2 text-sm text-white"
+            >
               Sign Up
-            </button>
+            </Link>
           </div>
         </div>
       )}
