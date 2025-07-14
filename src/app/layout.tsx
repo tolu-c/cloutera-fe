@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import { montserrat } from "@/app/fonts";
 import { ReactNode } from "react";
+import { AppProvider } from "@/components/provider/provider";
 
 export const metadata: Metadata = {
   title: "Cloutera",
@@ -18,7 +19,7 @@ export default function RootLayout({
       <body className={`${montserrat.className} antialiased`}>
         <div id="modal"></div>
         <div id="sidebar"></div>
-        {children}
+        <AppProvider>{children}</AppProvider>
       </body>
     </html>
   );

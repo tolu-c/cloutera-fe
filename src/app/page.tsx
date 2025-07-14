@@ -18,7 +18,10 @@ export default function Home() {
       <FeaturesSection />
       <HowItWorksSection />
       <TestimonialsSection />
-      <FaqsPage />
+      <div id="faq" className="w-full">
+        <FaqsPage />
+      </div>
+
       <Footer />
     </div>
   );
