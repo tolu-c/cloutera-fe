@@ -1,5 +1,6 @@
 import { ComponentProps } from "react";
 import Label from "@/components/form/label";
+import { LabelValuePair } from "@/types";
 
 interface SelectInputProps extends ComponentProps<"select"> {
   error?: string;

@@ -1,6 +1,7 @@
 import Image from "next/image";
+import { cn } from "@/utils/cn";
 
-const ClouteraLogo = () => {
+const ClouteraLogo = ({ isBlack }: { isBlack?: boolean }) => {
   return (
     <div className="flex items-center gap-1.5">
       <Image
@@ -9,7 +10,13 @@ const ClouteraLogo = () => {
         width={32}
         height={32}
       />
-      <p className="text-foundation-red-light text-xl">Cloutera Hub</p>
+      <p
+        className={cn("text-foundation-red-light text-xl", {
+          "text-black": isBlack,
+        })}
+      >
+        Cloutera Hub
+      </p>
     </div>
   );
 };

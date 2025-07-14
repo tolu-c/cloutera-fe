@@ -4,7 +4,10 @@ import { useState } from "react";
 import { cn } from "@/utils/cn";
 import { OrderService } from "@/types/enums";
 
-export const OrdersServiceList = () => {
+interface ServiceListProps {
+  onSelectService?: (service: OrderService) => void;
+}
+export const OrdersServiceList = ({ onSelectService }: ServiceListProps) => {
   const [selectedService, setSelectedService] = useState<OrderService>(
     OrderService.All,
   );
@@ -13,6 +16,9 @@ export const OrdersServiceList = () => {
 
   const selectService = (service: OrderService) => {
     setSelectedService(service);
+    if (onSelectService) {
+      onSelectService(service);
+    }
   };
 
   return (
