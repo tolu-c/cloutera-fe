@@ -62,3 +62,12 @@ export interface SignupData {
 export interface CheckUsernameData {
   username: string;
 }
+export interface ForgotPasswordFormData {
+  email: string;
+}
+
+export interface ResetPasswordData {
+  email: string;
+  token: string;
+  password: string;
+}
