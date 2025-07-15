@@ -56,7 +56,7 @@ const TextInput = ({
             type={inputType}
             name={name}
             className={cn(
-              "border-grey-300 focus:border-grey-800 placeholder:text-placeholder h-13 w-full rounded-lg border bg-white p-4 text-sm/5 focus:ring-0 focus:outline-none",
+              "border-grey-300 focus:border-grey-800 placeholder:text-placeholder h-13 w-full rounded-lg border bg-white p-4 text-sm/5 focus:ring-0 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50",
               className,
               {
                 "pr-10": rightSection,

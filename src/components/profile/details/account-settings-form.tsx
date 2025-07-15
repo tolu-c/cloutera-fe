@@ -8,10 +8,17 @@ import { Button, OutlineCard } from "@/components/ui";
 import { TextInput } from "@/components/form";
 import { UsernameAvailability } from "@/components/profile/details/username-availability";
 import { editAccountSchema } from "@/types/schema";
+import { useDeferredValue, useLocalStorage } from "@/hooks";
+import { CLOUTERA_USER } from "@/types/constants";
+import { User } from "@/types";
+import { useUpdateProfile } from "@/mutations/profile/use-update-profile";
 
 type FormData = z.infer<typeof editAccountSchema>;
 
 export const AccountSettingsForm = () => {
+  const { getItem } = useLocalStorage<User>(CLOUTERA_USER);
+  const user = getItem();
+
   const {
     register,
     formState: { errors },
@@ -20,18 +27,19 @@ export const AccountSettingsForm = () => {
   } = useForm<FormData>({
     resolver: zodResolver(editAccountSchema),
     defaultValues: {
-      firstName: "Toluwanimi",
-      lastName: "Adeyemo",
-      email: "webdevtolu@protonmail.com",
-      username: "wdt",
+      firstName: user?.firstName,
+      lastName: user?.lastName,
+      username: user?.username,
     },
   });
 
   const newUsername = watch("username");
+  const deferredUsername = useDeferredValue(newUsername, 500);
+
+  const { isPending, mutateAsync: submit } = useUpdateProfile();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log(data);
-    // show modal success / notification
+    await submit(data);
   };
 
   return (
@@ -62,17 +70,21 @@ export const AccountSettingsForm = () => {
               error={errors.username?.message}
               {...register("username")}
             />
-            <UsernameAvailability username={newUsername} />
+
+            <UsernameAvailability username={deferredUsername} />
           </div>
 
           <TextInput
             label="Email Address"
-            error={errors.email?.message}
-            {...register("email")}
+            name="email"
+            defaultValue={user?.email}
+            disabled
           />
         </div>
 
-        <Button type="submit">Save Changes</Button>
+        <Button type="submit" disabled={isPending}>
+          Save Changes
+        </Button>
       </form>
     </OutlineCard>
   );

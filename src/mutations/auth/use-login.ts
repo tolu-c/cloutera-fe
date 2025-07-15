@@ -22,7 +22,7 @@ export const useLogin = () => {
   return useMutation({
     mutationFn: userLogin,
     onError: handleError,
-    onSuccess: ({ data }, variables) => {
+    onSuccess: async ({ data }, variables) => {
       if (data.isVerified) {
         if (data.twoFactorEnabled) {
           setEmail(variables.email);

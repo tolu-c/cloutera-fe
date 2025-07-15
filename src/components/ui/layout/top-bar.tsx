@@ -9,11 +9,18 @@ import { usePathname } from "next/navigation";
 import { Fragment, useState } from "react";
 import Sidebar from "./side-bar";
 import Image from "next/image";
+import { useLocalStorage } from "@/hooks";
+import { CLOUTERA_USER } from "@/types/constants";
+import { User } from "@/types";
+import Link from "next/link";
 
 const TopBar = () => {
   const pathname = usePathname();
   const pageTitle = pathname.split("/").filter(Boolean).pop() || "";
   const [sidebarOpen, setSidebarOpen] = useState(false);
+
+  const { getItem } = useLocalStorage<User>(CLOUTERA_USER);
+  const user = getItem();
 
   return (
     <Fragment>
@@ -30,8 +37,13 @@ const TopBar = () => {
               <NotificationIcon className="size-4 text-white" />
             </div>
             <div className="flex items-center gap-2 px-3">
-              <p className="text-base/5 font-medium text-white">Emmanuel</p>
-              <div className="flex items-center gap-2">
+              <p className="text-base/5 font-medium text-white capitalize">
+                {user?.firstName}
+              </p>
+              <Link
+                href="/profile"
+                className="flex cursor-pointer items-center gap-2"
+              >
                 <div className="flex size-10 items-center justify-center rounded-full bg-white">
                   <Image
                     src="/images/user.svg"
@@ -42,7 +54,7 @@ const TopBar = () => {
                   />
                 </div>
                 <ChevronDownIcon className="size-4 text-white" />
-              </div>
+              </Link>
             </div>
           </div>
         </div>
