@@ -6,6 +6,7 @@ import {
   ApiDataResponse,
   ApiMessageResponse,
   LoginData,
+  LoginDataWith2FA,
   LoginResponse,
   SignupData,
 } from "@/types";
@@ -14,11 +15,20 @@ import { endpoints } from "@/api/endpoints";
 export const useAuth = () => {
   const api = useAxiosApi(ApiAuthModes.NoAuth);
 
-  const { login, signup } = endpoints.auth;
+  const { login, login2fa, signup } = endpoints.auth;
 
   const userLogin = async (data: LoginData) => {
     const res: AxiosResponse<ApiDataResponse<LoginResponse>> = await api.post(
       login,
+      data,
+    );
+
+    return res.data;
+  };
+
+  const userLoginWith2fa = async (data: LoginDataWith2FA) => {
+    const res: AxiosResponse<ApiDataResponse<LoginResponse>> = await api.post(
+      login2fa,
       data,
     );
 
@@ -32,6 +42,7 @@ export const useAuth = () => {
 
   return {
     userLogin,
+    userLoginWith2fa,
     userSignUp,
   };
 };
