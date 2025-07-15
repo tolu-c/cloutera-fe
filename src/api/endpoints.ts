@@ -9,4 +9,11 @@ export const endpoints = {
     logout: "/auth/sign-out",
     checkUsername: "/auth/check-username",
   },
+  profile: {
+    getProfile: "/profile",
+    updateProfile: "/profile/update",
+    changePassword: "/profile/change-password",
+    setup2fa: "/profile/setup-2fa",
+    verify2fa: "/profile/verify-2fa",
+  },
 };
