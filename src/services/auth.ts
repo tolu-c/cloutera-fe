@@ -11,6 +11,7 @@ import {
   SignupData,
   ForgotPasswordFormData,
   ResetPasswordData,
+  VerifyAccountData,
 } from "@/types";
 import { endpoints } from "@/api/endpoints";
 import { useLocalStorage } from "@/hooks";
@@ -18,6 +19,7 @@ import { CLOUTERA_TOKEN } from "@/types/constants";
 
 export const useAuth = () => {
   const { getItem } = useLocalStorage<string>(CLOUTERA_TOKEN);
+
   const api = useAxiosApi(ApiAuthModes.NoAuth);
   const authApi = useAxiosApi(ApiAuthModes.BearerToken, getItem());
 
@@ -25,6 +27,7 @@ export const useAuth = () => {
     login,
     login2fa,
     signup,
+    verifyAccount,
     forgotPassword,
     resetPassword,
     logout,
@@ -51,6 +54,15 @@ export const useAuth = () => {
 
   const userSignUp = async (data: SignupData) => {
     const res: AxiosResponse<ApiMessageResponse> = await api.post(signup, data);
+    return res.data;
+  };
+
+  const userVerifyAccount = async (data: VerifyAccountData) => {
+    const res: AxiosResponse<ApiMessageResponse> = await api.post(
+      verifyAccount,
+      data,
+    );
+
     return res.data;
   };
 
@@ -88,6 +100,7 @@ export const useAuth = () => {
     userLogin,
     userLoginWith2fa,
     userSignUp,
+    userVerifyAccount,
     userForgotPassword,
     userResetPassword,
     userLogout,

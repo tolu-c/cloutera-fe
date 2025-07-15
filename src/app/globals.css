@@ -78,6 +78,7 @@ input[type="number"]::-ms-reveal {
   --color-foundation-red-light: #fcebed;
   --color-foundation-red-white: #fdf5f6;
   --color-foundation-red-light-active: #f5c1c6;
+  --color-foundation-grey-600: #434b52;
 
   --color-success-base: #0f973d;
   --color-success-50: #e7f6ec;
@@ -98,6 +99,8 @@ input[type="number"]::-ms-reveal {
   --color-status-error-container: #f9dedc;
 
   --color-error: #ae241a;
+
+  --emarald-700: #047857;
 
   --color-input-content-medium: #666666;
 

@@ -19,7 +19,7 @@ type ResetPasswordData = z.infer<typeof resetPasswordSchema>;
 const ResetPasswordForm = () => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
-  const params = useParams();
+  const params = useParams<{ email: string; token: string }>();
 
   const email = decodeURIComponent(params.email);
   const token = params.token;

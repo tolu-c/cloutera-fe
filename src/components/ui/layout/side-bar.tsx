@@ -17,7 +17,7 @@ import {
 } from "@/assets/icons";
 import Image from "next/image";
 import Link from "next/link";
-import { useLogout } from "@/mutations/auth/use-logout";
+import { useLogout } from "@/mutations/auth";
 
 const sidebarLinks = [
   { label: "New Orders", href: "/order", icon: <NewOrderIcon /> },

@@ -3,6 +3,7 @@ export const endpoints = {
     login: "/auth/login",
     login2fa: "/auth/login-2fa",
     signup: "/auth/signup",
+    verifyAccount: "/auth/verify-email",
     forgotPassword: "/auth/forgot-password",
     resetPassword: "/auth/reset-password",
     logout: "/auth/sign-out",
