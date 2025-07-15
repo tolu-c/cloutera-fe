@@ -21,3 +21,8 @@ export enum Status {
   InProgress = "In Progress",
   Cancelled = "Cancelled",
 }
+
+export enum ApiAuthModes {
+  NoAuth,
+  BearerToken,
+}

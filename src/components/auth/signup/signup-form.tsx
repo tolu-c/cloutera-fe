@@ -10,29 +10,41 @@ import { TextInput } from "@/components/form";
 import { Button } from "@/components/ui";
 import { signupSchema } from "@/types/schema";
 import SignupSuccessModal from "./signup-modal";
+import { useAuth } from "@/services/auth";
 
 type FormData = z.infer<typeof signupSchema>;
 
 const SignupForm = () => {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState<string>("");
 
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm<FormData>({
     resolver: zodResolver(signupSchema),
   });
 
+  const { userSignUp } = useAuth();
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log(data);
-    setSubmittedEmail(data.email);
-    setOpen(true);
+    setLoading(true);
+    await userSignUp({
+      ...data,
+    })
+      .then(() => {
+        setSubmittedEmail(data.email);
+        setOpen(true);
+      })
+      .finally(() => setLoading(false));
   };
 
   const handleClose = () => {
     setOpen(false);
+    reset();
   };
 
   return (
@@ -77,7 +89,9 @@ const SignupForm = () => {
         </div>
 
         <div className="flex flex-col items-center gap-6">
-          <Button type="submit">Create Account</Button>
+          <Button type="submit" disabled={loading}>
+            Create Account
+          </Button>
           <p className="text-office-brown-700 flex items-center gap-1 text-sm">
             Already have an account?{" "}
             <Link

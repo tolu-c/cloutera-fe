@@ -28,3 +28,28 @@ interface Order {
   date: string;
   status: Status;
 }
+
+export interface ApiMessageResponse {
+  message: string;
+}
+export interface ApiDataResponse<T> extends ApiMessageResponse {
+  data: T;
+}
+
+export interface LoginData {
+  email: string;
+  password: string;
+}
+export interface LoginResponse {
+  token: string;
+  isVerified: boolean;
+  twoFactorEnabled: boolean;
+}
+
+export interface SignupData {
+  username: string;
+  email: string;
+  password: string;
+  firstName: string;
+  lastName: string;
+}
