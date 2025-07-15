@@ -58,3 +58,7 @@ export interface SignupData {
   firstName: string;
   lastName: string;
 }
+
+export interface CheckUsernameData {
+  username: string;
+}
