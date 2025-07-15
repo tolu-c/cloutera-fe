@@ -71,3 +71,8 @@ export interface ResetPasswordData {
   token: string;
   password: string;
 }
+
+export interface VerifyAccountData {
+  token: string;
+  email: string;
+}

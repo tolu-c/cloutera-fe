@@ -4,3 +4,5 @@ export * from "./use-forgot-password";
 export * from "./use-reset-password";
 export * from "./use-check-username";
 export * from "./use-signup";
+export * from "./use-signup";
+export * from "./use-logout";

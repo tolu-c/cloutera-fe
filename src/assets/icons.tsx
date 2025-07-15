@@ -2,6 +2,40 @@ import { ComponentProps } from "react";
 
 type IconProps = ComponentProps<"svg">;
 
+export const CheckIcon = (props: IconProps) => (
+  <svg
+    width="54"
+    height="40"
+    viewBox="0 0 54 40"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path d="M28.9308 32.3725C25.545 35.7499 23.166 38.1235 23.166 38.1235C22.1952 39.0925 20.88 39.6355 19.5108 39.6355C19.4862 39.6355 19.4616 39.6355 19.437 39.6349C18.0414 39.6151 16.713 39.0319 15.753 38.0185L1.85765 23.3431C-0.107951 21.2677 -0.0185519 17.9923 2.05685 16.0273C4.13225 14.0617 7.40825 14.1523 9.37265 16.2265L19.6164 27.0457L44.4582 2.26086C46.4814 0.24246 49.758 0.24666 51.7764 2.26986C53.796 4.29306 53.7918 7.56966 51.7686 9.58806C51.7686 9.58806 37.2846 24.0379 28.9308 32.3725Z" />
+  </svg>
+);
+
+export const CircularSpinner = (props: IconProps) => (
+  <svg
+    width="34"
+    height="35"
+    viewBox="0 0 34 35"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <circle
+      cx="17"
+      cy="17.5005"
+      r="12"
+      strokeWidth="10"
+      strokeLinecap="round"
+      strokeDasharray="1 20"
+    />
+  </svg>
+);
+
 export const ArrowRightIcon = (props: IconProps) => (
   <svg
     width="24"
