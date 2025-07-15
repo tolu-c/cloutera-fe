@@ -1,13 +1,14 @@
 "use client";
 
 import Link from "next/link";
-import { TextInput } from "@/components/form";
-import { Button } from "@/components/ui";
-import { loginSchema } from "@/types/schema";
 import { z } from "zod/v4";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { useRouter } from "next/navigation";
+
+import { TextInput } from "@/components/form";
+import { Button } from "@/components/ui";
+import { loginSchema } from "@/types/schema";
+import { useLogin } from "@/mutations/auth";
 
 type FormData = z.infer<typeof loginSchema>;
 
@@ -19,11 +20,11 @@ const LoginForm = () => {
   } = useForm<FormData>({
     resolver: zodResolver(loginSchema),
   });
-  const router = useRouter();
+
+  const { isPending, mutateAsync: submit } = useLogin();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log(data);
-    router.push("/order");
+    await submit(data);
   };
 
   return (
@@ -47,7 +48,9 @@ const LoginForm = () => {
       </div>
 
       <div className="flex flex-col items-center gap-6">
-        <Button type="submit">Sign in</Button>
+        <Button type="submit" disabled={isPending}>
+          Sign in
+        </Button>
         <p className="text-office-brown-700 flex items-center gap-1 text-sm">
           Forgot password?{" "}
           <Link
