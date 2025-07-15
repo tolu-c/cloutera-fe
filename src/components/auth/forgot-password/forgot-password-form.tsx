@@ -10,6 +10,7 @@ import { TextInput } from "@/components/form";
 import { Button } from "@/components/ui";
 import { forgotPasswordSchema } from "@/types/schema";
 import ForgotPasswordModal from "./forgot-password-modal";
+import { useForgotPassword } from "@/mutations/auth";
 
 type ForgotPasswordFormData = z.infer<typeof forgotPasswordSchema>;
 
@@ -25,8 +26,10 @@ const ForgotPasswordForm = () => {
     resolver: zodResolver(forgotPasswordSchema),
   });
 
+  const { isPending, mutateAsync: submit } = useForgotPassword();
+
   const onSubmit: SubmitHandler<ForgotPasswordFormData> = async (data) => {
-    console.log(data);
+    await submit(data);
     setSubmittedEmail(data.email);
     setOpen(true);
   };
@@ -50,7 +53,7 @@ const ForgotPasswordForm = () => {
         </div>
 
         <div className="flex flex-col items-center gap-6">
-          <Button type="submit" disabled={isSubmitting}>
+          <Button type="submit" disabled={isSubmitting || isPending}>
             Send
           </Button>
           <p className="text-office-brown-700 flex items-center gap-1 text-sm">

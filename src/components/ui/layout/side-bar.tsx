@@ -17,6 +17,7 @@ import {
 } from "@/assets/icons";
 import Image from "next/image";
 import Link from "next/link";
+import { useLogout } from "@/mutations/auth/use-logout";
 
 const sidebarLinks = [
   { label: "New Orders", href: "/order", icon: <NewOrderIcon /> },
@@ -35,6 +36,7 @@ type SidebarProps = {
 
 const Sidebar = ({ open, close, className }: SidebarProps) => {
   const pathname = usePathname();
+  const { isPending, mutate: logout } = useLogout();
 
   const content = (
     <div className="fixed inset-0 z-[70] flex">
@@ -104,7 +106,11 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
             </Link>
           ))}
 
-          <button className="flex items-center gap-3 px-4 py-3 text-xs font-medium text-[#A0AEC0]">
+          <button
+            onClick={() => logout()}
+            disabled={isPending}
+            className="flex items-center gap-3 px-4 py-3 text-xs font-medium text-[#A0AEC0]"
+          >
             <LogoutIcon className="text-foundation-red-normal size-6" />
             Log out
           </button>

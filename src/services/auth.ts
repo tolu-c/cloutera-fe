@@ -1,5 +1,4 @@
 import { AxiosResponse } from "axios";
-
 import { useAxiosApi } from "@/api/api-client";
 import { ApiAuthModes } from "@/types/enums";
 import {
@@ -10,13 +9,27 @@ import {
   LoginDataWith2FA,
   LoginResponse,
   SignupData,
+  ForgotPasswordFormData,
+  ResetPasswordData,
 } from "@/types";
 import { endpoints } from "@/api/endpoints";
+import { useLocalStorage } from "@/hooks";
+import { CLOUTERA_TOKEN } from "@/types/constants";
 
 export const useAuth = () => {
+  const { getItem } = useLocalStorage<string>(CLOUTERA_TOKEN);
   const api = useAxiosApi(ApiAuthModes.NoAuth);
+  const authApi = useAxiosApi(ApiAuthModes.BearerToken, getItem());
 
-  const { login, login2fa, signup, checkUsername } = endpoints.auth;
+  const {
+    login,
+    login2fa,
+    signup,
+    forgotPassword,
+    resetPassword,
+    logout,
+    checkUsername,
+  } = endpoints.auth;
 
   const userLogin = async (data: LoginData) => {
     const res: AxiosResponse<ApiDataResponse<LoginResponse>> = await api.post(
@@ -41,6 +54,27 @@ export const useAuth = () => {
     return res.data;
   };
 
+  const userForgotPassword = async (data: ForgotPasswordFormData) => {
+    const res: AxiosResponse<ApiMessageResponse> = await api.post(
+      forgotPassword,
+      data,
+    );
+    return res.data;
+  };
+
+  const userResetPassword = async (data: ResetPasswordData) => {
+    const res: AxiosResponse<ApiMessageResponse> = await api.post(
+      resetPassword,
+      data,
+    );
+    return res.data;
+  };
+
+  const userLogout = async () => {
+    const res: AxiosResponse<ApiMessageResponse> = await authApi.post(logout);
+    return res.data;
+  };
+
   const handleCheckUsername = async (data: CheckUsernameData) => {
     const res: AxiosResponse<ApiMessageResponse> = await api.post(
       checkUsername,
@@ -54,6 +88,9 @@ export const useAuth = () => {
     userLogin,
     userLoginWith2fa,
     userSignUp,
+    userForgotPassword,
+    userResetPassword,
+    userLogout,
     handleCheckUsername,
   };
 };

@@ -1,7 +1,10 @@
 import axios, { InternalAxiosRequestConfig } from "axios";
 import { ApiAuthModes } from "@/types/enums";
 
-export const useAxiosApi = (apiAuthMode: ApiAuthModes, token?: string) => {
+export const useAxiosApi = (
+  apiAuthMode: ApiAuthModes,
+  token?: string | null,
+) => {
   const AxiosApi = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
   });
