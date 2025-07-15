@@ -1,5 +1,10 @@
+"use client";
+
+import { useEffect } from "react";
+
 import { cn } from "@/utils/cn";
 import { CheckCircleIcon } from "@/assets/icons";
+import { useCheckUsername } from "@/mutations/auth";
 
 interface UsernameAvailabilityProps {
   username: string;
@@ -8,8 +13,23 @@ interface UsernameAvailabilityProps {
 export const UsernameAvailability = ({
   username,
 }: UsernameAvailabilityProps) => {
-  // TODO: ~> check if username if available
-  const isUsernameAvailable = !!username;
+  const { mutateAsync: submit, data, isPending } = useCheckUsername();
+
+  useEffect(() => {
+    (async () => {
+      await submit({ username });
+    })();
+  }, [submit, username]);
+
+  if (!username) {
+    return null;
+  }
+
+  if (isPending) {
+    return <div className="text-xs">checking your username...</div>;
+  }
+
+  const isUsernameAvailable = !!data;
 
   return (
     <div

@@ -10,13 +10,14 @@ import { TextInput } from "@/components/form";
 import { Button } from "@/components/ui";
 import { signupSchema } from "@/types/schema";
 import SignupSuccessModal from "./signup-modal";
-import { useAuth } from "@/services/auth";
+import { UsernameAvailability } from "@/components/profile/details/username-availability";
+import { useDeferredValue } from "@/hooks";
+import { useSignup } from "@/mutations/auth";
 
 type FormData = z.infer<typeof signupSchema>;
 
 const SignupForm = () => {
   const [open, setOpen] = useState(false);
-  const [loading, setLoading] = useState(false);
   const [submittedEmail, setSubmittedEmail] = useState<string>("");
 
   const {
@@ -24,22 +25,23 @@ const SignupForm = () => {
     handleSubmit,
     formState: { errors },
     reset,
+    watch,
   } = useForm<FormData>({
     resolver: zodResolver(signupSchema),
   });
 
-  const { userSignUp } = useAuth();
+  const username = watch("username");
+  const deferredUsername = useDeferredValue(username, 500);
+
+  const { isPending, mutateAsync: submit } = useSignup();
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    setLoading(true);
-    await userSignUp({
+    await submit({
       ...data,
-    })
-      .then(() => {
-        setSubmittedEmail(data.email);
-        setOpen(true);
-      })
-      .finally(() => setLoading(false));
+    }).then(() => {
+      setSubmittedEmail(data.email);
+      setOpen(true);
+    });
   };
 
   const handleClose = () => {
@@ -54,11 +56,15 @@ const SignupForm = () => {
         className="flex w-full flex-col gap-8"
       >
         <div className="flex w-full flex-col gap-4">
-          <TextInput
-            label="Username"
-            error={errors.username?.message}
-            {...register("username")}
-          />
+          <div className="flex flex-col items-start gap-2">
+            <TextInput
+              label="Username"
+              error={errors.username?.message}
+              {...register("username")}
+            />
+            <UsernameAvailability username={deferredUsername} />
+          </div>
+
           <TextInput
             label="Email Address"
             error={errors.email?.message}
@@ -89,7 +95,7 @@ const SignupForm = () => {
         </div>
 
         <div className="flex flex-col items-center gap-6">
-          <Button type="submit" disabled={loading}>
+          <Button type="submit" disabled={isPending}>
             Create Account
           </Button>
           <p className="text-office-brown-700 flex items-center gap-1 text-sm">
@@ -103,6 +109,7 @@ const SignupForm = () => {
           </p>
         </div>
       </form>
+
       <SignupSuccessModal
         open={open}
         email={submittedEmail}
