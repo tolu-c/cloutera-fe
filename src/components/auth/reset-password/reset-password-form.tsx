@@ -21,10 +21,13 @@ const ResetPasswordForm = () => {
   const router = useRouter();
   const params = useParams();
 
+  const email = decodeURIComponent(params.email);
+  const token = params.token;
+
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<ResetPasswordData>({
     resolver: zodResolver(resetPasswordSchema),
   });
@@ -32,17 +35,14 @@ const ResetPasswordForm = () => {
   const { isPending, mutateAsync: submit } = useResetPassword();
 
   const onSubmit: SubmitHandler<ResetPasswordData> = async (data) => {
-    const email = decodeURIComponent(params.email as string);
-    const token = params.token as string;
-
-    if (!email || !token) return;
-
-    await submit({
-      email,
-      token,
-      password: data.newPassword,
-    });
-    setOpen(true);
+    if (email && token) {
+      await submit({
+        email,
+        token,
+        password: data.newPassword,
+      });
+      setOpen(true);
+    }
   };
 
   const handleClose = () => {
@@ -71,7 +71,7 @@ const ResetPasswordForm = () => {
         </div>
 
         <div className="flex flex-col items-center gap-6">
-          <Button type="submit" disabled={isSubmitting || isPending}>
+          <Button type="submit" disabled={isPending}>
             Reset Password
           </Button>
           <p className="text-office-brown-700 flex items-center gap-1 text-sm">

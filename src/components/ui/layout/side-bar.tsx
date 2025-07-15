@@ -107,7 +107,7 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
           ))}
 
           <button
-            onClick={() => logout()}
+            onClick={async () => await logout()}
             disabled={isPending}
             className="flex items-center gap-3 px-4 py-3 text-xs font-medium text-[#A0AEC0]"
           >

@@ -3,7 +3,7 @@ import { ApiAuthModes } from "@/types/enums";
 
 export const useAxiosApi = (
   apiAuthMode: ApiAuthModes,
-  token?: string | null,
+  token: string | null,
 ) => {
   const AxiosApi = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,

@@ -21,7 +21,7 @@ const ForgotPasswordForm = () => {
   const {
     register,
     handleSubmit,
-    formState: { errors, isSubmitting },
+    formState: { errors },
   } = useForm<ForgotPasswordFormData>({
     resolver: zodResolver(forgotPasswordSchema),
   });
@@ -53,9 +53,10 @@ const ForgotPasswordForm = () => {
         </div>
 
         <div className="flex flex-col items-center gap-6">
-          <Button type="submit" disabled={isSubmitting || isPending}>
+          <Button type="submit" disabled={isPending}>
             Send
           </Button>
+
           <p className="text-office-brown-700 flex items-center gap-1 text-sm">
             Oops?{" "}
             <Link
@@ -67,6 +68,7 @@ const ForgotPasswordForm = () => {
           </p>
         </div>
       </form>
+
       <ForgotPasswordModal
         open={open}
         submittedEmail={submittedEmail}
