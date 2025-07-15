@@ -23,7 +23,6 @@ export const useLogin = () => {
     mutationFn: userLogin,
     onError: handleError,
     onSuccess: ({ data }, variables) => {
-      console.log(variables);
       if (data.isVerified) {
         if (data.twoFactorEnabled) {
           setEmail(variables.email);
