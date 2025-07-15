@@ -1,3 +1,5 @@
+"use client";
+
 export const useLocalStorage = <T>(key: string) => {
   const getItem = (): T | null => {
     try {

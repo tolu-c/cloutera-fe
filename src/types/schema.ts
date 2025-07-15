@@ -63,7 +63,6 @@ export const forgotPasswordSchema = z.object({
 
 export const editAccountSchema = signupSchema.pick({
   username: true,
-  email: true,
   firstName: true,
   lastName: true,
 });

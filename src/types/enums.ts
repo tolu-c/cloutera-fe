@@ -26,3 +26,8 @@ export enum ApiAuthModes {
   NoAuth,
   BearerToken,
 }
+
+export enum UserRole {
+  Customer = "Customer",
+  Admin = "Admin",
+}

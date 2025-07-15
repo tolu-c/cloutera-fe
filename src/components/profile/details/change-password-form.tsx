@@ -6,6 +6,7 @@ import { changePasswordSchema } from "@/types/schema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { TextInput } from "@/components/form";
+import { useChangePassword } from "@/mutations/profile";
 
 type FormData = z.infer<typeof changePasswordSchema>;
 
@@ -18,9 +19,13 @@ export const ChangePasswordForm = () => {
     resolver: zodResolver(changePasswordSchema),
   });
 
+  const { isPending, mutateAsync: submit } = useChangePassword();
+
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log(data);
-    // show notification
+    await submit({
+      oldPassword: data.currentPassword,
+      newPassword: data.password,
+    });
   };
 
   return (
@@ -52,7 +57,9 @@ export const ChangePasswordForm = () => {
           {...register("confirmPassword")}
         />
 
-        <Button type="submit">Save Changes</Button>
+        <Button type="submit" disabled={isPending}>
+          Save Changes
+        </Button>
       </form>
     </OutlineCard>
   );

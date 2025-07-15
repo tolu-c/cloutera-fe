@@ -14,7 +14,7 @@ export const useLogin2fa = () => {
   return useMutation({
     mutationFn: userLoginWith2fa,
     onError: handleError,
-    onSuccess: ({ data }) => {
+    onSuccess: async ({ data }) => {
       if (data.isVerified) {
         setItem(data.token);
         router.push("/order");

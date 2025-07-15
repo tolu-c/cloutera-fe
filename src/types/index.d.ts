@@ -1,4 +1,4 @@
-import { Status } from "@/types/enums";
+import { Status, UserRole } from "@/types/enums";
 
 interface LabelValuePair<T = string> {
   label: string;
@@ -74,5 +74,40 @@ export interface ResetPasswordData {
 
 export interface VerifyAccountData {
   token: string;
+  email: string;
+}
+
+export interface User {
+  _id: string;
+  username: string;
+  email: string;
+  firstName: string;
+  lastName: string;
+  isVerified: boolean;
+  role: UserRole;
+  twoFactorEnabled: boolean;
+  __v: number;
+}
+
+export interface Profile {
+  user: User;
+}
+
+export interface UpdateProfileData {
+  firstName: string;
+  lastName: string;
+  username: string;
+}
+
+export interface UpdatePasswordData {
+  oldPassword: string;
+  newPassword: string;
+}
+
+export interface Verify2FAData {
+  secretCode: string;
+}
+
+export interface Setup2FAData {
   email: string;
 }
