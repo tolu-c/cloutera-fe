@@ -1,5 +1,5 @@
-import { useLocalStorage } from "@/hooks";
-import { CLOUTERA_TOKEN, CLOUTERA_USER } from "@/types/constants";
+import { useError, useLocalStorage } from "@/hooks";
+import { CLOUTERA_USER } from "@/types/constants";
 import { useAxiosApi } from "@/api/api-client";
 import { ApiAuthModes } from "@/types/enums";
 import { endpoints } from "@/api/endpoints";
@@ -16,10 +16,10 @@ import {
 } from "@/types";
 
 export const useProfile = () => {
-  const { getItem } = useLocalStorage<string>(CLOUTERA_TOKEN);
+  const { handleError } = useError();
   const { setItem } = useLocalStorage<User>(CLOUTERA_USER);
 
-  const authApi = useAxiosApi(ApiAuthModes.BearerToken, getItem());
+  const authApi = useAxiosApi(ApiAuthModes.BearerToken, handleError);
 
   const { getProfile, updateProfile, changePassword, verify2fa, setup2fa } =
     endpoints.profile;

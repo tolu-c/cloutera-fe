@@ -5,11 +5,6 @@ interface LabelValuePair<T = string> {
   value: T;
 }
 
-interface ServiceList {
-  title: string;
-  services: Service[];
-}
-
 interface Service {
   id: string;
   service: string;
@@ -34,6 +29,24 @@ export interface ApiMessageResponse {
 }
 export interface ApiDataResponse<T> extends ApiMessageResponse {
   data: T;
+}
+
+export interface PaginatedResponse<T> {
+  success: boolean;
+  data: T[];
+  pagination: {
+    current: number;
+    pages: number;
+    total: number;
+    limit: number;
+    hasNext: boolean;
+    hasPrev: boolean;
+  };
+  filters: Record<string, string>;
+}
+
+export interface BaseParams {
+  [key: string]: Param;
 }
 
 export interface LoginData {

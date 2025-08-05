@@ -7,6 +7,12 @@ export const useError = () => {
     if (error instanceof AxiosError) {
       console.log(error.response?.data?.message);
       console.log(error.status);
+
+      if (error.status === 401 || error.status === 403) {
+        console.log("logout");
+
+        // notify('error', 'You are not authorized to perform this action.');
+      }
       // notify('error', error.message);
     } else {
       console.log(error);

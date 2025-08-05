@@ -14,14 +14,10 @@ import {
   VerifyAccountData,
 } from "@/types";
 import { endpoints } from "@/api/endpoints";
-import { useLocalStorage } from "@/hooks";
-import { CLOUTERA_TOKEN } from "@/types/constants";
 
 export const useAuth = () => {
-  const { getItem } = useLocalStorage<string>(CLOUTERA_TOKEN);
-
   const api = useAxiosApi(ApiAuthModes.NoAuth);
-  const authApi = useAxiosApi(ApiAuthModes.BearerToken, getItem());
+  const authApi = useAxiosApi(ApiAuthModes.BearerToken);
 
   const {
     login,

@@ -4,3 +4,5 @@ export * from "./modal";
 export * from "./card";
 export * from "./data-cell";
 export * from "./badge";
+export * from "./loading";
+export * from "./pagination";

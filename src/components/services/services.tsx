@@ -1,0 +1,47 @@
+"use client";
+
+import Link from "next/link";
+import { Searchbar } from "../form";
+import { Button, DataCell } from "../ui";
+import { VideoIcon } from "@/assets/icons";
+import { ServicesGroup } from "./services-group";
+import { Fragment, useState } from "react";
+import { OrdersServiceList } from "../orders";
+
+export const Services = () => {
+  const [searchValue, setSearchValue] = useState("");
+  const [currentCategory, setCurrentCategory] = useState<string>("");
+
+  return (
+    <Fragment>
+      <OrdersServiceList
+        onSelectService={(category) => setCurrentCategory(category)}
+      />
+
+      <div className="flex w-full flex-col items-start gap-4 p-4">
+        <div className="flex h-14 w-full items-center justify-between gap-3">
+          <Searchbar onSendSearchValue={(value) => setSearchValue(value)} />
+
+          <Link href="https://www.youtube.com" target="_blank">
+            <Button icon={<VideoIcon className="text-white" />} width="max">
+              Watch Tutorial
+            </Button>
+          </Link>
+        </div>
+
+        <div className="flex w-full flex-col gap-2">
+          <div className="bg-foundation-red-normal hidden h-13 w-full items-center overflow-hidden rounded-lg text-white lg:flex">
+            <DataCell className="basis-1/7 text-current">ID</DataCell>
+            <DataCell className="basis-2/7 text-current">Service</DataCell>
+            <DataCell className="basis-1/7 text-current">Rate/100</DataCell>
+            <DataCell className="basis-1/7 text-current">Min Order</DataCell>
+            <DataCell className="basis-1/7 text-current">Max Order</DataCell>
+            <DataCell className="basis-1/7 text-current">Description</DataCell>
+          </div>
+
+          <ServicesGroup search={searchValue} category={currentCategory} />
+        </div>
+      </div>
+    </Fragment>
+  );
+};

@@ -2,28 +2,43 @@
 
 import { useState } from "react";
 import { cn } from "@/utils/cn";
-import { OrderService } from "@/types/enums";
+import { useGetServiceCategories } from "@/queries/services/get-service-categories";
+import { Loading } from "../ui";
 
 interface ServiceListProps {
-  onSelectService?: (service: OrderService) => void;
+  onSelectService?: (service: string) => void;
 }
 export const OrdersServiceList = ({ onSelectService }: ServiceListProps) => {
-  const [selectedService, setSelectedService] = useState<OrderService>(
-    OrderService.All,
-  );
+  const [categoriesLength, setCategoriesLength] = useState(10);
+  const [selectedService, setSelectedService] = useState<string>("");
 
-  const servicesList = Object.values(OrderService);
+  const { data, isLoading } = useGetServiceCategories();
 
-  const selectService = (service: OrderService) => {
+  const selectService = (service: string) => {
     setSelectedService(service);
     if (onSelectService) {
       onSelectService(service);
     }
   };
+  console.log(selectedService);
+
+  if (isLoading) {
+    return <Loading />;
+  }
+
+  if (!data?.data.categories) {
+    return null;
+  }
 
   return (
     <div className="flex w-full flex-wrap items-start gap-2 p-4">
-      {servicesList.map((service, index) => (
+      <button
+        className="text-foundation-red-normal h-11 rounded-full bg-white px-4 py-2 text-sm/5 font-semibold shadow-md"
+        onClick={() => setSelectedService("")}
+      >
+        All
+      </button>
+      {data.data.categories.slice(0, categoriesLength).map((service, index) => (
         <button
           key={index}
           onClick={() => selectService(service)}
@@ -39,6 +54,12 @@ export const OrdersServiceList = ({ onSelectService }: ServiceListProps) => {
           {service}
         </button>
       ))}
+      <button
+        className="text-foundation-red-normal h-11 rounded-full bg-white px-4 py-2 text-sm/5 font-semibold shadow-md"
+        onClick={() => setCategoriesLength((prev) => prev + 10)}
+      >
+        Load more...
+      </button>
     </div>
   );
 };

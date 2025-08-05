@@ -18,7 +18,7 @@ const Modal = ({
   className,
 }: ModalProps) => {
   const content = (
-    <div className="fixed inset-0 z-[70] flex items-end justify-center lg:items-center">
+    <div className="fixed inset-0 z-[90] flex items-end justify-center lg:items-center">
       <div
         className="absolute inset-0 z-[60] cursor-pointer bg-gray-600/70 backdrop-blur-[2px]"
         onClick={close}
