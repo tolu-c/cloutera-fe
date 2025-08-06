@@ -14,10 +14,12 @@ import {
   VerifyAccountData,
 } from "@/types";
 import { endpoints } from "@/api/endpoints";
+import { useError } from "@/hooks";
 
 export const useAuth = () => {
-  const api = useAxiosApi(ApiAuthModes.NoAuth);
-  const authApi = useAxiosApi(ApiAuthModes.BearerToken);
+  const { handleError } = useError();
+  const api = useAxiosApi(ApiAuthModes.NoAuth, handleError);
+  const authApi = useAxiosApi(ApiAuthModes.BearerToken, handleError);
 
   const {
     login,

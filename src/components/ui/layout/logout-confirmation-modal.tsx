@@ -1,4 +1,4 @@
-import { useLogout } from "@/mutations/auth";
+import { useHandleLogout } from "@/hooks/useHandleLogout";
 import { Button } from "../button";
 
 interface LogoutConfirmationModalProps {
@@ -8,11 +8,7 @@ interface LogoutConfirmationModalProps {
 export const LogoutConfirmationModal = ({
   close,
 }: LogoutConfirmationModalProps) => {
-  const { isPending, mutateAsync: logout } = useLogout();
-
-  const handleLogout = async () => {
-    await logout().then(() => close());
-  };
+  const { handleLogout, isPending } = useHandleLogout();
 
   return (
     <div className="flex w-full flex-col items-center gap-4">

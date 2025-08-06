@@ -12,6 +12,7 @@ import { queryConfig } from "@/lib/react-query";
 import { ErrorDisplay } from "@/components/ui/error";
 import { TawkTo } from "./tawkto";
 import { SessionProvider } from "next-auth/react";
+import { NotificationProvider } from "../context/notification";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -34,7 +35,9 @@ export const AppProvider = ({ children }: AppProviderProps) => (
         )}
       >
         <QueryClientProvider client={queryClient}>
-          <SessionProvider>{children}</SessionProvider>
+          <SessionProvider>
+            <NotificationProvider>{children}</NotificationProvider>
+          </SessionProvider>
           <TawkTo />
         </QueryClientProvider>
       </ErrorBoundary>
