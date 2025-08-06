@@ -6,3 +6,4 @@ export * from "./data-cell";
 export * from "./badge";
 export * from "./loading";
 export * from "./pagination";
+export * from "./google-login";
