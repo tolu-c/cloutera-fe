@@ -1,20 +1,17 @@
-"use client";
-
-import { useState } from "react";
 import { cn } from "@/utils/cn";
+import { OrderStatus } from "@/types/enums";
 
-const tabs = [
-  "All",
-  "Completed",
-  "In Progress",
-  "Processing",
-  "Pending",
-  "Canceled",
-];
+interface HistoryTabsProps {
+  tabs: OrderStatus[];
+  setActiveTabAction: (tab: OrderStatus) => void;
+  currentTab: OrderStatus;
+}
 
-export const HistoryTabs = () => {
-  const [activeTab, setActiveTab] = useState(tabs[0]);
-
+export const HistoryTabs = ({
+  tabs,
+  setActiveTabAction,
+  currentTab,
+}: HistoryTabsProps) => {
   return (
     <div className="flex h-11 w-max items-end gap-4 border-b border-[#E7EFFF]">
       {tabs.map((tab, index) => (
@@ -24,10 +21,10 @@ export const HistoryTabs = () => {
             "text-grey-10 flex h-full items-center justify-center p-3 text-base/5",
             {
               "text-foundation-red-normal border-foundation-red-normal border-b-2":
-                tab === activeTab,
+                tab === currentTab,
             },
           )}
-          onClick={() => setActiveTab(tab)}
+          onClick={() => setActiveTabAction(tab)}
         >
           {tab}
         </button>

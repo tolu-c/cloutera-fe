@@ -1,3 +1,5 @@
+"use client";
+
 import { useLogout } from "@/mutations/auth";
 import { useLocalStorage } from "./useLocalStorage";
 import {

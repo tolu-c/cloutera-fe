@@ -9,5 +9,6 @@ export const useGetServices = (params: ServiceParams) => {
     queryKey: ["services", params],
     queryFn: () => handleGetAllServices(params),
     staleTime: Infinity,
+    gcTime: Infinity,
   });
 };

@@ -16,7 +16,8 @@ export const useServices = () => {
 
   const authApi = useAxiosApi(ApiAuthModes.BearerToken, handleError);
 
-  const { getAllServices, getServiceCategories } = endpoints.services;
+  const { getAllServices, getServiceCategories, getServiveById } =
+    endpoints.services;
 
   const handleGetAllServices = async (params: ServiceParams) => {
     const url = appendQueryParams(getAllServices, params);
@@ -34,8 +35,17 @@ export const useServices = () => {
     return res.data;
   };
 
+  const handleGetServiceById = async (id: string) => {
+    const res: AxiosResponse<ApiDataResponse<ServiceItem>> = await authApi.get(
+      getServiveById(id),
+    );
+
+    return res.data;
+  };
+
   return {
     handleGetAllServices,
     handleGetServiceCategories,
+    handleGetServiceById,
   };
 };

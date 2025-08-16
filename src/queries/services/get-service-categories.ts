@@ -8,5 +8,6 @@ export const useGetServiceCategories = () => {
     queryKey: ["service-categories"],
     queryFn: handleGetServiceCategories,
     staleTime: Infinity,
+    gcTime: Infinity,
   });
 };

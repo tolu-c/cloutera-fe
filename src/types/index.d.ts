@@ -26,6 +26,7 @@ interface Order {
 
 export interface ApiMessageResponse {
   message: string;
+  success: boolean;
 }
 export interface ApiDataResponse<T> extends ApiMessageResponse {
   data: T;
@@ -123,4 +124,11 @@ export interface Verify2FAData {
 
 export interface Setup2FAData {
   email: string;
+}
+
+export interface FormatAmountOptions {
+  currency?: string; // e.g., 'USD', 'EUR', 'NGN'
+  locale?: string; // e.g., 'en-US', 'en-NG', 'fr-FR'
+  decimalPlaces?: number; // Number of decimal places (default: 2)
+  showCurrencySymbol?: boolean; // Whether to show currency symbol (default: true)
 }

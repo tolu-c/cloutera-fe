@@ -19,5 +19,10 @@ export const endpoints = {
   services: {
     getAllServices: "/services",
     getServiceCategories: "/services/categories",
+    getServiveById: (serviceId: string) => `/services/${serviceId}`,
+  },
+  orders: {
+    addOrder: "/orders/add",
+    getUserOrders: "/orders/list",
   },
 };
