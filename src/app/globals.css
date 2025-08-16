@@ -63,6 +63,10 @@ input[type="number"]::-ms-reveal {
   .shadow-5 {
     box-shadow: 0 4px 4px 0 #0000004d;
   }
+
+  .shadow-100 {
+    box-shadow: 0 1px 4px 0 #0c0c0d0d;
+  }
 }
 
 @theme {
@@ -101,6 +105,7 @@ input[type="number"]::-ms-reveal {
   --color-foundation-red-white: #fdf5f6;
   --color-foundation-red-light-active: #f5c1c6;
   --color-foundation-grey-600: #434b52;
+  --color-foundation-grey-900: #1f2226;
 
   --color-success-base: #0f973d;
   --color-success-50: #e7f6ec;

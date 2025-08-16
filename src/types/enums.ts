@@ -20,6 +20,15 @@ export enum Status {
   Processing = "Processing",
   InProgress = "In Progress",
   Cancelled = "Cancelled",
+  Successful = "Successful",
+}
+
+export enum OrderStatus {
+  All = "All",
+  PENDING = "Pending",
+  COMPLETED = "Completed",
+  CANCELLED = "Cancelled",
+  REFUNDED = "Refunded",
 }
 
 export enum ApiAuthModes {
@@ -35,4 +44,14 @@ export enum UserRole {
 export enum NotificationStatus {
   Success = "success",
   Error = "error",
+}
+
+export enum FundHistoryCategory {
+  All = "All",
+  Successful = "Successful",
+  Failed = "Failed",
+}
+
+export enum AddFundOptions {
+  FlutterWave = "FlutterWave",
 }

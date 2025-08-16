@@ -38,7 +38,7 @@ export const ServiceListItem = ({
             serviceId={serviceId}
             name={name}
             category={category}
-            close={close}
+            closeAction={close}
           />
         </Modal>
       )}

@@ -10,10 +10,11 @@ interface NotificationProps {
 
 export const Notification = ({ message, status, close }: NotificationProps) => {
   return (
-    <div className="border-grey-200 fixed top-4 right-4 z-[999999] flex h-11 w-112 items-center gap-4 overflow-hidden rounded-sm rounded-l-none border bg-white shadow-xs">
+    <div className="border-grey-200 fixed top-4 right-4 z-[999999] flex h-11 w-112 items-center gap-4 overflow-hidden rounded-sm border bg-white shadow-xs">
       <div
         className={cn("h-full w-1.5 rounded-l-sm", {
           "bg-error": status === NotificationStatus.Error,
+          "bg-success-base": status === NotificationStatus.Success,
         })}
       />
 
@@ -21,6 +22,7 @@ export const Notification = ({ message, status, close }: NotificationProps) => {
         <p
           className={cn("flex-1 text-sm/5", {
             "text-error": status === NotificationStatus.Error,
+            "text-success-base": status === NotificationStatus.Success,
           })}
         >
           {message}
@@ -29,6 +31,7 @@ export const Notification = ({ message, status, close }: NotificationProps) => {
         <div
           className={cn("flex h-5 flex-none items-center border-l pl-3", {
             "border-error": status === NotificationStatus.Error,
+            "border-success-base": status === NotificationStatus.Success,
           })}
         >
           <button onClick={close}>

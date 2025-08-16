@@ -10,7 +10,13 @@ export const metadata: Metadata = {
   title: "Cloutera | Order",
 };
 
-const OrderPage = () => {
+const OrderPage = async ({
+  searchParams,
+}: {
+  searchParams: Promise<{ serviceId: string }>;
+}) => {
+  const serviceId = (await searchParams).serviceId;
+
   return (
     <div className="flex w-full flex-col items-start gap-16">
       <div className="flex w-full flex-col items-start gap-4">
@@ -32,7 +38,7 @@ const OrderPage = () => {
 
           <OrdersServiceList />
 
-          <NewOrderForm />
+          <NewOrderForm serviceId={serviceId} />
         </div>
 
         <OrdersServiceDescription />
