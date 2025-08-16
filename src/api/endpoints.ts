@@ -25,4 +25,8 @@ export const endpoints = {
     addOrder: "/orders/add",
     getUserOrders: "/orders/list",
   },
+  account: {
+    addFund: "/account/add-fund",
+    accountStatus: "/account/status",
+  },
 };

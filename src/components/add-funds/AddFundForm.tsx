@@ -10,11 +10,14 @@ import { addFundSchema } from "@/types/schema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddFundOptions } from "@/types/enums";
+import { useAddFund } from "@/mutations/account";
 
 type FormData = z.infer<typeof addFundSchema>;
 
 export const AddFundForm = () => {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
+
+  const { isPending, mutateAsync: submit } = useAddFund();
 
   const amountOptions = [500, 1000, 2000, 5000];
 
@@ -36,8 +39,9 @@ export const AddFundForm = () => {
   });
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    console.log(data);
-    // show modal
+    await submit({
+      amount: data.amount,
+    });
   };
 
   return (
@@ -83,7 +87,9 @@ export const AddFundForm = () => {
         {...register("amount", { valueAsNumber: true })}
       />
 
-      <Button type="submit">Proceed</Button>
+      <Button type="submit" disabled={isPending}>
+        Proceed
+      </Button>
     </form>
   );
 };
