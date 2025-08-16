@@ -1,9 +1,9 @@
-import { Order } from "@/types";
 import Link from "next/link";
 import { HistoryListItem } from "@/components/orders/history/history-list-item";
+import { OrderItem } from "@/types/orders.types";
 
 interface HistoryListProps {
-  orders: Order[];
+  orders: OrderItem[];
 }
 export const HistoryList = ({ orders }: HistoryListProps) => {
   if (!orders.length) {
@@ -20,7 +20,7 @@ export const HistoryList = ({ orders }: HistoryListProps) => {
   return (
     <div className="flex w-full flex-col items-start gap-2">
       {orders.map((order) => (
-        <HistoryListItem order={order} key={order.id} />
+        <HistoryListItem order={order} key={order._id} />
       ))}
     </div>
   );

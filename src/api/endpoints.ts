@@ -16,4 +16,17 @@ export const endpoints = {
     setup2fa: "/profile/setup-2fa",
     verify2fa: "/profile/verify-2fa",
   },
+  services: {
+    getAllServices: "/services",
+    getServiceCategories: "/services/categories",
+    getServiveById: (serviceId: string) => `/services/${serviceId}`,
+  },
+  orders: {
+    addOrder: "/orders/add",
+    getUserOrders: "/orders/list",
+  },
+  account: {
+    addFund: "/account/add-fund",
+    accountStatus: "/account/status",
+  },
 };

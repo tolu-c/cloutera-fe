@@ -2,6 +2,175 @@ import { ComponentProps } from "react";
 
 type IconProps = ComponentProps<"svg">;
 
+export const ArrowDownIcon = (props: IconProps) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M13.28 5.96667L8.93333 10.3133C8.42 10.8267 7.58 10.8267 7.06667 10.3133L2.72 5.96667"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const EmptyWalletIcon = (props: IconProps) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    xmlns="http://www.w3.org/2000/svg"
+    stroke="currentColor"
+    {...props}
+  >
+    <path
+      d="M12.0267 9.03328C11.7467 9.30662 11.5867 9.69995 11.6267 10.12C11.6867 10.84 12.3467 11.3666 13.0667 11.3666H14.3334V12.16C14.3334 13.54 13.2067 14.6666 11.8267 14.6666H4.17335C2.79335 14.6666 1.66669 13.54 1.66669 12.16V7.6733C1.66669 6.2933 2.79335 5.16663 4.17335 5.16663H11.8267C13.2067 5.16663 14.3334 6.2933 14.3334 7.6733V8.6333H12.9867C12.6134 8.6333 12.2734 8.77995 12.0267 9.03328Z"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      opacity="0.4"
+      d="M1.66669 8.27337V5.22674C1.66669 4.4334 2.15335 3.72671 2.89335 3.44671L8.18669 1.44671C9.01335 1.13337 9.90002 1.74673 9.90002 2.63339V5.16672"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      d="M15.04 9.31327V10.6866C15.04 11.0533 14.7467 11.3533 14.3734 11.3666H13.0667C12.3467 11.3666 11.6867 10.84 11.6267 10.12C11.5867 9.69995 11.7467 9.30662 12.0267 9.03328C12.2734 8.77995 12.6134 8.6333 12.9867 8.6333H14.3734C14.7467 8.64663 15.04 8.94661 15.04 9.31327Z"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      opacity="0.4"
+      d="M4.66669 8H9.33335"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const ShoppingCartIcon = (props: IconProps) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M1.33331 1.33337H2.49332C3.21332 1.33337 3.77998 1.95337 3.71998 2.66671L3.16665 9.3067C3.07331 10.3934 3.93331 11.3267 5.02664 11.3267H12.1266C13.0866 11.3267 13.9266 10.54 14 9.58671L14.36 4.58671C14.44 3.48004 13.6 2.58004 12.4866 2.58004H3.87998"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      opacity="0.4"
+      d="M10.8333 14.6667C11.2936 14.6667 11.6667 14.2936 11.6667 13.8333C11.6667 13.3731 11.2936 13 10.8333 13C10.3731 13 10 13.3731 10 13.8333C10 14.2936 10.3731 14.6667 10.8333 14.6667Z"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      opacity="0.4"
+      d="M5.50002 14.6667C5.96026 14.6667 6.33335 14.2936 6.33335 13.8333C6.33335 13.3731 5.96026 13 5.50002 13C5.03978 13 4.66669 13.3731 4.66669 13.8333C4.66669 14.2936 5.03978 14.6667 5.50002 14.6667Z"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      opacity="0.4"
+      d="M6 5.33337H14"
+      strokeWidth="1.5"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const AccountStatusIcon = (props: IconProps) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M2.83997 7.34663V10.66C2.83997 11.8733 2.83997 11.8733 3.98663 12.6466L7.13997 14.4666C7.6133 14.74 8.38663 14.74 8.85997 14.4666L12.0133 12.6466C13.16 11.8733 13.16 11.8733 13.16 10.66V7.34663C13.16 6.13329 13.16 6.13329 12.0133 5.35996L8.85997 3.53996C8.38663 3.26663 7.6133 3.26663 7.13997 3.53996L3.98663 5.35996C2.83997 6.13329 2.83997 6.13329 2.83997 7.34663Z"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      opacity="0.4"
+      d="M11.6667 5.08671V3.33337C11.6667 2.00004 11 1.33337 9.66671 1.33337H6.33337C5.00004 1.33337 4.33337 2.00004 4.33337 3.33337V5.04004"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+    <path
+      opacity="0.4"
+      d="M8.42006 7.32664L8.80006 7.91997C8.86006 8.01331 8.99339 8.10664 9.09339 8.13331L9.77339 8.30664C10.1934 8.41331 10.3067 8.77331 10.0334 9.10664L9.58672 9.64664C9.52006 9.73331 9.46672 9.88664 9.47339 9.99331L9.51339 10.6933C9.54006 11.1266 9.23339 11.3466 8.83339 11.1866L8.18006 10.9266C8.08006 10.8866 7.91339 10.8866 7.81339 10.9266L7.16006 11.1866C6.76006 11.3466 6.45339 11.12 6.48006 10.6933L6.52006 9.99331C6.52672 9.88664 6.47339 9.72664 6.40672 9.64664L5.96006 9.10664C5.68672 8.77331 5.80006 8.41331 6.22006 8.30664L6.90006 8.13331C7.00672 8.10664 7.14006 8.00664 7.19339 7.91997L7.57339 7.32664C7.81339 6.96664 8.18672 6.96664 8.42006 7.32664Z"
+      strokeWidth="1.5"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
+export const CloseIcon = (props: IconProps) => (
+  <svg
+    width="20"
+    height="21"
+    viewBox="0 0 20 21"
+    fill="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path d="M5.87571 5.19671C5.55028 4.87128 5.02264 4.87128 4.6972 5.19671C4.37177 5.52215 4.37177 6.04979 4.6972 6.37523L8.82199 10.5L4.6972 14.6248C4.37177 14.9502 4.37177 15.4779 4.6972 15.8033C5.02264 16.1288 5.55028 16.1288 5.87571 15.8033L10.0005 11.6785L14.1253 15.8033C14.4507 16.1288 14.9784 16.1288 15.3038 15.8033C15.6292 15.4779 15.6292 14.9502 15.3038 14.6248L11.179 10.5L15.3038 6.37523C15.6292 6.04979 15.6292 5.52215 15.3038 5.19671C14.9784 4.87128 14.4507 4.87128 14.1253 5.19671L10.0005 9.3215L5.87571 5.19671Z" />
+  </svg>
+);
+
+export const ChevronIcon = (props: IconProps) => (
+  <svg
+    width="16"
+    height="16"
+    viewBox="0 0 16 16"
+    fill="none"
+    stroke="currentColor"
+    xmlns="http://www.w3.org/2000/svg"
+    {...props}
+  >
+    <path
+      d="M5.93994 13.28L10.2866 8.9333C10.7999 8.41997 10.7999 7.57997 10.2866 7.06664L5.93994 2.71997"
+      strokeWidth="0.75"
+      strokeMiterlimit="10"
+      strokeLinecap="round"
+      strokeLinejoin="round"
+    />
+  </svg>
+);
+
 export const CheckIcon = (props: IconProps) => (
   <svg
     width="54"

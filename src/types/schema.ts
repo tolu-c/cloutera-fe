@@ -1,5 +1,5 @@
 import { z } from "zod/v4";
-import { OrderCategory, OrderService } from "@/types/enums";
+import { AddFundOptions } from "@/types/enums";
 
 export const supportFormSchema = z.object({
   subject: z.string().min(1, "Subject is required"),
@@ -15,12 +15,8 @@ export const loginSchema = z.object({
 });
 
 export const newOrderSchema = z.object({
-  category: z.enum(OrderCategory, {
-    error: "Please select a category",
-  }),
-  service: z.enum(OrderService, {
-    error: "Please select a service",
-  }),
+  category: z.string().min(1, { error: "Please select a category" }),
+  service: z.string().min(1, { error: "Please select a service" }),
   link: z
     .url({ error: "Please enter a valid link" })
     .min(1, { error: "Link is required" }),
@@ -95,3 +91,18 @@ export const resetPasswordSchema = z
     error: "New passwords do not match",
     path: ["confirmNewPassword"],
   });
+
+export const addFundSchema = z.object({
+  amount: z
+    .number({
+      error: (issue) =>
+        issue.input === undefined ? "Required" : "Please enter a number",
+    })
+    .min(500, { error: "Minimum amount is 500" })
+    .max(10000000, {
+      error: "Maximum amount is 10000000",
+    }),
+  paymentMethod: z.enum(AddFundOptions, {
+    error: "Please select a method",
+  }),
+});

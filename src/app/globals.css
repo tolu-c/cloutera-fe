@@ -37,9 +37,35 @@ input[type="number"]::-ms-reveal {
   );
 }
 
+.text--gradient {
+  background: linear-gradient(
+    223.05deg,
+    #de3746 18.84%,
+    #dd3746 26.18%,
+    #db3645 32.16%,
+    #d73544 36.99%,
+    #d23442 40.86%,
+    #cb3240 44%,
+    #c4313e 46.61%,
+    #bd2f3b 48.9%,
+    #b42d39 51.1%,
+    #ab2a36 53.39%,
+    #a22833 56%,
+    #992630 59.14%,
+    #90242e 63.01%,
+    #88222b 67.84%,
+    #802028 73.82%,
+    #781e26 81.16%
+  );
+}
+
 @layer components {
   .shadow-5 {
     box-shadow: 0 4px 4px 0 #0000004d;
+  }
+
+  .shadow-100 {
+    box-shadow: 0 1px 4px 0 #0c0c0d0d;
   }
 }
 
@@ -79,11 +105,15 @@ input[type="number"]::-ms-reveal {
   --color-foundation-red-white: #fdf5f6;
   --color-foundation-red-light-active: #f5c1c6;
   --color-foundation-grey-600: #434b52;
+  --color-foundation-grey-900: #1f2226;
 
   --color-success-base: #0f973d;
   --color-success-50: #e7f6ec;
 
   --color-error: #ae241a;
+  --color-error-50: #fef3f2;
+  --color-error-500: #dc2626;
+
   --color-foundation-blue-normal: #3121df;
   --color-foundation-blue-light: #e0defa;
 
@@ -98,8 +128,6 @@ input[type="number"]::-ms-reveal {
   --color-status-error: #b3261e;
   --color-status-error-container: #f9dedc;
 
-  --color-error: #ae241a;
-
   --emarald-700: #047857;
 
   --color-input-content-medium: #666666;
@@ -112,12 +140,15 @@ input[type="number"]::-ms-reveal {
   0% {
     transform: translate(0px, 0px) scale(1);
   }
+
   33% {
     transform: translate(30px, -50px) scale(1.1);
   }
+
   66% {
     transform: translate(-20px, 20px) scale(0.9);
   }
+
   100% {
     transform: translate(0px, 0px) scale(1);
   }
@@ -127,9 +158,11 @@ input[type="number"]::-ms-reveal {
 .animate-blob {
   animation: blob 7s infinite;
 }
+
 .animate-blob-delay-2000 {
   animation: blob 7s infinite 2s;
 }
+
 .animate-blob-delay-4000 {
   animation: blob 7s infinite 4s;
 }

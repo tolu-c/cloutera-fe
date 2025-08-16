@@ -1,5 +1,5 @@
 import { ReactNode } from "react";
-import { Button } from "@/components/ui";
+import { GoogleLogin } from "@/components/ui";
 
 interface AuthCardProps {
   children: ReactNode;
@@ -35,9 +35,7 @@ const AuthCard = ({
             </span>
           </div>
 
-          <Button state="outline" radius="md">
-            Google
-          </Button>
+          <GoogleLogin />
         </div>
       )}
     </div>

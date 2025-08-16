@@ -1,12 +1,36 @@
+"use client";
+
 import { TextInput } from "@/components/form";
 import { SearchIcon, SettingsIcon } from "@/assets/icons";
+import { useState, useEffect } from "react";
+import { useDeferredValue } from "@/hooks";
+import { cn } from "@/utils/cn";
 
-export const Searchbar = () => {
+interface SearchBarProps {
+  onSendSearchValue?: (value: string) => void;
+  className?: string;
+}
+
+export const Searchbar = ({ onSendSearchValue, className }: SearchBarProps) => {
+  const [searchValue, setSearchValue] = useState("");
+  const deferredSearchValue = useDeferredValue(searchValue, 500);
+
+  // Use useEffect to call onSendSearchValue when deferredSearchValue changes
+  useEffect(() => {
+    if (onSendSearchValue) {
+      onSendSearchValue(deferredSearchValue);
+    }
+  }, [deferredSearchValue, onSendSearchValue]);
+
+  const handleOnChange = (value: string) => {
+    setSearchValue(value);
+  };
+
   return (
     <TextInput
       type="search"
       placeholder="Search"
-      width="w-120"
+      width={cn("w-120", className)}
       className="bg-black/4"
       icon={<SearchIcon className="text-input-content-medium size-5" />}
       rightSection={
@@ -14,6 +38,7 @@ export const Searchbar = () => {
           <SettingsIcon className="text-foundation-red-normal size-4" />
         </button>
       }
+      onChange={(e) => handleOnChange(e.currentTarget.value)}
     />
   );
 };
