@@ -20,7 +20,6 @@ export const OrdersServiceList = ({ onSelectService }: ServiceListProps) => {
       onSelectService(service);
     }
   };
-  console.log(selectedService);
 
   if (isLoading) {
     return <Loading />;

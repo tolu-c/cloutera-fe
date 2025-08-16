@@ -7,7 +7,7 @@ export const useAxiosApi = (
   apiAuthMode: ApiAuthModes,
   handleError?: (error: unknown) => void,
 ) => {
-  const token = useLocalStorage<string>(CLOUTERA_TOKEN).getItem();
+  const { getItem } = useLocalStorage<string>(CLOUTERA_TOKEN);
 
   const AxiosApi = axios.create({
     baseURL: process.env.NEXT_PUBLIC_API_URL,
@@ -17,6 +17,7 @@ export const useAxiosApi = (
   AxiosApi.defaults.headers["Accept"] = "application/json";
 
   AxiosApi.interceptors.request.use((config: InternalAxiosRequestConfig) => {
+    const token = getItem();
     if (apiAuthMode === ApiAuthModes.BearerToken) {
       config.headers["Authorization"] = `Bearer ${token}`;
     }
