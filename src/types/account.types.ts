@@ -1,5 +1,10 @@
+import { AddFundOptions } from "./enums";
+
 export interface AddFundRequest {
   amount: number;
+  paymentMethod: AddFundOptions;
+  status: string;
+  tx_reference: string;
 }
 
 export interface AddFundResponse {
