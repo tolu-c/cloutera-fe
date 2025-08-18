@@ -1831,7 +1831,6 @@ packages:
         optional: true
       sass:
         optional: true
-
   nwsapi@2.2.21:
     resolution: {integrity: sha512-o6nIY3qwiSXl7/LuOU0Dmuctd34Yay0yeuZRLFmDPrrdHpXKFndPj3hM+YEPVHYC5fx2otBx4Ilc/gyYSAUaIA==}
 
@@ -4944,7 +4943,7 @@ snapshots:
   uri-js@4.4.1:
     dependencies:
       punycode: 2.3.1
-
+      
   url-parse@1.5.10:
     dependencies:
       querystringify: 2.2.0
