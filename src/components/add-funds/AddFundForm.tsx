@@ -11,6 +11,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddFundOptions } from "@/types/enums";
 import { useAddFund } from "@/mutations/account";
+import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
+import {
+  FlutterwaveConfig,
+  FlutterWaveResponse,
+} from "flutterwave-react-v3/dist/types";
 
 type FormData = z.infer<typeof addFundSchema>;
 
@@ -30,6 +35,7 @@ export const AddFundForm = () => {
     register,
     handleSubmit,
     formState: { errors },
+    setValue,
   } = useForm<FormData>({
     resolver: zodResolver(addFundSchema),
     defaultValues: {
@@ -37,10 +43,41 @@ export const AddFundForm = () => {
       paymentMethod: AddFundOptions.FlutterWave,
     },
   });
+  const handleFlutterwave = useFlutterwave;
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    await submit({
+    const config: FlutterwaveConfig = {
+      public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_KEY as string,
+      tx_ref: String(Date.now()),
       amount: data.amount,
+      currency: "NGN",
+      payment_options: "card,mobilemoney,ussd",
+      customer: {
+        email: "webdevtolu@protonmail.com",
+        phone_number: "08141272488",
+        name: "Tolu Test",
+      },
+      customizations: {
+        title: "Fund My Cloutera Wallet",
+        description: `Funding my wallet with ${formatAmount(data.amount)}`,
+        logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
+      },
+    };
+
+    const handleFlutterPayment = handleFlutterwave(config);
+
+    handleFlutterPayment({
+      callback: async (res: FlutterWaveResponse) => {
+        const { amount, status, tx_ref } = res;
+        await submit({
+          amount,
+          status,
+          tx_reference: tx_ref,
+          paymentMethod: data.paymentMethod,
+        });
+        closePaymentModal();
+      },
+      onClose: () => {},
     });
   };
 
@@ -63,7 +100,10 @@ export const AddFundForm = () => {
             <button
               key={index}
               type="button"
-              onClick={() => setSelectedAmount(amount)}
+              onClick={() => {
+                setValue("amount", amount);
+                setSelectedAmount(amount);
+              }}
               className={cn(
                 "shadow-100 flex flex-1 items-center justify-center rounded-lg p-4",
                 {
