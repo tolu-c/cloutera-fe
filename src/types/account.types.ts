@@ -1,4 +1,5 @@
-import { AddFundOptions } from "./enums";
+import { AddFundOptions, TransactionStatus, TransactionType } from "./enums";
+import { TimeStamp } from "@/types/index";
 
 export interface AddFundRequest {
   amount: number;
@@ -21,4 +22,16 @@ export interface AccountStatusResponse {
     totalSuccessfulOrders: number;
     totalAmount: number;
   };
+}
+
+export interface Transaction extends TimeStamp {
+  _id: string;
+  transactionId: string;
+  userId: string;
+  paymentMethod: string;
+  amount: number;
+  status: TransactionStatus;
+  type: TransactionType;
+  balanceBefore: number;
+  balanceAfter: number;
 }
