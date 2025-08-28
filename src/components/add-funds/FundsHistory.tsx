@@ -17,11 +17,12 @@ export const FundsHistory = () => {
   const { handleLimitChange, handlePageChange } = usePagination();
 
   const tabs = Object.values(FundHistoryCategory);
-  console.log(searchValue);
 
   const { data, isLoading } = useGetFundHistory();
 
   const pagination = data?.pagination;
+
+  console.log("searchValue", searchValue);
 
   return (
     <div className="flex w-full flex-col gap-4 px-6 py-4">

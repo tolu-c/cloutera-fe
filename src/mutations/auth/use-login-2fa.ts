@@ -4,6 +4,7 @@ import { useMutation } from "@tanstack/react-query";
 import { useAuth } from "@/services/auth";
 import { useError, useLocalStorage } from "@/hooks";
 import { CLOUTERA_TOKEN } from "@/types/constants";
+import { UserRole } from "@/types/enums";
 
 export const useLogin2fa = () => {
   const { userLoginWith2fa } = useAuth();
@@ -17,7 +18,11 @@ export const useLogin2fa = () => {
     onSuccess: async ({ data }) => {
       if (data.isVerified) {
         setItem(data.token);
-        router.push("/order");
+        if (data.role === UserRole.Admin) {
+          router.push("/admin/dashboard");
+        } else {
+          router.push("/order");
+        }
       }
     },
   });
