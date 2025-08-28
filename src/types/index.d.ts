@@ -63,6 +63,7 @@ export interface LoginResponse {
   token: string;
   isVerified: boolean;
   twoFactorEnabled: boolean;
+  role: UserRole;
 }
 
 export interface SignupData {

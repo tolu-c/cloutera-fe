@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-
+import { UserRole } from "@/types/enums";
 import { useAuth } from "@/services/auth";
 import { useError, useLocalStorage } from "@/hooks";
 import {
@@ -24,13 +24,17 @@ export const useLogin = () => {
     onError: handleError,
     onSuccess: async ({ data }, variables) => {
       if (data.isVerified) {
-        if (data.twoFactorEnabled) {
+        if (!data.twoFactorEnabled) {
           setEmail(variables.email);
           setPassword(variables.password);
           router.push("/login/2fa");
         } else {
           setItem(data.token);
-          router.push("/order");
+          if (data?.role === UserRole.Admin) {
+            router.push("/admin/dashboard");
+          } else {
+            router.push("/order");
+          }
         }
       }
     },
