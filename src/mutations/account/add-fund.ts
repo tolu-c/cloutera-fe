@@ -20,6 +20,7 @@ export const useAddFund = () => {
         message: res.message,
       });
       queryClient.invalidateQueries({ queryKey: ["accountStatus"] });
+      queryClient.invalidateQueries({ queryKey: ["fundHistory"] });
     },
   });
 };

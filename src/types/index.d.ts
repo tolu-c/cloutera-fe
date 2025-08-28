@@ -132,3 +132,8 @@ export interface FormatAmountOptions {
   decimalPlaces?: number; // Number of decimal places (default: 2)
   showCurrencySymbol?: boolean; // Whether to show currency symbol (default: true)
 }
+
+export interface TimeStamp {
+  createdAt: string;
+  updatedAt: string;
+}
