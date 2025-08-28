@@ -24,7 +24,7 @@ export const useLogin = () => {
     onError: handleError,
     onSuccess: async ({ data }, variables) => {
       if (data.isVerified) {
-        if (!data.twoFactorEnabled) {
+        if (data.twoFactorEnabled) {
           setEmail(variables.email);
           setPassword(variables.password);
           router.push("/login/2fa");
