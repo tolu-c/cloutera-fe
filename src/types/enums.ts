@@ -55,3 +55,14 @@ export enum FundHistoryCategory {
 export enum AddFundOptions {
   FlutterWave = "FlutterWave",
 }
+
+export enum TransactionStatus {
+  PENDING = "pending",
+  SUCCESSFUL = "successful",
+  FAILED = "failed",
+}
+
+export enum TransactionType {
+  CREDIT = "credit",
+  DEBIT = "debit",
+}

@@ -19,7 +19,7 @@ export const endpoints = {
   services: {
     getAllServices: "/services",
     getServiceCategories: "/services/categories",
-    getServiveById: (serviceId: string) => `/services/${serviceId}`,
+    getServiceById: (serviceId: string) => `/services/${serviceId}`,
   },
   orders: {
     addOrder: "/orders/add",
@@ -28,5 +28,6 @@ export const endpoints = {
   account: {
     addFund: "/account/add-fund",
     accountStatus: "/account/status",
+    getFundsHistory: "/account/funds/history",
   },
 };

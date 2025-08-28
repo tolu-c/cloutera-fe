@@ -1,11 +1,12 @@
 import { useAxiosApi } from "@/api/api-client";
 import { endpoints } from "@/api/endpoints";
 import { useError } from "@/hooks";
-import { ApiDataResponse } from "@/types";
+import { ApiDataResponse, PaginatedResponse } from "@/types";
 import {
   AccountStatusResponse,
   AddFundRequest,
   AddFundResponse,
+  Transaction,
 } from "@/types/account.types";
 import { ApiAuthModes } from "@/types/enums";
 import { AxiosResponse } from "axios";
@@ -15,7 +16,7 @@ export const useAccount = () => {
 
   const authApi = useAxiosApi(ApiAuthModes.BearerToken, handleError);
 
-  const { addFund, accountStatus } = endpoints.account;
+  const { addFund, accountStatus, getFundsHistory } = endpoints.account;
 
   const handleAddFund = async (data: AddFundRequest) => {
     const res: AxiosResponse<ApiDataResponse<AddFundResponse>> =
@@ -30,8 +31,16 @@ export const useAccount = () => {
     return res.data;
   };
 
+  // TODO: updated to use params for search and filter
+  const handleGetFundHistory = async () => {
+    const res: AxiosResponse<PaginatedResponse<Transaction>> =
+      await authApi.get(getFundsHistory);
+    return res.data;
+  };
+
   return {
     handleAddFund,
     handleGetAccountStatus,
+    handleGetFundHistory,
   };
 };
