@@ -5,18 +5,16 @@ import {
   DashboardFillIcon,
   NotificationIcon,
 } from "@/assets/icons";
-import { usePathname } from "next/navigation";
 import { Fragment, useState } from "react";
 import Sidebar from "./side-bar";
 import Image from "next/image";
-import { useLocalStorage } from "@/hooks";
+import { useGetPageTitle, useLocalStorage } from "@/hooks";
 import { CLOUTERA_USER } from "@/types/constants";
 import { User } from "@/types";
 import Link from "next/link";
 
 const TopBar = () => {
-  const pathname = usePathname();
-  const pageTitle = pathname.split("/").filter(Boolean).pop() || "";
+  const pageTitle = useGetPageTitle();
   const [sidebarOpen, setSidebarOpen] = useState(false);
 
   const { getItem } = useLocalStorage<User>(CLOUTERA_USER);

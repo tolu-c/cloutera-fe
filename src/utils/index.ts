@@ -1,4 +1,6 @@
+import dayjs from "dayjs";
 import { BaseParams, FormatAmountOptions } from "@/types";
+import { DateTimeFormat } from "@/types/enums";
 
 export const generateQueryString = (params: BaseParams): string => {
   const searchParams = new URLSearchParams();
@@ -59,3 +61,11 @@ export function formatNumber(number: number): string {
     maximumFractionDigits: 0,
   });
 }
+
+export const formatDateTime = (
+  date: Date | string,
+  format: DateTimeFormat,
+): string => {
+  const formattedDate = dayjs(date);
+  return formattedDate.format(format);
+};
