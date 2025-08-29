@@ -66,3 +66,7 @@ export enum TransactionType {
   CREDIT = "credit",
   DEBIT = "debit",
 }
+
+export enum DateTimeFormat {
+  DayDateMonthYear = "ddd, D MMMM, YYYY",
+}
