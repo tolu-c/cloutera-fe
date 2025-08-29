@@ -71,6 +71,7 @@ input[type="number"]::-ms-reveal {
 
 @theme {
   --color-cloutera-black: #1b1818;
+  --color-admin-black: #0a0a08;
   --color-fade: #edeeef;
   --color-fade-light: #ededf2;
   --color-neutral-black: #1a1a21;
@@ -82,7 +83,8 @@ input[type="number"]::-ms-reveal {
 
   --color-dark: #140800;
 
-  --color-gray-200: #e9eaeb;
+  --color-bg-2: #f8fbff;
+  --color-general-white: #f6f9ff;
 
   --color-grey-10: #9e9e9e;
   --color-grey-100: #f0f2f5;
@@ -117,9 +119,6 @@ input[type="number"]::-ms-reveal {
   --color-foundation-blue-normal: #3121df;
   --color-foundation-blue-light: #e0defa;
 
-  --color-success-base: #0f973d;
-  --color-success-50: #e7f6ec;
-
   --color-status-bg-green: #e9ffef;
   --color-status-text-green: #409261;
 
@@ -127,7 +126,7 @@ input[type="number"]::-ms-reveal {
 
   --color-status-error: #b3261e;
   --color-status-error-container: #f9dedc;
-
+  --color-accent-1: #ff5714;
   --emarald-700: #047857;
 
   --color-input-content-medium: #666666;
