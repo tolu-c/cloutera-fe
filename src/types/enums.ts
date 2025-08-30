@@ -70,3 +70,8 @@ export enum TransactionType {
 export enum DateTimeFormat {
   DayDateMonthYear = "ddd, D MMMM, YYYY",
 }
+
+export enum GraphFilter {
+  ThisWeek = "ThisWeek",
+  LastWeek = "LastWeek",
+}
