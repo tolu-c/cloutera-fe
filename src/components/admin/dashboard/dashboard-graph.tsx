@@ -15,18 +15,18 @@ import { AdminCard } from "@/components/ui";
 import { GraphFilter } from "@/types/enums";
 import { FilterButton } from "@/components/admin/dashboard/filter-button";
 
+const data = [
+  { name: "Sun", value: 15000, day: "Sunday", amount: "15k" },
+  { name: "Mon", value: 15000, day: "Monday", amount: "15k" },
+  { name: "Tue", value: 26000, day: "Tuesday", amount: "26k" },
+  { name: "Wed", value: 0, day: "Wednesday", amount: "0k" },
+  { name: "Thu", value: 35000, day: "Thursday", amount: "35k" },
+  { name: "Fri", value: 22000, day: "Friday", amount: "22k" },
+  { name: "Sat", value: 30000, day: "Saturday", amount: "30k" },
+];
+
 export const DashboardGraph = () => {
   const [filter, setFilter] = useState<GraphFilter>(GraphFilter.ThisWeek);
-
-  const data = [
-    { name: "Sun", value: 15000, day: "Sunday", amount: "15k" },
-    { name: "Mon", value: 15000, day: "Monday", amount: "15k" },
-    { name: "Tue", value: 26000, day: "Tuesday", amount: "26k" },
-    { name: "Wed", value: 0, day: "Wednesday", amount: "0k" },
-    { name: "Thu", value: 35000, day: "Thursday", amount: "35k" },
-    { name: "Fri", value: 22000, day: "Friday", amount: "22k" },
-    { name: "Sat", value: 30000, day: "Saturday", amount: "30k" },
-  ];
 
   const CustomTooltip = ({
     active,

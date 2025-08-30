@@ -43,7 +43,7 @@ export const StatCard = ({
           <p className="text-light-black font-light">{title}</p>
 
           <p className="text-light-black text-lg font-bold">
-            {asCurrency ? formatAmount(value) : formatNumber(value)}
+            {asCurrency ? formatAmount(value ?? 0) : formatNumber(value ?? 0)}
           </p>
         </div>
       </div>
@@ -56,7 +56,8 @@ export const StatCard = ({
             <span className="bg-success size-1.5 rounded-full" />
 
             <p className="text-light-black text-sm font-bold">
-              {formatNumber(active)} <span className="font-normal">active</span>
+              {formatNumber(active ?? 0)}{" "}
+              <span className="font-normal">active</span>
             </p>
           </div>
         </div>
