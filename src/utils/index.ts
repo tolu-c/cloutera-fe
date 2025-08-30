@@ -67,5 +67,8 @@ export const formatDateTime = (
   format: DateTimeFormat,
 ): string => {
   const formattedDate = dayjs(date);
+  if (!formattedDate.isValid()) {
+    return "";
+  }
   return formattedDate.format(format);
 };

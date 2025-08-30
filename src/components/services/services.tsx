@@ -8,15 +8,21 @@ import { ServicesGroup } from "./services-group";
 import { Fragment, useState } from "react";
 import { OrdersServiceList } from "../orders";
 
-export const Services = () => {
+interface ServicesProps {
+  showList?: boolean;
+}
+
+export const Services = ({ showList = true }: ServicesProps) => {
   const [searchValue, setSearchValue] = useState("");
   const [currentCategory, setCurrentCategory] = useState<string>("");
 
   return (
     <Fragment>
-      <OrdersServiceList
-        onSelectService={(category) => setCurrentCategory(category)}
-      />
+      {showList && (
+        <OrdersServiceList
+          onSelectService={(category) => setCurrentCategory(category)}
+        />
+      )}
 
       <div className="flex w-full flex-col items-start gap-4 p-4">
         <div className="flex h-14 w-full items-center justify-between gap-3">

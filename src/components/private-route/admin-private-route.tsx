@@ -7,6 +7,7 @@ import { CLOUTERA_TOKEN } from "@/types/constants";
 import { useGetProfile } from "@/queries/profile";
 import { UserRole } from "@/types/enums";
 import { Loading } from "@/components/ui";
+import { routes } from "@/utils/routes";
 
 interface AdminPrivateRouteProps {
   children: ReactNode;
@@ -17,15 +18,20 @@ export const AdminPrivateRoute = ({ children }: AdminPrivateRouteProps) => {
   const isLoggedIn = !!getItem();
   const { data, isLoading } = useGetProfile();
   const router = useRouter();
+  const { auth, customer } = routes;
 
   useEffect(() => {
     if (!isLoggedIn) {
-      router.push("/login");
+      router.push(auth.login);
+      return;
     }
-    if (!isLoading && data?.data.user.role !== UserRole.Admin) {
-      router.push("/order");
+    if (!isLoading) {
+      const role = data?.data.user.role;
+      if (role !== UserRole.Admin) {
+        router.push(customer.order);
+      }
     }
-  }, [isLoading, isLoggedIn, data?.data.user, router]);
+  }, [isLoading, isLoggedIn, data?.data.user.role, router]);
 
   if (isLoading) {
     return <Loading />;
