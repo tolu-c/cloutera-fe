@@ -8,6 +8,7 @@ import {
   CLOUTERA_USER_EMAIL,
   CLOUTERA_USER_PASSWORD,
 } from "@/types/constants";
+import { routes } from "@/utils/routes";
 
 export const useLogin = () => {
   const { userLogin } = useAuth();
@@ -19,6 +20,8 @@ export const useLogin = () => {
   );
   const router = useRouter();
 
+  const { auth, admin, customer } = routes;
+
   return useMutation({
     mutationFn: userLogin,
     onError: handleError,
@@ -27,13 +30,13 @@ export const useLogin = () => {
         if (data.twoFactorEnabled) {
           setEmail(variables.email);
           setPassword(variables.password);
-          router.push("/login/2fa");
+          router.push(auth.login2fa);
         } else {
           setItem(data.token);
           if (data?.role === UserRole.Admin) {
-            router.push("/admin/dashboard");
+            router.push(admin.dashboard);
           } else {
-            router.push("/order");
+            router.push(customer.order);
           }
         }
       }
