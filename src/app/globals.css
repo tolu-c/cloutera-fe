@@ -115,6 +115,12 @@ input[type="number"]::-ms-reveal {
   --color-foundation-grey-600: #434b52;
   --color-foundation-grey-900: #1f2226;
 
+  --color-pending-bg: #fffbf6;
+  --color-pending: #df6e05;
+
+  --color-grey-text-200: #ececed;
+  --color-grey-text-950: #0c111d;
+
   --color-success: #009934;
   --color-success-base: #0f973d;
   --color-success-dark: #006121;

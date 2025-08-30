@@ -3,15 +3,16 @@ import {
   DashboardStats,
   Greeting,
 } from "@/components/admin/dashboard";
+import { PageSection } from "@/components/ui";
 
 export const AdminDashboard = () => {
   return (
-    <div className="flex w-full flex-col items-start gap-6">
+    <PageSection>
       <Greeting />
 
       <DashboardStats />
 
       <DashboardGraph />
-    </div>
+    </PageSection>
   );
 };
