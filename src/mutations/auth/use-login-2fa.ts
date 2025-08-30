@@ -5,12 +5,14 @@ import { useAuth } from "@/services/auth";
 import { useError, useLocalStorage } from "@/hooks";
 import { CLOUTERA_TOKEN } from "@/types/constants";
 import { UserRole } from "@/types/enums";
+import { routes } from "@/utils/routes";
 
 export const useLogin2fa = () => {
   const { userLoginWith2fa } = useAuth();
   const { handleError } = useError();
   const { setItem } = useLocalStorage<string>(CLOUTERA_TOKEN);
   const router = useRouter();
+  const { admin, customer } = routes;
 
   return useMutation({
     mutationFn: userLoginWith2fa,
@@ -19,9 +21,9 @@ export const useLogin2fa = () => {
       if (data.isVerified) {
         setItem(data.token);
         if (data.role === UserRole.Admin) {
-          router.push("/admin/dashboard");
+          router.push(admin.dashboard);
         } else {
-          router.push("/order");
+          router.push(customer.order);
         }
       }
     },
