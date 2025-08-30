@@ -15,6 +15,10 @@ input[type="number"]::-ms-reveal {
   display: none;
 }
 
+.stat-card {
+  box-shadow: 0 4px 24px 0 #f5c1c60f;
+}
+
 .card--gradient {
   background: linear-gradient(
     80.28deg,
@@ -82,6 +86,7 @@ input[type="number"]::-ms-reveal {
   --color-heading: #1e1e1e;
 
   --color-dark: #140800;
+  --color-light-black: #191b20;
 
   --color-bg-2: #f8fbff;
   --color-general-white: #f6f9ff;
@@ -106,11 +111,17 @@ input[type="number"]::-ms-reveal {
   --color-foundation-red-light: #fcebed;
   --color-foundation-red-white: #fdf5f6;
   --color-foundation-red-light-active: #f5c1c6;
+  --color-foundation-grey-200: #acafb3;
   --color-foundation-grey-600: #434b52;
   --color-foundation-grey-900: #1f2226;
 
+  --color-success: #009934;
   --color-success-base: #0f973d;
+  --color-success-dark: #006121;
+  --color-success-light: #e6f2ee;
   --color-success-50: #e7f6ec;
+
+  --color-dark-bottom: #383c42;
 
   --color-error: #ae241a;
   --color-error-50: #fef3f2;
