@@ -8,3 +8,4 @@ export * from "./loading";
 export * from "./pagination";
 export * from "./google-login";
 export * from "./notification";
+export * from "./page-section";

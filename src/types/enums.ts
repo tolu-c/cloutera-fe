@@ -75,3 +75,10 @@ export enum GraphFilter {
   ThisWeek = "ThisWeek",
   LastWeek = "LastWeek",
 }
+
+export enum OrderStat {
+  All = "All Orders",
+  Completed = "Completed",
+  Pending = "Pending",
+  Cancelled = "Cancelled",
+}
