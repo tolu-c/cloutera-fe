@@ -9,3 +9,6 @@ export * from "./pagination";
 export * from "./google-login";
 export * from "./notification";
 export * from "./page-section";
+export * from "./popover";
+export * from "./divider";
+export * from "./info";

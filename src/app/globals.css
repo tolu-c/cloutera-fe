@@ -19,6 +19,10 @@ input[type="number"]::-ms-reveal {
   box-shadow: 0 4px 24px 0 #f5c1c60f;
 }
 
+.tab-shadow {
+  box-shadow: 0 8px 16px 0 #191b2014;
+}
+
 .card--gradient {
   background: linear-gradient(
     80.28deg,
@@ -118,7 +122,11 @@ input[type="number"]::-ms-reveal {
   --color-pending-bg: #fffbf6;
   --color-pending: #df6e05;
 
+  --color-grey-text-50: #f5f5f6;
+  --color-grey-text-100: #f0f1f1;
   --color-grey-text-200: #ececed;
+  --color-grey-text-400: #94969c;
+  --color-grey-text-800: #1f242f;
   --color-grey-text-950: #0c111d;
 
   --color-success: #009934;
@@ -126,6 +134,9 @@ input[type="number"]::-ms-reveal {
   --color-success-dark: #006121;
   --color-success-light: #e6f2ee;
   --color-success-50: #e7f6ec;
+  --color-success-25: #f6fef9;
+  --color-success-500: #16a34a;
+  --color-success-600: #079455;
 
   --color-dark-bottom: #383c42;
 
