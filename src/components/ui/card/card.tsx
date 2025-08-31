@@ -7,13 +7,24 @@ interface CardProps {
   gradient?: boolean;
   icon: ReactNode;
   extraIcon?: ReactNode;
+  className?: string;
+  amountSize?: string;
 }
 
-const Card = ({ title, value, gradient, icon, extraIcon }: CardProps) => {
+const Card = ({
+  title,
+  value,
+  gradient,
+  icon,
+  extraIcon,
+  className,
+  amountSize,
+}: CardProps) => {
   return (
     <div
       className={cn(
         "flex h-30 min-w-68 flex-col gap-2 rounded-3xl bg-white p-6",
+        className,
         {
           "card--gradient text-white": gradient,
           "shadow-5 text-grey-900": !gradient,
@@ -27,7 +38,14 @@ const Card = ({ title, value, gradient, icon, extraIcon }: CardProps) => {
       </div>
 
       <div className="flex w-full items-start gap-2">
-        <p className="flex-1 text-[32px] leading-10 font-semibold">{value}</p>
+        <p
+          className={cn(
+            "flex-1 text-[32px] leading-10 font-semibold",
+            amountSize,
+          )}
+        >
+          {value}
+        </p>
         {extraIcon}
       </div>
     </div>

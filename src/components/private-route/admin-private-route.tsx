@@ -31,7 +31,14 @@ export const AdminPrivateRoute = ({ children }: AdminPrivateRouteProps) => {
         router.push(customer.order);
       }
     }
-  }, [isLoading, isLoggedIn, data?.data.user.role, router]);
+  }, [
+    isLoading,
+    isLoggedIn,
+    data?.data.user.role,
+    router,
+    auth.login,
+    customer.order,
+  ]);
 
   if (isLoading) {
     return <Loading />;

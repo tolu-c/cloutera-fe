@@ -69,6 +69,7 @@ export enum TransactionType {
 
 export enum DateTimeFormat {
   DayDateMonthYear = "ddd, D MMMM, YYYY",
+  MonthDateYear = "MMM D, YYYY",
 }
 
 export enum GraphFilter {
@@ -81,4 +82,10 @@ export enum OrderStat {
   Completed = "Completed",
   Pending = "Pending",
   Cancelled = "Cancelled",
+}
+
+export enum CustomerStat {
+  Total = "Total Customers",
+  Active = "Active Customers",
+  Inactive = "Inactive Customers",
 }
