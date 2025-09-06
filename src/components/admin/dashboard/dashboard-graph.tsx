@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import {
   CartesianGrid,
   Line,
@@ -11,22 +11,54 @@ import {
   YAxis,
 } from "recharts";
 
-import { AdminCard } from "@/components/ui";
+import { AdminCard, Loading } from "@/components/ui";
 import { GraphFilter } from "@/types/enums";
 import { FilterButton } from "@/components/admin/dashboard/filter-button";
+import { useGetDashboardTrends } from "@/queries/dashboard";
 
-const data = [
-  { name: "Sun", value: 15000, day: "Sunday", amount: "15k" },
-  { name: "Mon", value: 15000, day: "Monday", amount: "15k" },
-  { name: "Tue", value: 26000, day: "Tuesday", amount: "26k" },
-  { name: "Wed", value: 0, day: "Wednesday", amount: "0k" },
-  { name: "Thu", value: 35000, day: "Thursday", amount: "35k" },
-  { name: "Fri", value: 22000, day: "Friday", amount: "22k" },
-  { name: "Sat", value: 30000, day: "Saturday", amount: "30k" },
-];
+// const data = [
+//   { name: "Sun", value: 15000, day: "Sunday", amount: "15k" },
+//   { name: "Mon", value: 15000, day: "Monday", amount: "15k" },
+//   { name: "Tue", value: 26000, day: "Tuesday", amount: "26k" },
+//   { name: "Wed", value: 0, day: "Wednesday", amount: "0k" },
+//   { name: "Thu", value: 35000, day: "Thursday", amount: "35k" },
+//   { name: "Fri", value: 22000, day: "Friday", amount: "22k" },
+//   { name: "Sat", value: 30000, day: "Saturday", amount: "30k" },
+// ];
 
 export const DashboardGraph = () => {
+  const { isLoading, data } = useGetDashboardTrends();
+
   const [filter, setFilter] = useState<GraphFilter>(GraphFilter.ThisWeek);
+
+  const trendsData = data?.data;
+  const graphData = useMemo(() => {
+    const trends =
+      filter === GraphFilter.ThisWeek
+        ? trendsData?.thisWeek
+        : trendsData?.lastWeek;
+    if (!trends) return [];
+    return trends.map((trend) => {
+      const fullDayMap = {
+        Sun: "Sunday",
+        Mon: "Monday",
+        Tue: "Tuesday",
+        Wed: "Wednesday",
+        Thu: "Thursday",
+        Fri: "Friday",
+        Sat: "Saturday",
+      };
+      const fullDay = fullDayMap[trend.day];
+      const value = trend.revenue;
+      const amount = `${Math.round(value / 1000)}k`;
+      return { name: trend.day, value, day: fullDay, amount };
+    });
+  }, [filter, trendsData]);
+
+  const title =
+    filter === GraphFilter.ThisWeek
+      ? "Report for this week"
+      : "Report for last week";
 
   const CustomTooltip = ({
     active,
@@ -59,12 +91,14 @@ export const DashboardGraph = () => {
     return null;
   };
 
+  if (isLoading) {
+    return <Loading />;
+  }
+
   return (
     <AdminCard>
       <div className="flex w-full items-center justify-between">
-        <p className="text-light-black text-lg font-bold">
-          Report for this week
-        </p>
+        <p className="text-light-black text-lg font-bold">{title}</p>
 
         <div className="bg-foundation-red-white flex items-center gap-1 rounded-xl p-1">
           <FilterButton
@@ -85,7 +119,7 @@ export const DashboardGraph = () => {
 
       <ResponsiveContainer width="100%" height={320}>
         <LineChart
-          data={data}
+          data={graphData}
           margin={{ top: 40, right: 30, left: 20, bottom: 20 }}
         >
           <defs>

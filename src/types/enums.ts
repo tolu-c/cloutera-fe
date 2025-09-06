@@ -89,3 +89,18 @@ export enum CustomerStat {
   Active = "Active Customers",
   Inactive = "Inactive Customers",
 }
+
+export enum UserStatus {
+  Active = "Active",
+  Inactive = "Inactive",
+}
+
+export enum Day {
+  Sun = "Sun",
+  Mon = "Mon",
+  Tue = "Tue",
+  Wed = "Wed",
+  Thu = "Thu",
+  Fri = "Fri",
+  Sat = "Sat",
+}

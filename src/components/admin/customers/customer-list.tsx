@@ -1,23 +1,39 @@
 "use client";
 
-import { useMemo } from "react";
+import { useState } from "react";
 
-import { AdminCard, Button, DataCell } from "@/components/ui";
+import {
+  AdminCard,
+  Button,
+  DataCell,
+  Loading,
+  Pagination,
+} from "@/components/ui";
 import { Searchbar } from "@/components/form";
 import { ExportAsIcon } from "@/assets/icons";
 import { CustomerListItem } from "@/components/admin/customers";
+import { useGetCustomers } from "@/queries/customers";
+import { usePagination } from "@/hooks";
 
 export const CustomerList = () => {
-  const items = useMemo(() => Array.from({ length: 20 }, (_, i) => i), []);
+  const [search, setSearch] = useState<string | undefined>(undefined);
+
+  const { page, limit, handlePageChange, handleLimitChange } = usePagination();
+
+  const { isLoading, data } = useGetCustomers({
+    search,
+    page,
+    limit,
+  });
+
+  const pagination = data?.pagination;
 
   return (
     <AdminCard className="gap-0 p-0">
       <div className="flex w-full items-center justify-between bg-white p-4">
         <Searchbar
           className="w-85"
-          onSendSearchValue={(value) => {
-            console.log(value);
-          }}
+          onSendSearchValue={(value) => setSearch(value)}
         />
 
         <Button
@@ -42,13 +58,26 @@ export const CustomerList = () => {
           </div>
         </div>
 
+        {isLoading && <Loading />}
         <div className="h-full">
-          {items.map((_, i) => (
-            <CustomerListItem key={i} />
-          ))}
+          {!isLoading &&
+            data?.data &&
+            data.data.map((user) => (
+              <CustomerListItem key={user._id} user={user} />
+            ))}
         </div>
 
-        <div>pagination</div>
+        {pagination && (
+          <Pagination
+            current={pagination.current}
+            pages={pagination.pages}
+            limit={pagination.limit}
+            hasPrev={pagination.hasPrev}
+            hasNext={pagination.hasNext}
+            onLimitChange={handleLimitChange}
+            onPageChange={handlePageChange}
+          />
+        )}
       </div>
     </AdminCard>
   );

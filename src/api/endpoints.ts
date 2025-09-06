@@ -30,4 +30,22 @@ export const endpoints = {
     accountStatus: "/account/status",
     getFundsHistory: "/account/funds/history",
   },
+  admin: {
+    customers: {
+      getStats: "/admin/users/stats",
+      getUsersList: "/admin/users",
+      getSingleUser: (userId: string) => `/admin/users/${userId}`,
+      getUserOrders: (userId: string) => `/admin/users/${userId}/orders`,
+      getUserAccount: (userId: string) => `/admin/users/${userId}/account`,
+      toggleBlockUser: (userId: string) => `/admin/users/${userId}/block`,
+    },
+    orders: {
+      getStats: "/admin/orders/stats",
+      getOrdersList: "/admin/orders/list",
+    },
+    dashboard: {
+      dashboardStats: "/admin/dashboard/stats",
+      dashboardTrends: "/admin/dashboard/trends",
+    },
+  },
 };
