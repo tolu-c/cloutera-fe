@@ -1,26 +1,34 @@
 import { Badge, DataCell } from "@/components/ui";
-import { formatAmount, formatNumber } from "@/utils";
-import { OrderStatus } from "@/types/enums";
+import { formatAmount, formatDateTime, formatNumber } from "@/utils";
+import { DateTimeFormat } from "@/types/enums";
+import { OrderItem } from "@/types/orders.types";
 
-export const CustomerOrderHistoryListItem = () => {
+interface CustomerOrderHistoryListItemProps {
+  order: OrderItem;
+}
+
+export const CustomerOrderHistoryListItem = ({
+  order,
+}: CustomerOrderHistoryListItemProps) => {
+  const { orderId, link, charge, quantity, serviceId, status, createdAt } =
+    order;
+
   return (
     <div className="grid w-full grid-cols-10 border-b border-gray-100 text-sm hover:bg-gray-50">
       <DataCell className="gap-4 p-4">
         <input type="checkbox" className="size-4 rounded-sm" />
-        <span>123456</span>
+        <span>{orderId}</span>
       </DataCell>
-      <DataCell className="col-span-2 truncate p-4">
-        https://www.instagram.com/
-      </DataCell>
-      <DataCell className="p-4">{formatAmount(3500)}</DataCell>
-      <DataCell className="p-4">{formatNumber(500)}</DataCell>
-      <DataCell className="col-span-2 p-4">
-        Instagram Followers - [ Max: 100K ]
-      </DataCell>
+      <DataCell className="col-span-2 truncate p-4">{link}</DataCell>
+      <DataCell className="p-4">{formatAmount(charge)}</DataCell>
+      <DataCell className="p-4">{formatNumber(quantity)}</DataCell>
+      <DataCell className="col-span-2 p-4">{serviceId?.name || "-"}</DataCell>
       <DataCell className="p-4">
-        <Badge status={OrderStatus.COMPLETED} />
+        <Badge status={status} />
       </DataCell>
-      <DataCell className="col-span-2 p-4">2022-08-20 16:17:34</DataCell>
+      <DataCell className="col-span-2 p-4">
+        {formatDateTime(createdAt, DateTimeFormat.MonthDateYear)}
+      </DataCell>
     </div>
   );
 };

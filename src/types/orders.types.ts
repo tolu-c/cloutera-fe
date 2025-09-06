@@ -1,4 +1,5 @@
 import { OrderStatus } from "./enums";
+import { TimeStamp } from "@/types/index";
 
 export interface AddOrderRequest {
   serviceId: string;
@@ -32,5 +33,30 @@ export interface OrderItem {
   status: OrderStatus;
   createdAt: string;
   updatedAt: string;
+  orderId: number;
+}
+
+export interface AdminOrdersStats {
+  total: number;
+  completed: number;
+  pending: number;
+  cancelled: number;
+}
+
+export interface AdminOrderItem extends TimeStamp {
+  _id: string;
+  userId: {
+    _id: string;
+    email: string;
+    firstName: string;
+    lastName: string;
+  };
+  serviceId: string | null;
+  link: string;
+  quantity: number;
+  charge: number;
+  startCount: number;
+  remains: number;
+  status: OrderStatus;
   orderId: number;
 }

@@ -1,21 +1,27 @@
 import { Button } from "@/components/ui";
 import { ErrorInfoIcon } from "@/assets/icons";
+import { useToggleBlockCustomer } from "@/queries/customers";
 
 interface BlockCustomerModalProps {
   customerId: string;
   customerName: string;
   successCallback: () => void;
   close: () => void;
+  isCustomerBlocked: boolean;
 }
 export const BlockCustomerModal = ({
   successCallback,
   customerId,
   customerName,
   close,
+  isCustomerBlocked,
 }: BlockCustomerModalProps) => {
+  const { isPending, mutateAsync: submit } = useToggleBlockCustomer(customerId);
+
   const handleBlockCustomer = () => {
-    console.log("blocking customer", customerId);
-    successCallback();
+    submit().then(() => {
+      successCallback();
+    });
   };
 
   return (
@@ -25,12 +31,15 @@ export const BlockCustomerModal = ({
       </div>
 
       <div className="flex w-full flex-col gap-3">
-        <p className="text-grey-text-950 text-sm font-semibold">Block User ?</p>
+        <p className="text-grey-text-950 text-sm font-semibold">
+          {isCustomerBlocked ? "Unblock" : "Block"} User ?
+        </p>
 
         <p className="text-grey-text-950 text-sm/5">
-          Are you sure you want to block{" "}
-          <span className="font-medium">{customerName}</span> access? They will
-          no longer be able to log in .
+          Are you sure you want to {isCustomerBlocked ? "unblock" : "block"}{" "}
+          <span className="font-medium">{customerName}</span> access? They will{" "}
+          {isCustomerBlocked ? null : "no longer "}
+          be able to log in .
         </p>
       </div>
 
@@ -39,7 +48,13 @@ export const BlockCustomerModal = ({
           Cancel
         </Button>
 
-        <Button onClick={handleBlockCustomer}>Disable User</Button>
+        <Button
+          onClick={handleBlockCustomer}
+          state={isCustomerBlocked ? "outline" : "primary"}
+          disabled={isPending}
+        >
+          Disable User
+        </Button>
       </div>
     </div>
   );

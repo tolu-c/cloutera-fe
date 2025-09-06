@@ -1,42 +1,58 @@
-import { StatCard } from "@/components/ui";
+"use client";
+
+import { Loading, StatCard } from "@/components/ui";
 import { MoneyIcon, PeopleIcon, ShoppingCartIcon } from "@/assets/icons";
+import { useGetDashboardStats } from "@/queries/dashboard";
 
 export const DashboardStats = () => {
-  return (
-    <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">
-      <StatCard
-        title="Total Customers"
-        value={100000}
-        icon={{
-          color: "bg-foundation-red-white",
-          icon: <PeopleIcon className="text-foundation-red-normal size-6" />,
-        }}
-        active={98000}
-        lastWeek={{ status: "down", percentage: 10 }}
-      />
+  const { isLoading, data } = useGetDashboardStats();
 
-      <StatCard
-        title="Total Orders"
-        value={40000}
-        icon={{
-          color: "bg-[#FFFBF6]",
-          icon: <ShoppingCartIcon className="size-6 text-[#DF6E05]" />,
-        }}
-        active={98000}
-        lastWeek={{ status: "up", percentage: 25 }}
-      />
+  if (isLoading) {
+    return <Loading />;
+  }
 
-      <StatCard
-        title="Total Revenue"
-        value={45000}
-        icon={{
-          color: "bg-success-light",
-          icon: <MoneyIcon className="text-success-dark size-6" />,
-        }}
-        active={98000}
-        lastWeek={{ status: "up", percentage: 25 }}
-        asCurrency
-      />
-    </div>
-  );
+  if (data?.data) {
+    const { totalCustomers, totalOrders, totalRevenue } = data.data;
+
+    return (
+      <div className="grid w-full grid-cols-1 gap-4 lg:grid-cols-3">
+        <StatCard
+          title="Total Customers"
+          value={totalCustomers.current}
+          icon={{
+            color: "bg-foundation-red-white",
+            icon: <PeopleIcon className="text-foundation-red-normal size-6" />,
+          }}
+          active={totalCustomers.active}
+          lastWeek={{
+            status: "down",
+            percentage: totalCustomers.percentageChange,
+          }}
+        />
+
+        <StatCard
+          title="Total Orders"
+          value={totalOrders.current}
+          icon={{
+            color: "bg-[#FFFBF6]",
+            icon: <ShoppingCartIcon className="size-6 text-[#DF6E05]" />,
+          }}
+          active={totalOrders.active}
+          lastWeek={{ status: "up", percentage: totalOrders.percentageChange }}
+        />
+
+        <StatCard
+          title="Total Revenue"
+          value={totalRevenue.current}
+          icon={{
+            color: "bg-success-light",
+            icon: <MoneyIcon className="text-success-dark size-6" />,
+          }}
+          active={totalRevenue.active}
+          lastWeek={{ status: "up", percentage: totalRevenue.percentageChange }}
+          asCurrency
+        />
+      </div>
+    );
+  }
 };
