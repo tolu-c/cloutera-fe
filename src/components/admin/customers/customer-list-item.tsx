@@ -8,14 +8,25 @@ import { CancelIcon, EllipsisIcon, EyeIcon } from "@/assets/icons";
 import { useDisclosure } from "@/hooks";
 import { routes } from "@/utils/routes";
 import { BlockCustomerModal } from "@/components/admin/customers";
+import { User } from "@/types";
+import { formatDateTime } from "@/utils";
+import { DateTimeFormat } from "@/types/enums";
 
-export const CustomerListItem = () => {
+interface CustomerListItemProps {
+  user: User;
+}
+
+export const CustomerListItem = ({ user }: CustomerListItemProps) => {
+  const { firstName, lastName, username, _id, status, createdAt, isBlocked } =
+    user;
+
   const [openActions, { toggle, close }] = useDisclosure(false);
   const [blockUser, { open: openBlockUserModal, close: closeBlockUserModal }] =
     useDisclosure(false);
 
   const { singleCustomer } = routes.admin;
 
+  const fullName = `${firstName} ${lastName}`;
   return (
     <Fragment>
       <Modal
@@ -25,21 +36,26 @@ export const CustomerListItem = () => {
         hideCloseIcon
       >
         <BlockCustomerModal
-          customerId="1234"
-          customerName="Tolu Adeyemo"
+          customerId={_id}
+          customerName={fullName}
           successCallback={closeBlockUserModal}
           close={closeBlockUserModal}
+          isCustomerBlocked={isBlocked}
         />
       </Modal>
 
       <div className="grid w-full grid-cols-7 border-b border-gray-100 text-sm hover:bg-gray-50">
         <DataCell className="col-span-2 gap-4 p-4">
           <input type="checkbox" className="mr-2 size-4 rounded-sm" />
-          <span>Customer</span>
+          <span>{fullName}</span>
         </DataCell>
-        <DataCell className="p-4">Pamela</DataCell>
-        <DataCell className="p-4">Status</DataCell>
-        <DataCell className="col-span-2 p-4">Aug 29, 2025 | 09:32AM</DataCell>
+        <DataCell className="p-4">{username}</DataCell>
+        <DataCell className="p-4">
+          <div>{status}</div>
+        </DataCell>
+        <DataCell className="col-span-2 p-4">
+          {formatDateTime(createdAt, DateTimeFormat.MonthDateYear)}
+        </DataCell>
         <DataCell className="p-4">
           <button
             type="button"
@@ -49,12 +65,12 @@ export const CustomerListItem = () => {
             <EllipsisIcon className="text-grey-text-400 size-4" />
 
             <Popover isOpen={openActions} close={close}>
-              <Link href={singleCustomer("1234")}>
-                <button className="flex w-full cursor-pointer items-center justify-between pb-3">
+              <Link href={singleCustomer(_id)}>
+                <div className="flex w-full cursor-pointer items-center justify-between pb-3">
                   <p className="text-grey-text-950 text-sm">View details</p>
 
                   <EyeIcon className="text-grey-text-400 size-5" />
-                </button>
+                </div>
               </Link>
 
               <button

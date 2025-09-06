@@ -20,6 +20,7 @@ export const BlockUserButton = ({ customerId }: BlockUserButtonProps) => {
           customerName="Tolu Adeyemo"
           successCallback={close}
           close={close}
+          isCustomerBlocked={false}
         />
       </Modal>
 
