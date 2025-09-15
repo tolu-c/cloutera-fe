@@ -98,7 +98,7 @@ export const CreateEditFaqModal = ({
           />
 
           <TextareaInput
-            label="Respone"
+            label="Response"
             placeholder="Enter Response"
             {...register("answer")}
             error={errors.answer?.message}
