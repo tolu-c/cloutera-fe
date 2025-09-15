@@ -53,7 +53,7 @@ export const BlockCustomerModal = ({
           state={isCustomerBlocked ? "outline" : "primary"}
           disabled={isPending}
         >
-          Disable User
+          {isCustomerBlocked ? "Unblock" : "Disable"} User
         </Button>
       </div>
     </div>

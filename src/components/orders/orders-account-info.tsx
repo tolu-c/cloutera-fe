@@ -3,12 +3,15 @@
 import {
   AccountStatusIcon,
   EmptyWalletIcon,
+  PlusLineIcon,
   ShoppingCartIcon,
 } from "@/assets/icons";
 import { Card } from "@/components/ui";
 import { useGetAccountStatus } from "@/queries/account";
 import { formatAmount } from "@/utils";
 import { Fragment } from "react";
+import Link from "next/link";
+import { routes } from "@/utils/routes";
 
 export const OrdersAccountInfo = () => {
   const { data, isLoading } = useGetAccountStatus();
@@ -37,6 +40,14 @@ export const OrdersAccountInfo = () => {
             value={formatAmount(account.accountBalance)}
             icon={
               <EmptyWalletIcon className="text-foundation-red-normal size-4" />
+            }
+            extraIcon={
+              <Link
+                href={routes.customer.addFunds}
+                className="bg-foundation-red-normal flex size-5 items-center justify-center rounded-sm text-white"
+              >
+                <PlusLineIcon className="size-3 text-white" />
+              </Link>
             }
           />
         </Fragment>

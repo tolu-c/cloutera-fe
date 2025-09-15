@@ -1,6 +1,6 @@
 import { useRouter } from "next/navigation";
 import { useMutation } from "@tanstack/react-query";
-import { UserRole } from "@/types/enums";
+import { NotificationStatus, UserRole } from "@/types/enums";
 import { useAuth } from "@/services/auth";
 import { useError, useLocalStorage } from "@/hooks";
 import {
@@ -9,10 +9,12 @@ import {
   CLOUTERA_USER_PASSWORD,
 } from "@/types/constants";
 import { routes } from "@/utils/routes";
+import { useNotification } from "@/hooks/useNotification";
 
 export const useLogin = () => {
   const { userLogin } = useAuth();
   const { handleError } = useError();
+  const { notify } = useNotification();
   const { setItem } = useLocalStorage<string>(CLOUTERA_TOKEN);
   const { setItem: setEmail } = useLocalStorage<string>(CLOUTERA_USER_EMAIL);
   const { setItem: setPassword } = useLocalStorage<string>(
@@ -26,13 +28,17 @@ export const useLogin = () => {
     mutationFn: userLogin,
     onError: handleError,
     onSuccess: async ({ data }, variables) => {
-      if (data.isVerified) {
+      if (data.isVerified && !data.isBlocked) {
         if (data.twoFactorEnabled) {
           setEmail(variables.email);
           setPassword(variables.password);
           router.push(auth.login2fa);
         } else {
           setItem(data.token);
+          notify({
+            message: "Login Successful",
+            status: NotificationStatus.Success,
+          });
           if (data?.role === UserRole.Admin) {
             router.push(admin.dashboard);
           } else {

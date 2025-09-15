@@ -64,6 +64,7 @@ export interface LoginResponse {
   isVerified: boolean;
   twoFactorEnabled: boolean;
   role: UserRole;
+  isBlocked: boolean;
 }
 
 export interface SignupData {

@@ -68,6 +68,10 @@ input[type="number"]::-ms-reveal {
 }
 
 @layer components {
+  .shadow-2 {
+    box-shadow: 5px 6px 22px 0 #00000014;
+  }
+
   .shadow-5 {
     box-shadow: 0 4px 4px 0 #0000004d;
   }
