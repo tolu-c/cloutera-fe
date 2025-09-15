@@ -27,6 +27,7 @@ export const BlockUserButton = ({ customerId }: BlockUserButtonProps) => {
 
   async function handleDeleteCustomer() {
     await deleteCustomer().then(() => {
+      closeDeleteUser();
       router.push(routes.admin.customer);
     });
   }
