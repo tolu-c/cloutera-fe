@@ -57,11 +57,7 @@ export const CustomerListItem = ({ user }: CustomerListItemProps) => {
           {formatDateTime(createdAt, DateTimeFormat.MonthDateYear)}
         </DataCell>
         <DataCell className="p-4">
-          <button
-            type="button"
-            className="relative cursor-pointer"
-            onClick={toggle}
-          >
+          <div className="relative cursor-pointer" onClick={toggle}>
             <EllipsisIcon className="text-grey-text-400 size-4" />
 
             <Popover isOpen={openActions} close={close}>
@@ -84,7 +80,7 @@ export const CustomerListItem = ({ user }: CustomerListItemProps) => {
                 <CancelIcon className="text-foundation-red-normal size-5" />
               </button>
             </Popover>
-          </button>
+          </div>
         </DataCell>
       </div>
     </Fragment>

@@ -106,3 +106,8 @@ export const addFundSchema = z.object({
     error: "Please select a method",
   }),
 });
+
+export const faqSchema = z.object({
+  question: z.string().min(1, { error: "Please enter a question" }),
+  answer: z.string().min(1, { error: "Please enter a question" }),
+});

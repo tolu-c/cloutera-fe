@@ -2,13 +2,20 @@
 
 import { ReactNode, useRef } from "react";
 import { useClickOutside } from "@/hooks/useClickOutside";
+import { cn } from "@/utils/cn";
 
 interface PopoverProps {
   isOpen: boolean;
   close: () => void;
   children: ReactNode;
+  className?: string;
 }
-export const Popover = ({ isOpen, close, children }: PopoverProps) => {
+export const Popover = ({
+  isOpen,
+  close,
+  children,
+  className,
+}: PopoverProps) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
 
   useClickOutside([dropdownRef], close, isOpen);
@@ -20,7 +27,10 @@ export const Popover = ({ isOpen, close, children }: PopoverProps) => {
   return (
     <div
       ref={dropdownRef}
-      className="absolute top-5 right-0 z-50 flex w-60 flex-col gap-4 rounded-lg border border-[#F0F1F1] bg-white p-4"
+      className={cn(
+        "absolute top-5 right-0 z-50 flex w-60 flex-col gap-4 rounded-lg border border-[#F0F1F1] bg-white p-4",
+        className,
+      )}
     >
       {children}
     </div>

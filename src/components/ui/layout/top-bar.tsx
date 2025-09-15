@@ -25,7 +25,10 @@ const TopBar = () => {
       <div className="bg-foundation-red-normal flex h-22 w-full items-center justify-center">
         <div className="flex h-10 w-full max-w-7xl items-center justify-between">
           <div className="flex items-center gap-4">
-            <button onClick={() => setSidebarOpen(true)}>
+            <button
+              className="cursor-pointer"
+              onClick={() => setSidebarOpen(true)}
+            >
               <DashboardFillIcon className="size-6 text-white" />
             </button>
             <p className="text-xl text-white capitalize">{pageTitle}</p>

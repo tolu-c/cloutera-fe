@@ -29,6 +29,7 @@ export const useAdminCustomer = () => {
     getUserOrders,
     getUserAccount,
     toggleBlockUser,
+    deleteUser,
   } = endpoints.admin.customers;
 
   const handleGetCustomerStats = async () => {
@@ -76,6 +77,14 @@ export const useAdminCustomer = () => {
     return res.data;
   };
 
+  async function handleDeleteUser(userId: string) {
+    const res: AxiosResponse<ApiMessageResponse> = await authApi.delete(
+      deleteUser(userId),
+    );
+
+    return res.data;
+  }
+
   return {
     handleGetCustomerStats,
     handleGetCustomers,
@@ -83,5 +92,6 @@ export const useAdminCustomer = () => {
     handleGetCustomerAccount,
     handleGetCustomerOrders,
     handleToggleBlockCustomer,
+    handleDeleteUser,
   };
 };
