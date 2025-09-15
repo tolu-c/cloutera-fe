@@ -18,7 +18,7 @@ export const useLogin2fa = () => {
     mutationFn: userLoginWith2fa,
     onError: handleError,
     onSuccess: async ({ data }) => {
-      if (data.isVerified) {
+      if (data.isVerified && !data.isBlocked) {
         setItem(data.token);
         if (data.role === UserRole.Admin) {
           router.push(admin.dashboard);

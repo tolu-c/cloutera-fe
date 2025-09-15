@@ -5,5 +5,5 @@ import { usePathname } from "next/navigation";
 export const useGetPageTitle = () => {
   const pathname = usePathname();
 
-  return pathname.split("/").filter(Boolean).pop() || "";
+  return pathname.split("/").filter(Boolean).pop()?.replace("-", " ") || "";
 };

@@ -19,6 +19,7 @@ export default function RootLayout({
       <body className={`${montserrat.className} antialiased`}>
         <AppProvider>
           <div id="modal"></div>
+          <div id="filter-modal"></div>
           <div id="sidebar"></div>
           {children}
         </AppProvider>

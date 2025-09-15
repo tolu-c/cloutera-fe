@@ -9,7 +9,7 @@ interface ServiceListProps {
   onSelectService?: (service: string) => void;
 }
 export const OrdersServiceList = ({ onSelectService }: ServiceListProps) => {
-  const [categoriesLength, setCategoriesLength] = useState(10);
+  const [categoriesLength, setCategoriesLength] = useState(5);
   const [selectedService, setSelectedService] = useState<string>("");
 
   const { data, isLoading } = useGetServiceCategories();

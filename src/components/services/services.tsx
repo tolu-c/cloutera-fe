@@ -25,7 +25,7 @@ export const Services = ({ showList = true }: ServicesProps) => {
       )}
 
       <div className="flex w-full flex-col items-start gap-4 p-4">
-        <div className="flex h-14 w-full items-center justify-between gap-3">
+        <div className="flex h-full w-full flex-col items-start justify-between gap-3 lg:h-14 lg:flex-row lg:items-center">
           <Searchbar onSendSearchValue={(value) => setSearchValue(value)} />
 
           <Link href="https://www.youtube.com" target="_blank">
