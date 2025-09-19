@@ -3,6 +3,7 @@ import {
   OrdersAccountInfo,
   OrdersServiceDescription,
   OrdersServiceList,
+  OrderUserWelcome,
 } from "@/components/orders";
 import type { Metadata } from "next";
 
@@ -20,12 +21,7 @@ const OrderPage = async ({
   return (
     <div className="flex w-full flex-col items-start gap-16">
       <div className="flex w-full flex-col items-start gap-4">
-        <p className="px-4 text-2xl font-light">
-          <span className="text-foundation-red-normal font-medium">
-            Hello Oludotun!
-          </span>{" "}
-          Welcome to Cloutera Hub!
-        </p>
+        <OrderUserWelcome />
 
         <OrdersAccountInfo />
       </div>

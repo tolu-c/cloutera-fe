@@ -30,4 +30,30 @@ export const endpoints = {
     accountStatus: "/account/status",
     getFundsHistory: "/account/funds/history",
   },
+  faq: {
+    list: "/faqs/",
+    item: (faqId: string) => `/faqs/${faqId}`,
+    add: "/faqs/add",
+    edit: (faqId: string) => `/faqs/${faqId}/edit`,
+    deleteFaq: (faqId: string) => `/faqs/${faqId}/delete`,
+  },
+  admin: {
+    customers: {
+      getStats: "/admin/users/stats",
+      getUsersList: "/admin/users",
+      getSingleUser: (userId: string) => `/admin/users/${userId}`,
+      getUserOrders: (userId: string) => `/admin/users/${userId}/orders`,
+      getUserAccount: (userId: string) => `/admin/users/${userId}/account`,
+      toggleBlockUser: (userId: string) => `/admin/users/${userId}/block`,
+      deleteUser: (userId: string) => `/admin/users/${userId}/delete`,
+    },
+    orders: {
+      getStats: "/admin/orders/stats",
+      getOrdersList: "/admin/orders/list",
+    },
+    dashboard: {
+      dashboardStats: "/admin/dashboard/stats",
+      dashboardTrends: "/admin/dashboard/trends",
+    },
+  },
 };

@@ -14,12 +14,14 @@ import { useGetServiceById } from "@/queries/services";
 import { useAddOrder } from "@/mutations/orders";
 import { formatAmount, formatNumber } from "@/utils";
 import { useRouter } from "next/navigation";
+import { OrderFilterForm } from "@/components/orders/order-filter-form";
 
 type FormData = z.infer<typeof newOrderSchema>;
 
 interface NewOrderFormProps {
   serviceId?: string;
 }
+
 export const NewOrderForm = ({ serviceId }: NewOrderFormProps) => {
   const [searchValue, setSearchValue] = useState<string | undefined>(undefined);
 
@@ -103,7 +105,7 @@ export const NewOrderForm = ({ serviceId }: NewOrderFormProps) => {
     }
   }, [serviceId, singleServiceData, setValue]);
 
-  // Reset service when category changes (unless pre-filled)
+  // Reset service when the category changes (unless pre-filled)
   useEffect(() => {
     if (selectedCategory && !serviceId) {
       setValue("service", "");
@@ -120,6 +122,22 @@ export const NewOrderForm = ({ serviceId }: NewOrderFormProps) => {
     router.push("/order/history");
   };
 
+  function handleApplyFilter({
+    category,
+    service,
+  }: {
+    category: string;
+    service: string;
+  }) {
+    if (category) setValue("category", category);
+    if (service) setValue("service", service);
+  }
+
+  function handleClearFilter() {
+    setValue("category", "");
+    setValue("service", "");
+  }
+
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
@@ -128,6 +146,15 @@ export const NewOrderForm = ({ serviceId }: NewOrderFormProps) => {
       <Searchbar
         className="w-full"
         onSendSearchValue={(value) => setSearchValue(value)}
+        filterComponent={
+          <OrderFilterForm
+            categoryOptions={categoryOptions}
+            serviceOptions={serviceOptions}
+            clearFilterAction={handleClearFilter}
+            applyFilterAction={handleApplyFilter}
+            closeAction={() => {}}
+          />
+        }
       />
       <SelectInput
         options={categoryOptions}

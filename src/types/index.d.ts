@@ -1,4 +1,4 @@
-import { Status, UserRole } from "@/types/enums";
+import { Status, UserRole, UserStatus } from "@/types/enums";
 
 interface LabelValuePair<T = string> {
   label: string;
@@ -64,6 +64,7 @@ export interface LoginResponse {
   isVerified: boolean;
   twoFactorEnabled: boolean;
   role: UserRole;
+  isBlocked: boolean;
 }
 
 export interface SignupData {
@@ -92,7 +93,7 @@ export interface VerifyAccountData {
   email: string;
 }
 
-export interface User {
+export interface User extends TimeStamp {
   _id: string;
   username: string;
   email: string;
@@ -100,7 +101,9 @@ export interface User {
   lastName: string;
   isVerified: boolean;
   role: UserRole;
+  status: UserStatus;
   twoFactorEnabled: boolean;
+  isBlocked: boolean;
   __v: number;
 }
 

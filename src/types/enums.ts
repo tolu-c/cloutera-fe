@@ -89,3 +89,29 @@ export enum CustomerStat {
   Active = "Active Customers",
   Inactive = "Inactive Customers",
 }
+
+export enum UserStatus {
+  Active = "Active",
+  Inactive = "Inactive",
+  Blocked = "Blocked",
+}
+
+export enum Day {
+  Sun = "Sun",
+  Mon = "Mon",
+  Tue = "Tue",
+  Wed = "Wed",
+  Thu = "Thu",
+  Fri = "Fri",
+  Sat = "Sat",
+}
+
+export enum AdminSupportTab {
+  NotificationsAnnouncements = "Notifications & Announcements",
+  Faq = "FAQs",
+}
+
+export enum AdminNotification {
+  Sent = "Sent",
+  Scheduled = "Scheduled",
+}

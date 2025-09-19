@@ -5,6 +5,7 @@ export const routes = {
   },
   customer: {
     order: "/order",
+    addFunds: "/add-funds",
   },
   admin: {
     dashboard: "/admin/dashboard",
@@ -12,6 +13,7 @@ export const routes = {
     customer: "/admin/customer",
     singleCustomer: (customerId: string) => `/admin/customer/${customerId}`,
     support: "/admin/support",
+    newNotification: "/admin/support/new-notification",
     orders: "/admin/orders",
   },
 };

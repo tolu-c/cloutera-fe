@@ -1,9 +1,18 @@
 "use client";
 
 import { Searchbar } from "@/components/form";
-import { AdminCard, Button, DataCell } from "@/components/ui";
+import {
+  AdminCard,
+  Button,
+  DataCell,
+  Loading,
+  Pagination,
+} from "@/components/ui";
 import { ExportAsIcon } from "@/assets/icons";
 import { CustomerOrderHistoryListItem } from "@/components/admin/customers";
+import { usePagination } from "@/hooks";
+import { useGetCustomerOrders } from "@/queries/customers";
+import { useState } from "react";
 
 interface CustomerOrderHistoryListProps {
   customerId: string;
@@ -12,7 +21,17 @@ interface CustomerOrderHistoryListProps {
 export const CustomerOrderHistoryList = ({
   customerId,
 }: CustomerOrderHistoryListProps) => {
-  console.log(customerId);
+  const [search, setSearch] = useState<string | undefined>(undefined);
+  const { page, limit, handleLimitChange, handlePageChange } = usePagination();
+
+  const { isLoading, data } = useGetCustomerOrders(customerId, {
+    page,
+    limit,
+    search,
+  });
+
+  const pagination = data?.pagination;
+
   return (
     <div className="flex w-full flex-col items-start gap-4">
       <div className="bg-grey-text-50 flex items-center rounded-lg px-1 py-0.5">
@@ -28,9 +47,7 @@ export const CustomerOrderHistoryList = ({
         <div className="flex w-full items-center justify-between bg-white p-4">
           <Searchbar
             className="w-85"
-            onSendSearchValue={(value) => {
-              console.log(value);
-            }}
+            onSendSearchValue={(value) => setSearch(value)}
           />
 
           <Button
@@ -57,11 +74,29 @@ export const CustomerOrderHistoryList = ({
             </div>
           </div>
 
+          {isLoading && <Loading />}
+
           <div className="h-full">
-            <CustomerOrderHistoryListItem />
+            {Array.isArray(data?.data) && data?.data.length > 0 ? (
+              data.data.map((o) => (
+                <CustomerOrderHistoryListItem key={o._id} order={o} />
+              ))
+            ) : (
+              <p>No orders.</p>
+            )}
           </div>
 
-          <div>pagination</div>
+          {pagination && (
+            <Pagination
+              current={pagination.current}
+              pages={pagination.pages}
+              limit={pagination.limit}
+              hasPrev={pagination.hasPrev}
+              hasNext={pagination.hasNext}
+              onLimitChange={handleLimitChange}
+              onPageChange={handlePageChange}
+            />
+          )}
         </div>
       </AdminCard>
     </div>

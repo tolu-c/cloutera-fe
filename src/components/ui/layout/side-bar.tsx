@@ -5,14 +5,12 @@ import { usePathname } from "next/navigation";
 import ClouteraLogo from "../logo";
 import { cn } from "@/utils/cn";
 import {
-  // AffiliatesIcon,
+  BriefCaseIcon,
   FaqsIcon,
   FundsIcon,
   LogoutIcon,
-  // MassOrderIcon,
   NewOrderIcon,
   OrdersIcon,
-  ServicesIcon,
   SupportIcon,
 } from "@/assets/icons";
 import Image from "next/image";
@@ -24,7 +22,7 @@ import { LogoutConfirmationModal } from "./logout-confirmation-modal";
 
 const sidebarLinks = [
   { label: "New Orders", href: "/order", icon: <NewOrderIcon /> },
-  { label: "Services", href: "/services", icon: <ServicesIcon /> },
+  { label: "Services", href: "/services", icon: <BriefCaseIcon /> },
   { label: "Orders", href: "/order/history", icon: <OrdersIcon /> },
   { label: "Add Funds", href: "/add-funds", icon: <FundsIcon /> },
   { label: "FAQs", href: "/faq", icon: <FaqsIcon /> },

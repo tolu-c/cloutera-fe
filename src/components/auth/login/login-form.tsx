@@ -29,7 +29,9 @@ const LoginForm = () => {
 
   return (
     <form
-      onSubmit={handleSubmit(onSubmit)}
+      onSubmit={handleSubmit(onSubmit, (errors) => {
+        console.log("invalid errors", errors);
+      })}
       className="flex w-full flex-col gap-8"
     >
       <div className="flex w-full flex-col gap-4">
