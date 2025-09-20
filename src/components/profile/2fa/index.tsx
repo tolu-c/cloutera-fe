@@ -20,7 +20,7 @@ export const TwoFactorAuthentication = () => {
           onClick={handleTriggerClick} // Calls the prop function on click
         >
           <div className="flex flex-1 items-center gap-4">
-            <span className="flex size-8 items-center justify-center rounded-full bg-red-100">
+            <span className="bg-foundation-red-light-active flex size-8 items-center justify-center rounded-full">
               <PasswordCheckIcon className="size-5 text-red-500" />
             </span>
             <p className="text-slate-700">
