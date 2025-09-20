@@ -6,12 +6,14 @@ interface TwoFactorAuthEmailSelectionProps {
   email: string;
   onContinue: (email: string) => void;
   onBack: () => void;
+  isPending: boolean;
 }
 
 export const TwoFactorAuthEmailSelection = ({
   email,
   onContinue,
   onBack,
+  isPending,
 }: TwoFactorAuthEmailSelectionProps) => {
   const [selectedOption, setSelectedOption] = useState<
     "registered" | "different"
@@ -139,7 +141,9 @@ export const TwoFactorAuthEmailSelection = ({
           <button
             className="rounded-md bg-red-500 px-6 py-3 text-[#F6F9FF] hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
             onClick={handleContinue}
-            disabled={selectedOption === "different" && !customEmail}
+            disabled={
+              isPending || (selectedOption === "different" && !customEmail)
+            }
           >
             Continue
           </button>
