@@ -8,7 +8,6 @@ import {
   ApiDataResponse,
   ApiMessageResponse,
   Profile,
-  Setup2FAData,
   UpdatePasswordData,
   UpdateProfileData,
   User,
@@ -50,11 +49,8 @@ export const useProfile = () => {
     return res.data;
   };
 
-  const handleSetup2fa = async (data: Setup2FAData) => {
-    const res: AxiosResponse<ApiMessageResponse> = await authApi.post(
-      setup2fa,
-      data,
-    );
+  const handleSetup2fa = async () => {
+    const res: AxiosResponse<ApiMessageResponse> = await authApi.post(setup2fa);
 
     return res.data;
   };
