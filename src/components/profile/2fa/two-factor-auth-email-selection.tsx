@@ -81,20 +81,37 @@ export const TwoFactorAuthEmailSelection = ({
             </label>
 
             {/* Different Email Option */}
-            <label className="bg-foundation-red-white flex cursor-pointer flex-col rounded-lg border border-gray-300 p-4 transition-colors duration-200 hover:border-blue-500">
-              <div className="flex items-center">
-                <input
-                  type="radio"
-                  name="emailOption"
-                  value="different"
-                  checked={selectedOption === "different"}
-                  onChange={() => setSelectedOption("different")}
-                  className="form-radio h-4 w-4 border-gray-300 text-blue-600 focus:ring-blue-500"
-                />
-                <span className="ml-3 text-slate-700">
+            <label className="bg-foundation-red-white flex h-[123px] cursor-pointer flex-col rounded-lg border border-gray-300 p-4 transition-colors duration-200 hover:border-blue-500">
+              <div className="flex w-full items-center justify-between">
+                <span className="text-slate-700">
                   Use a different email address
                 </span>
+                <span
+                  className="border-foundation-red-normal flex h-4 w-4 items-center justify-center rounded-full border-2"
+                  onClick={() => setSelectedOption("different")}
+                  tabIndex={0}
+                  role="radio"
+                  aria-checked={selectedOption === "different"}
+                  aria-label="Use different email address"
+                  onKeyDown={(e) => {
+                    if (e.key === "Enter" || e.key === " ")
+                      setSelectedOption("different");
+                  }}
+                >
+                  {selectedOption === "different" && (
+                    <span className="bg-foundation-red-normal block h-2 w-2 rounded-full" />
+                  )}
+                </span>
               </div>
+              <input
+                type="radio"
+                name="emailOption"
+                value="different"
+                checked={selectedOption === "different"}
+                onChange={() => setSelectedOption("different")}
+                className="sr-only"
+                tabIndex={-1}
+              />
               {selectedOption === "different" && (
                 <input
                   type="email"
