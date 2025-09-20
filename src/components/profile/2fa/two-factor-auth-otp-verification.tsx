@@ -68,7 +68,7 @@ export const TwoFactorAuthOTPVerification = ({
           </button>
           <OutlineCard.Title title="2 Factor Authentication" />
         </div>
-        <div className="flex flex-col gap-6 rounded-lg border border-gray-300 p-6">
+        <div className="flex flex-col gap-12 rounded-2xl border border-slate-100 px-12 py-10">
           <div className="flex flex-col items-start gap-6">
             <div className="fle flex-col gap-1">
               <p className="text-[20px] leading-[120%] font-semibold text-slate-800">
@@ -86,19 +86,19 @@ export const TwoFactorAuthOTPVerification = ({
                   key={index}
                   type="text"
                   maxLength={1}
-                  value={digit}
+                  value={digit !== "" ? "*" : ""}
                   onChange={(e) => handleChange(e, index)}
                   onKeyDown={(e) => handleKeyDown(e, index)}
                   onPaste={handlePaste}
-                  // FIX: Ensure the ref callback returns void
                   ref={(el) => {
                     if (el) {
-                      // Ensure element exists before assigning
                       inputRefs.current[index] = el;
                     }
                   }}
                   className="focus:border-foundation-red-normal focus:ring-foundation-red-normal-hover size-16 rounded-lg border-[1.5px] border-slate-200 text-center text-2xl font-bold transition-colors duration-200 focus:bg-slate-50 focus:outline-none"
-                  style={{ caretColor: "transparent" }} // Hide blinking cursor for cleaner look
+                  style={{ caretColor: "transparent" }}
+                  inputMode="numeric"
+                  autoComplete="one-time-code"
                 />
               ))}
             </div>
@@ -107,9 +107,7 @@ export const TwoFactorAuthOTPVerification = ({
               Don&apos;t receive the code?{" "}
               <button
                 className="text-foundation-red-normal font-medium underline transition-all duration-300 ease-in-out"
-                onClick={() => {
-                  /* No navigation, just animation */
-                }}
+                onClick={() => {}}
               >
                 Resend OTP
               </button>

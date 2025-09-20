@@ -7,8 +7,8 @@ export const metadata: Metadata = {
 
 const TwoFAPage = () => {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100 p-8 font-sans antialiased">
-      <div className="mx-auto w-full">
+    <div className="bg-foundation-red-white flex min-h-screen w-full font-sans antialiased">
+      <div className="w-full">
         {/* Render the client wrapper which handles fetching user data and the 2FA flow */}
         <TwoFactorAuthClientWrapper />
       </div>
