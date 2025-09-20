@@ -126,10 +126,6 @@ export interface Verify2FAData {
   secretCode: string;
 }
 
-export interface Setup2FAData {
-  email: string;
-}
-
 export interface FormatAmountOptions {
   currency?: string; // e.g., 'USD', 'EUR', 'NGN'
   locale?: string; // e.g., 'en-US', 'en-NG', 'fr-FR'

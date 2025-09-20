@@ -3,17 +3,18 @@
 import { ChevronDownIcon } from "@/assets/icons";
 import { OutlineCard } from "@/components/ui";
 import React, { useState, useRef, ChangeEvent, KeyboardEvent } from "react";
+import { useVerify2fa } from "@/mutations/profile";
 
 interface TwoFactorAuthOTPVerificationProps {
   email: string; // Email to display for verification
-  onVerify: () => void;
-  onBack: () => void;
+  onVerifyAction: () => void;
+  onBackAction: () => void;
 }
 
 export const TwoFactorAuthOTPVerification = ({
   email,
-  onVerify,
-  onBack,
+  onVerifyAction,
+  onBackAction,
 }: TwoFactorAuthOTPVerificationProps) => {
   const [otp, setOtp] = useState<string[]>(["", "", "", "", "", ""]); // 6-digit OTP
   const inputRefs = useRef<HTMLInputElement[]>([]);
@@ -55,13 +56,24 @@ export const TwoFactorAuthOTPVerification = ({
 
   const isOtpComplete = otp.every((digit) => digit !== "");
 
+  const { mutateAsync: submit, isPending } = useVerify2fa();
+
+  const handleVerify2fa = async () => {
+    if (isOtpComplete) {
+      await submit({
+        secretCode: otp.join(""),
+      });
+      onVerifyAction();
+    }
+  };
+
   return (
     <div className="w-full p-6 lg:p-8">
       <OutlineCard>
         <div className="flex w-full items-center gap-8">
           <button
             className="text-foundation-red-normal flex items-center gap-0.5 rounded p-2 hover:underline focus:ring-2 focus:ring-blue-500 focus:outline-none"
-            onClick={onBack}
+            onClick={onBackAction}
           >
             <ChevronDownIcon className="text-foundation-red-normal size-4 rotate-90" />
             <span className="text-[16px] leading-[120%] font-medium">Back</span>
@@ -116,8 +128,8 @@ export const TwoFactorAuthOTPVerification = ({
 
           <button
             className="rounded-md bg-red-500 px-6 py-3 text-white hover:bg-red-600 focus:ring-2 focus:ring-red-500 focus:ring-offset-2 focus:outline-none disabled:cursor-not-allowed disabled:opacity-50"
-            onClick={onVerify}
-            disabled={!isOtpComplete}
+            onClick={handleVerify2fa}
+            disabled={!isOtpComplete || isPending}
           >
             Verify
           </button>

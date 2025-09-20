@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { TwoFactorAuthOTPVerification } from "./two-factor-auth-otp-verification";
 import { TwoFactorAuthEmailSelection } from "./two-factor-auth-email-selection";
 import { useRouter } from "next/navigation";
+import { useSetup2fa } from "@/mutations/profile";
 
 // Define the steps in the 2FA setup flow
 type TwoFactorAuthStep = "emailSelection" | "otpVerification" | "completed";
@@ -20,11 +21,15 @@ export const TwoFactorAuthenticationFlow = ({
     useState<TwoFactorAuthStep>("emailSelection");
   const [selectedEmail, setSelectedEmail] = useState<string>(initialEmail);
 
-  const handleNextStep = (step: TwoFactorAuthStep, email?: string) => {
+  const { mutateAsync: submit, isPending } = useSetup2fa();
+
+  const handleNextStep = async (step: TwoFactorAuthStep, email?: string) => {
     if (email) {
       setSelectedEmail(email);
+      await submit().then(() => {
+        setCurrentStep(step);
+      });
     }
-    setCurrentStep(step);
   };
 
   const handleBack = () => {
@@ -43,6 +48,7 @@ export const TwoFactorAuthenticationFlow = ({
           email={selectedEmail}
           onContinue={(email) => handleNextStep("otpVerification", email)}
           onBack={handleBack}
+          isPending={isPending}
         />
       );
       break;
@@ -50,8 +56,8 @@ export const TwoFactorAuthenticationFlow = ({
       content = (
         <TwoFactorAuthOTPVerification
           email={selectedEmail}
-          onVerify={() => handleNextStep("completed")}
-          onBack={handleBack}
+          onVerifyAction={() => handleNextStep("completed")}
+          onBackAction={handleBack}
         />
       );
       break;
