@@ -36,8 +36,8 @@ export const TwoFactorAuthEmailSelection = ({
             className="text-foundation-red-normal flex items-center gap-0.5 rounded p-2 hover:underline focus:ring-2 focus:ring-blue-500 focus:outline-none"
             onClick={onBack}
           >
-            <ChevronDownIcon className="size-6 rotate-90 text-slate-400" />
-            <span className="font-medium">Back</span>
+            <ChevronDownIcon className="text-foundation-red-normal size-4 rotate-90" />
+            <span className="text-[16px] leading-[120%] font-medium">Back</span>
           </button>
           <OutlineCard.Title title="2 Factor Authentication" />
         </div>
@@ -49,9 +49,9 @@ export const TwoFactorAuthEmailSelection = ({
           <div className="space-y-4">
             {/* Registered Email Option */}
             <label className="flex cursor-pointer items-center gap-2 rounded-lg border border-gray-300 bg-white p-4 transition-colors duration-200 hover:border-blue-500">
-              <span className="text-slate-700">
+              <span className="text-grey-900 text-base">
                 Use your registered email{" "}
-                <span className="font-semibold">({email})</span>
+                <span className="font-medium">({email})</span>
               </span>
               <span
                 className="border-foundation-red-normal ml-2 flex h-4 w-4 items-center justify-center rounded-full border-2"
@@ -81,9 +81,9 @@ export const TwoFactorAuthEmailSelection = ({
             </label>
 
             {/* Different Email Option */}
-            <label className="bg-foundation-red-white flex h-[123px] cursor-pointer flex-col rounded-lg border border-gray-300 p-4 transition-colors duration-200 hover:border-blue-500">
+            <label className="bg-foundation-red-white border-foundation-red-normal hover:border-foundation-red-normal-hover flex cursor-pointer flex-col gap-2 rounded-lg border p-4 transition-colors duration-200">
               <div className="flex w-full items-center justify-between">
-                <span className="text-slate-700">
+                <span className="text-grey-900 text-base">
                   Use a different email address
                 </span>
                 <span
@@ -115,7 +115,7 @@ export const TwoFactorAuthEmailSelection = ({
               {selectedOption === "different" && (
                 <input
                   type="email"
-                  className="mt-2 block w-full rounded-md border border-gray-300 px-4 py-2 shadow-sm focus:border-blue-500 focus:ring-blue-500 focus:outline-none sm:text-sm"
+                  className="border-grey-300 focus:border-foundation-red-normal focus:ring-foundation-red-normal-hover block h-14 w-full rounded-[6px] border bg-white p-4 focus:outline-none sm:text-sm"
                   placeholder="Enter email address"
                   value={customEmail}
                   onChange={(e) => setCustomEmail(e.target.value)}
