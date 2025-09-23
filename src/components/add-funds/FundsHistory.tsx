@@ -8,21 +8,61 @@ import { Badge, DataCell, Pagination } from "../ui";
 import { formatAmount } from "@/utils";
 import { useGetFundHistory } from "@/queries/account/get-fund-history";
 import { usePagination } from "@/hooks";
+import { FundsHistoryFilterForm } from "./funds-history-filter-form";
 
 export const FundsHistory = () => {
+  const [filters, setFilters] = useState<{
+    category: FundHistoryCategory | "";
+    status: TransactionStatus | "";
+  }>({
+    category: "",
+    status: "",
+  });
   const [searchValue, setSearchValue] = useState("");
   const [currentCategory, setCurrentCategory] = useState<FundHistoryCategory>(
     FundHistoryCategory.All,
   );
   const { handleLimitChange, handlePageChange } = usePagination();
-
   const tabs = Object.values(FundHistoryCategory);
 
+  // Fetch all fund history data
   const { data, isLoading } = useGetFundHistory();
-
   const pagination = data?.pagination;
 
-  console.log("searchValue", searchValue);
+  // Client-side filtering
+  const filteredData =
+    data?.data?.filter((item) => {
+      const matchesSearch =
+        searchValue === "" ||
+        item.transactionId.toLowerCase().includes(searchValue.toLowerCase());
+      const matchesCategory =
+        !filters.category ||
+        item.type.toString() === filters.category.toString();
+      const matchesStatus = !filters.status || item.status === filters.status;
+      return matchesSearch && matchesCategory && matchesStatus;
+    }) || [];
+
+  const categoryOptions = tabs.map((tab) => ({ label: tab, value: tab }));
+  const statusOptions = Object.values(TransactionStatus).map((s) => ({
+    label: s,
+    value: s,
+  }));
+
+  function handleApplyFilter({
+    category,
+    status,
+  }: {
+    category: FundHistoryCategory | "";
+    status: TransactionStatus | "";
+  }) {
+    setFilters({ category, status });
+    setCurrentCategory(category || FundHistoryCategory.All);
+  }
+
+  function handleClearFilter() {
+    setFilters({ category: "", status: "" });
+    setCurrentCategory(FundHistoryCategory.All);
+  }
 
   return (
     <div className="flex w-full flex-col gap-4 px-6 py-4">
@@ -43,9 +83,18 @@ export const FundsHistory = () => {
           </button>
         ))}
       </div>
-
-      <Searchbar onSendSearchValue={setSearchValue} />
-
+      <Searchbar
+        onSendSearchValue={setSearchValue}
+        filterComponent={
+          <FundsHistoryFilterForm
+            categoryOptions={categoryOptions}
+            statusOptions={statusOptions}
+            clearFilterAction={handleClearFilter}
+            applyFilterAction={handleApplyFilter}
+            closeAction={() => {}}
+          />
+        }
+      />
       <div className="flex w-full flex-col gap-2">
         <div className="bg-foundation-red-normal hidden h-13 w-full items-center overflow-hidden rounded-lg text-white lg:flex">
           <DataCell className="basis-1/6 text-current">ID</DataCell>
@@ -57,9 +106,9 @@ export const FundsHistory = () => {
 
         {isLoading && <p>loading...</p>}
 
-        {!isLoading && data?.data && (
+        {!isLoading && filteredData && (
           <div className="flex w-full flex-col items-start gap-2">
-            {data.data.map(
+            {filteredData.map(
               ({
                 _id,
                 transactionId,
@@ -86,19 +135,18 @@ export const FundsHistory = () => {
             )}
           </div>
         )}
+        {pagination && (
+          <Pagination
+            current={pagination.current}
+            pages={pagination.pages}
+            limit={pagination.limit}
+            hasPrev={pagination.hasPrev}
+            hasNext={pagination.hasNext}
+            onLimitChange={handleLimitChange}
+            onPageChange={handlePageChange}
+          />
+        )}
       </div>
-
-      {pagination && (
-        <Pagination
-          current={pagination.current}
-          pages={pagination.pages}
-          limit={pagination.limit}
-          hasPrev={pagination.hasPrev}
-          hasNext={pagination.hasNext}
-          onLimitChange={handleLimitChange}
-          onPageChange={handlePageChange}
-        />
-      )}
     </div>
   );
 };

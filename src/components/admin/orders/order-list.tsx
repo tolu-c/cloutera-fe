@@ -7,16 +7,47 @@ import { Searchbar } from "@/components/form";
 import { OrderListItem } from "@/components/admin/orders";
 import { usePagination } from "@/hooks";
 import { useGetAdminOrders } from "@/queries/orders";
+import { OrderFilterForm } from "./order-filter-form";
 
 export const OrderList = () => {
   const [search, setSearch] = useState<string | undefined>(undefined);
+  const [filters, setFilters] = useState<{ status: string; customer: string }>({
+    status: "",
+    customer: "",
+  });
 
   const { page, limit, handlePageChange, handleLimitChange } = usePagination();
+
+  const statusOptions = [
+    { label: "Pending", value: "pending" },
+    { label: "Completed", value: "completed" },
+    { label: "Cancelled", value: "cancelled" },
+  ];
+  const customerOptions = [
+    { label: "All", value: "" },
+    // Add more customer options dynamically
+  ];
+
+  function handleApplyFilter({
+    status,
+    customer,
+  }: {
+    status: string;
+    customer: string;
+  }) {
+    setFilters({ status, customer });
+  }
+
+  function handleClearFilter() {
+    setFilters({ status: "", customer: "" });
+  }
 
   const { isLoading, data } = useGetAdminOrders({
     search,
     page,
     limit,
+    status: filters.status || undefined,
+    customer: filters.customer || undefined,
   });
 
   const pagination = data?.pagination;
@@ -29,6 +60,15 @@ export const OrderList = () => {
           onSendSearchValue={(value) => {
             setSearch(value);
           }}
+          filterComponent={
+            <OrderFilterForm
+              statusOptions={statusOptions}
+              customerOptions={customerOptions}
+              clearFilterAction={handleClearFilter}
+              applyFilterAction={handleApplyFilter}
+              closeAction={() => {}}
+            />
+          }
         />
       </div>
 
