@@ -10,11 +10,13 @@ export const metadata: Metadata = {
 const ProfilePage = () => {
   return (
     <div className="grid w-full grid-cols-1 lg:grid-cols-2">
+      {/* Left Column for Account Settings and Change Password */}
       <div className="flex w-full flex-col items-start gap-6 p-6 lg:p-8">
         <AccountSettingsForm />
         <ChangePasswordForm />
       </div>
 
+      {/* Right Column for 2FA - now handled by the wrapper client component */}
       <TwoFactorAuthentication />
     </div>
   );
