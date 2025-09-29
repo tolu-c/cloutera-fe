@@ -16,16 +16,6 @@ import { GraphFilter } from "@/types/enums";
 import { FilterButton } from "@/components/admin/dashboard/filter-button";
 import { useGetDashboardTrends } from "@/queries/dashboard";
 
-// const data = [
-//   { name: "Sun", value: 15000, day: "Sunday", amount: "15k" },
-//   { name: "Mon", value: 15000, day: "Monday", amount: "15k" },
-//   { name: "Tue", value: 26000, day: "Tuesday", amount: "26k" },
-//   { name: "Wed", value: 0, day: "Wednesday", amount: "0k" },
-//   { name: "Thu", value: 35000, day: "Thursday", amount: "35k" },
-//   { name: "Fri", value: 22000, day: "Friday", amount: "22k" },
-//   { name: "Sat", value: 30000, day: "Saturday", amount: "30k" },
-// ];
-
 export const DashboardGraph = () => {
   const { isLoading, data } = useGetDashboardTrends();
 
@@ -92,11 +82,15 @@ export const DashboardGraph = () => {
   };
 
   if (isLoading) {
-    return <Loading />;
+    return (
+      <div className="lg:col-span-2">
+        <Loading />
+      </div>
+    );
   }
 
   return (
-    <AdminCard>
+    <AdminCard className="col-span-2">
       <div className="flex w-full items-center justify-between">
         <p className="text-light-black text-lg font-bold">{title}</p>
 

@@ -1,6 +1,9 @@
 import dayjs from "dayjs";
+import relativeTime from "dayjs/plugin/relativeTime";
 import { BaseParams, FormatAmountOptions } from "@/types";
 import { DateTimeFormat } from "@/types/enums";
+
+dayjs.extend(relativeTime);
 
 export const generateQueryString = (params: BaseParams): string => {
   const searchParams = new URLSearchParams();
@@ -71,4 +74,8 @@ export const formatDateTime = (
     return "";
   }
   return formattedDate.format(format);
+};
+
+export const formatRelativeTime = (date: Date | string) => {
+  return dayjs(date).fromNow();
 };

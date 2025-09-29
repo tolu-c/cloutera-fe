@@ -31,7 +31,7 @@ export const SupportCard = ({
           <p className="text-light-black text-base font-light">{title}</p>
 
           <p className="text-light-black text-xl font-bold">
-            {formatNumber(value ?? 0)}
+            {formatNumber(value)}
           </p>
         </div>
       </div>
