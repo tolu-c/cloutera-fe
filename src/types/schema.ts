@@ -1,5 +1,10 @@
 import { z } from "zod/v4";
 import { AddFundOptions } from "@/types/enums";
+import {
+  NotificationEnum,
+  NotificationFreqEnum,
+  Time,
+} from "@/types/notifications.types";
 
 export const supportFormSchema = z.object({
   subject: z.string().min(1, "Subject is required"),
@@ -111,3 +116,60 @@ export const faqSchema = z.object({
   question: z.string().min(1, { error: "Please enter a question" }),
   answer: z.string().min(1, { error: "Please enter a question" }),
 });
+
+export const notificationSchema = z.object({
+  title: z.string().min(1, { error: "Please enter a title" }),
+  message: z.string().min(1, { error: "Please enter a message" }),
+  type: z.enum(NotificationEnum, {
+    error: "Please select a notification type",
+  }),
+});
+
+export const scheduledNotificationSchema = notificationSchema
+  .extend({
+    date: z
+      .string()
+      .refine((val) => !isNaN(Date.parse(val)), { message: "Invalid date" })
+      .refine(
+        (val) => new Date(val) >= new Date(new Date().setHours(0, 0, 0, 0)),
+        { message: "Cannot select a date lesser than today" },
+      ),
+    time: z.enum(Time, { message: "Please enter a time" }),
+    recurring: z.boolean().default(false),
+    endDate: z
+      .string()
+      .refine((val) => !isNaN(Date.parse(val)), { message: "Invalid date" })
+      .refine(
+        (val) => new Date(val) >= new Date(new Date().setHours(0, 0, 0, 0)),
+        { message: "Cannot select a date lesser than today" },
+      )
+      .optional(),
+    freq: z
+      .enum(NotificationFreqEnum, { error: "Please select a frequency" })
+      .optional(),
+  })
+  .refine((data) => !data.recurring || data.freq, {
+    path: ["freq"],
+    message: "Please select a frequency",
+  })
+  .refine((data) => !data.recurring || data.endDate, {
+    path: ["endDate"],
+    message: "Please select an end date",
+  })
+  .refine(
+    (data) =>
+      !data.recurring || (data.endDate && !isNaN(Date.parse(data.endDate))),
+    {
+      path: ["endDate"],
+      message: "Invalid end date",
+    },
+  )
+  .refine(
+    (data) =>
+      !data.recurring ||
+      (data.endDate && new Date(data.endDate) > new Date(data.date)),
+    {
+      path: ["endDate"],
+      message: "End date must be after start date",
+    },
+  );

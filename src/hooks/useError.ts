@@ -19,7 +19,6 @@ export const useError = () => {
   );
 
   const handleLogout = () => {
-    console.log("log me out");
     removeToken();
     removeEmail();
     removePassword();
@@ -28,9 +27,6 @@ export const useError = () => {
 
   const handleError = (error: unknown) => {
     if (error instanceof AxiosError) {
-      console.log(error.response?.data?.message);
-      console.log(error.status);
-
       const status = error.response?.status;
       const message =
         error.response?.data?.error?.message || "Something went wrong";
