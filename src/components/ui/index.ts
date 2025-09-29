@@ -12,3 +12,4 @@ export * from "./page-section";
 export * from "./popover";
 export * from "./divider";
 export * from "./info";
+export * from "./switch";

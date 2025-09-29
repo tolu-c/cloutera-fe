@@ -1,35 +1,110 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { SupportCard } from "@/components/admin/support";
 import { ApplicationNotificationIcon } from "@/assets/icons";
 import { Searchbar } from "@/components/form";
-import { AdminCard, Button, DataCell } from "@/components/ui";
+import {
+  AdminCard,
+  Button,
+  DataCell,
+  Loading,
+  Pagination,
+} from "@/components/ui";
 import { AdminNotification } from "@/types/enums";
 import { cn } from "@/utils/cn";
 import { NotificationListItem } from "@/components/admin/support/notification/notification-list-item";
 import Link from "next/link";
 import { routes } from "@/utils/routes";
+import {
+  useGetNotificationStats,
+  useGetScheduledNotifications,
+  useGetSentNotifications,
+} from "@/queries/notifications";
+import { usePagination } from "@/hooks";
+
+const tabs = Object.values(AdminNotification);
 
 export const Notification = () => {
   const [activeTab, setActiveTab] = useState<AdminNotification>(
     AdminNotification.Sent,
   );
+  const [search, setSearch] = useState<string | undefined>(undefined);
 
-  const tabs = Object.values(AdminNotification);
+  const { page, limit, handlePageChange, handleLimitChange } = usePagination();
+
+  const { data, isLoading } = useGetNotificationStats();
+
+  const shouldFetchScheduled = activeTab === AdminNotification.Scheduled;
+  const shouldFetchSent = activeTab === AdminNotification.Sent;
+
+  const {
+    data: scheduledNotifications,
+    isLoading: scheduledNotificationsLoading,
+  } = useGetScheduledNotifications(
+    { search, page, limit },
+    shouldFetchScheduled,
+  );
+  const { data: sentNotifications, isLoading: sentNotificationsLoading } =
+    useGetSentNotifications(
+      {
+        search,
+        page,
+        limit,
+      },
+      shouldFetchSent,
+    );
+
+  const { notificationsData, notificationsPagination, notificationsLoading } =
+    useMemo(() => {
+      const loading = shouldFetchScheduled
+        ? scheduledNotificationsLoading
+        : sentNotificationsLoading;
+
+      const data =
+        activeTab === AdminNotification.Sent
+          ? sentNotifications?.data || []
+          : scheduledNotifications?.data || [];
+
+      const pagination =
+        activeTab === AdminNotification.Sent
+          ? sentNotifications?.pagination
+          : scheduledNotifications?.pagination;
+
+      return {
+        notificationsData: data,
+        notificationsPagination: pagination,
+        notificationsLoading: loading,
+      };
+    }, [
+      activeTab,
+      sentNotifications,
+      scheduledNotifications,
+      sentNotificationsLoading,
+      scheduledNotificationsLoading,
+      shouldFetchScheduled,
+    ]);
+
+  function handleTabChange(tab: AdminNotification) {
+    setActiveTab(tab);
+    setSearch("");
+  }
+
+  console.log("Scheduled Notifications:", scheduledNotifications);
 
   return (
     <Fragment>
       <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
+        {isLoading && <Loading />}
         <SupportCard
           title="Total Notifications Sent"
-          value={100000}
+          value={data?.data.sent}
           className="bg-foundation-red-white text-foundation-red-normal"
           Icon={ApplicationNotificationIcon}
         />
         <SupportCard
           title="Total Notifications Scheduled"
-          value={40000}
+          value={data?.data.scheduled}
           className="bg-pending-bg text-pending"
           Icon={ApplicationNotificationIcon}
         />
@@ -52,7 +127,7 @@ export const Notification = () => {
                     "text-grey-text-800 tab-shadow bg-white": tab === activeTab,
                   },
                 )}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => handleTabChange(tab)}
               >
                 {tab}
               </button>
@@ -60,7 +135,7 @@ export const Notification = () => {
           </div>
 
           <div className="flex w-full justify-between">
-            <Searchbar />
+            <Searchbar onSendSearchValue={setSearch} />
 
             <Link href={routes.admin.newNotification}>
               <Button width="max">Send New Notification</Button>
@@ -81,12 +156,31 @@ export const Notification = () => {
               </div>
             </div>
 
+            {notificationsLoading && <Loading />}
             {/* loading */}
             <div className="h-full">
-              <NotificationListItem />
+              {!notificationsLoading &&
+                notificationsData &&
+                notificationsData.map((notification) => (
+                  <NotificationListItem
+                    key={notification._id}
+                    notification={notification}
+                  />
+                ))}
             </div>
 
             {/* pagination */}
+            {notificationsPagination && (
+              <Pagination
+                current={notificationsPagination.current}
+                pages={notificationsPagination.pages}
+                limit={notificationsPagination.limit}
+                hasPrev={notificationsPagination.hasPrev}
+                hasNext={notificationsPagination.hasNext}
+                onLimitChange={handleLimitChange}
+                onPageChange={handlePageChange}
+              />
+            )}
           </div>
         </AdminCard>
       </div>
