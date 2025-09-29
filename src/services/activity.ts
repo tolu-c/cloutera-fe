@@ -20,7 +20,7 @@ export function useActivity() {
     return res.data;
   }
 
-  async function handleUserActivities(userId: string, params?: ActivityParams) {
+  async function handleUserActivities(userId: string, params: ActivityParams) {
     const url = appendQueryParams(userActivities(userId), params);
 
     const res: AxiosResponse<PaginatedResponse<Activity>> =

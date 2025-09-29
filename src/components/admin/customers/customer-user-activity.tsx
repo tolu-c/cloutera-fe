@@ -13,6 +13,7 @@ import { useGetUserActivities } from "@/queries/activity";
 import { Searchbar } from "@/components/form";
 import { ExportAsIcon } from "@/assets/icons";
 import { formatDateTime } from "@/utils";
+import { DateTimeFormat } from "@/types/enums";
 
 interface CustomerUserActivityProps {
   customerId: string;
@@ -74,7 +75,7 @@ export function CustomerUserActivity({
                   <span>{action}</span>
                 </DataCell>
                 <DataCell className="col-span-1 p-4">
-                  {formatDateTime(createdAt)}
+                  {formatDateTime(createdAt, DateTimeFormat.MonthDateYear)}
                 </DataCell>
               </div>
             ))

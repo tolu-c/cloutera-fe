@@ -90,21 +90,19 @@ export const Notification = () => {
     setSearch("");
   }
 
-  console.log("Scheduled Notifications:", scheduledNotifications);
-
   return (
     <Fragment>
       <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
         {isLoading && <Loading />}
         <SupportCard
           title="Total Notifications Sent"
-          value={data?.data.sent}
+          value={data?.data.sent ?? 0}
           className="bg-foundation-red-white text-foundation-red-normal"
           Icon={ApplicationNotificationIcon}
         />
         <SupportCard
           title="Total Notifications Scheduled"
-          value={data?.data.scheduled}
+          value={data?.data.scheduled ?? 0}
           className="bg-pending-bg text-pending"
           Icon={ApplicationNotificationIcon}
         />

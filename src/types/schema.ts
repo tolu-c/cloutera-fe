@@ -135,7 +135,7 @@ export const scheduledNotificationSchema = notificationSchema
         { message: "Cannot select a date lesser than today" },
       ),
     time: z.enum(Time, { message: "Please enter a time" }),
-    recurring: z.boolean().default(false),
+    recurring: z.boolean(),
     endDate: z
       .string()
       .refine((val) => !isNaN(Date.parse(val)), { message: "Invalid date" })

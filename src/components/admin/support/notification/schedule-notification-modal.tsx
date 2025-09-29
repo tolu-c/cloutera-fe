@@ -2,7 +2,10 @@
 
 import { Button, Modal, Switch } from "@/components/ui";
 import { z } from "zod/v4";
-import { scheduledNotificationSchema } from "@/types/schema";
+import {
+  notificationSchema,
+  scheduledNotificationSchema,
+} from "@/types/schema";
 import { useDisclosure } from "@/hooks";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -25,11 +28,7 @@ import {
 interface ScheduleNotificationModalProps {
   open: boolean;
   close: () => void;
-  notificationData: {
-    type: string;
-    title: string;
-    message: string;
-  };
+  notificationData: z.infer<typeof notificationSchema>;
 }
 
 type FormData = z.infer<typeof scheduledNotificationSchema>;
@@ -58,8 +57,8 @@ export function ScheduleNotificationModal({
       ...notificationData,
       recurring: false,
       date: "",
-      time: undefined,
-      freq: undefined,
+      time: Time["12 PM"],
+      freq: NotificationFreqEnum.Daily,
       endDate: "",
     },
   });
@@ -81,6 +80,8 @@ export function ScheduleNotificationModal({
     } else {
       const payload: AddRecurringNotificationReq = {
         ...data,
+        endDate: data.endDate || "",
+        freq: data.freq || NotificationFreqEnum.Daily,
       };
 
       await recur(payload);
@@ -137,9 +138,7 @@ export function ScheduleNotificationModal({
               label="Time"
               {...register("time")}
               error={errors.time?.message}
-              placeholder="Select Time"
               options={notificationTime}
-              type="datetime-local"
             />
           </div>
 
@@ -155,10 +154,9 @@ export function ScheduleNotificationModal({
                 label="Frequency"
                 {...register("freq")}
                 error={errors.freq?.message}
-                placeholder="Select Frequency"
                 options={notificationFreq}
-                type="datetime-local"
               />
+
               <TextInput
                 label="End Date"
                 {...register("endDate")}

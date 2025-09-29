@@ -20,6 +20,7 @@ export const AdminTopBar = () => {
   const user = getItem();
 
   const today = new Date();
+
   return (
     <div className="flex h-20 w-full items-center justify-between gap-6 px-6 py-3">
       <div className="flex flex-col items-start gap-1">
@@ -39,7 +40,7 @@ export const AdminTopBar = () => {
         >
           <NotificationIcon className="text-cloutera-black size-4" />
 
-          {data?.data.length > 0 && (
+          {data?.data && data.data.length > 0 && (
             <span className="bg-accent-1 absolute top-2 right-2.5 size-1 rounded-full" />
           )}
 

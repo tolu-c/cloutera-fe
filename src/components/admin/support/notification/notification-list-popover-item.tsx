@@ -14,14 +14,18 @@ export function NotificationListPopoverItem({
 }: NotificationListPopoverItemProps) {
   const { _id, title, message, createdAt } = notification;
 
-  const { mutateAsync: markAsRead } = useMarkNotificationAsRead(_id);
+  const { mutateAsync: submit } = useMarkNotificationAsRead(_id);
+
+  async function markAsRead() {
+    await submit();
+  }
 
   return (
-    <button
+    <div
       onClick={markAsRead}
-      className="border-foundation-red-light flex w-full cursor-pointer flex-col gap-2 rounded-lg border p-4"
+      className="border-foundation-red-light flex w-full cursor-pointer flex-col items-start gap-2 rounded-lg border p-4"
     >
-      <div className="flex justify-between">
+      <div className="flex w-full justify-between">
         <p className="text-foundation-grey-200 text-xs/5">
           {formatDateTime(createdAt, DateTimeFormat.MonthDateYear)}
         </p>
@@ -38,6 +42,6 @@ export function NotificationListPopoverItem({
       </p>
 
       <p className="text-xs/5 text-green-900">{message}</p>
-    </button>
+    </div>
   );
 }
