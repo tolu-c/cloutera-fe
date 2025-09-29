@@ -38,11 +38,11 @@ export function NotificationListPopover({
           </p>
         )}
 
-        {notifications.map((notification, index) => (
+        {notifications.map((notification) => (
           <NotificationListPopoverItem
             key={notification._id}
             notification={notification}
-            isNew={index === 0}
+            isNew={!notification.isRead}
           />
         ))}
       </div>

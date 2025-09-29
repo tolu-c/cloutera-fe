@@ -18,7 +18,7 @@ export function Switch({ isActive, toggleIsActive, label }: SwitchProps) {
         )}
         onClick={toggleIsActive}
       >
-        <span className="bg-general-white absolute size-5 rounded-full transition-all duration-300 ease-in-out" />
+        <span className="bg-general-white size-5 rounded-full transition-all duration-300 ease-in-out" />
       </div>
       {label && <p className="text-base font-medium text-slate-500">{label}</p>}
     </div>

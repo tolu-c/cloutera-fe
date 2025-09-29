@@ -8,7 +8,6 @@ export function useGetScheduledNotifications(
 ) {
   const { getScheduledNotifications } = useNotifications();
 
-  console.log("shouldFetch", shouldFetch);
   return useQuery({
     queryFn: () => getScheduledNotifications(params),
     queryKey: ["scheduledNotifications", params],
