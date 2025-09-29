@@ -33,7 +33,6 @@ export function NewNotification() {
 
   const router = useRouter();
 
-  const notificationTypeValue = watch("type");
   const notificationTitle = watch("title");
   const notificationMessage = watch("message");
 
@@ -50,12 +49,7 @@ export function NewNotification() {
   );
 
   function handleOpenRescheduleNotification() {
-    if (
-      notificationTitle !== "" &&
-      notificationMessage !== "" &&
-      notificationTypeValue !== "" &&
-      notificationTypeValue !== undefined
-    ) {
+    if (notificationTitle !== "" && notificationMessage !== "") {
       console.log("hello");
       clearErrors("root");
       open();

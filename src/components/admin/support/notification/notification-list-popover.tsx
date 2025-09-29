@@ -31,7 +31,7 @@ export function NotificationListPopover({
         />
       </div>
 
-      <div className="flex max-h-80 w-full overflow-y-auto p-3">
+      <div className="flex max-h-80 w-full flex-col gap-2 overflow-y-auto p-3">
         {notifications.length === 0 && (
           <p className="text-sm font-medium text-gray-900">
             You&apos;re all caught up for now!

@@ -43,7 +43,7 @@ const TopBar = () => {
             <div className="relative" onClick={open}>
               <NotificationIcon className="size-4 text-white" />
 
-              {data?.data.length > 0 && (
+              {data?.data && data.data.length > 0 && (
                 <span className="bg-accent-1 absolute top-2 right-2.5 size-1 rounded-full" />
               )}
 

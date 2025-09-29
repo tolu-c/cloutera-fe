@@ -52,7 +52,7 @@ export function useNotifications() {
   }
 
   async function markNotificationAsRead(id: string) {
-    const res: AxiosResponse<ApiMessageResponse> = await authApi.get(
+    const res: AxiosResponse<ApiMessageResponse> = await authApi.patch(
       markAsRead(id),
     );
     return res.data;
@@ -112,7 +112,6 @@ export function useNotifications() {
     getNotifications,
     viewNotification,
     markNotificationAsRead,
-    getSentNotifications,
     getSentNotifications,
     getScheduledNotifications,
     handleDeleteNotification,
