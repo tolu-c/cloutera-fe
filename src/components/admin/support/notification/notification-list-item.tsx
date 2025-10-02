@@ -7,7 +7,20 @@ import { formatDateTime } from "@/utils";
 import { DateTimeFormat } from "@/types/enums";
 import { CancelIcon, EllipsisIcon, EyeIcon } from "@/assets/icons";
 
-export const NotificationListItem = () => {
+interface NotificationListItemProps {
+  notification: {
+    id: string;
+    title: string;
+    message: string;
+    recipient: string;
+    date: string;
+    tab: string;
+  };
+}
+
+export const NotificationListItem = ({
+  notification,
+}: NotificationListItemProps) => {
   const [viewNotification, { open, close }] = useDisclosure(false);
   const [
     deleteNotification,
@@ -27,20 +40,18 @@ export const NotificationListItem = () => {
       />
 
       <Modal open={viewNotification} close={close}>
-        hello notification
+        {notification.message}
       </Modal>
 
       <div className="grid w-full grid-cols-6 border-b border-gray-100 text-sm hover:bg-gray-50">
         <DataCell className="gap-4 truncate p-4">
           <input type="checkbox" className="mr-2 size-4 rounded-sm" />
-          <span>Security Alert</span>
+          <span>{notification.title}</span>
         </DataCell>
-        <DataCell className="col-span-2 p-4">
-          Dear customers please setup your..
-        </DataCell>
-        <DataCell className="p-4">All</DataCell>
+        <DataCell className="col-span-2 p-4">{notification.message}</DataCell>
+        <DataCell className="p-4">{notification.recipient}</DataCell>
         <DataCell className="p-4">
-          {formatDateTime("2022-08-20 16:17:34", DateTimeFormat.MonthDateYear)}
+          {formatDateTime(notification.date, DateTimeFormat.MonthDateYear)}
         </DataCell>
         <DataCell className="p-4">
           <div className="relative cursor-pointer" onClick={toggle}>
