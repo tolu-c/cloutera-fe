@@ -28,7 +28,7 @@ const TopBar = () => {
   return (
     <Fragment>
       <div className="bg-foundation-red-normal flex h-22 w-full items-center justify-center">
-        <div className="flex h-10 w-full max-w-7xl items-center justify-between">
+        <div className="flex h-10 w-full max-w-7xl items-center justify-between px-2">
           <div className="flex items-center gap-4">
             <button
               className="cursor-pointer"

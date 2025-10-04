@@ -13,7 +13,7 @@ export const HistoryTabs = ({
   currentTab,
 }: HistoryTabsProps) => {
   return (
-    <div className="flex h-11 w-max items-end gap-4 border-b border-[#E7EFFF]">
+    <div className="flex h-11 w-full items-end gap-4 overflow-x-auto border-b border-[#E7EFFF] lg:w-max">
       {tabs.map((tab, index) => (
         <button
           key={index}

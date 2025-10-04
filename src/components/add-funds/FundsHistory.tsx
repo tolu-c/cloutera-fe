@@ -1,11 +1,15 @@
 "use client";
 
-import { FundHistoryCategory, TransactionStatus } from "@/types/enums";
+import {
+  DateTimeFormat,
+  FundHistoryCategory,
+  TransactionStatus,
+} from "@/types/enums";
 import { useState } from "react";
 import { Searchbar } from "../form";
 import { cn } from "@/utils/cn";
 import { Badge, DataCell, Pagination } from "../ui";
-import { formatAmount } from "@/utils";
+import { formatAmount, formatDateTime } from "@/utils";
 import { useGetFundHistory } from "@/queries/account/get-fund-history";
 import { usePagination } from "@/hooks";
 
@@ -80,7 +84,9 @@ export const FundsHistory = () => {
                   <DataCell className="basis-1/6">
                     <Badge status={status as TransactionStatus} />
                   </DataCell>
-                  <DataCell className="basis-1/6">{createdAt}</DataCell>
+                  <DataCell className="basis-1/6">
+                    {formatDateTime(createdAt, DateTimeFormat.DayDateMonthYear)}
+                  </DataCell>
                 </div>
               ),
             )}
