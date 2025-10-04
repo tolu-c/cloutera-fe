@@ -12,15 +12,15 @@ export const TwoFactorAuthentication = () => {
     router.push("/2fa"); // Navigate to the dedicated /2fa page
   };
   return (
-    <div className="w-full p-6 lg:p-8">
+    <div className="w-full p-2 lg:p-8">
       <OutlineCard>
         <OutlineCard.Title title="2 Factor Authentication" />
         <button
-          className="flex w-full items-center justify-between gap-7 rounded-lg bg-white px-4 py-3 transition-colors duration-200 hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none"
+          className="flex w-full items-center justify-between gap-7 rounded-lg bg-white px-0 py-3 transition-colors duration-200 hover:bg-gray-50 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 focus:outline-none lg:px-4"
           onClick={handleTriggerClick} // Calls the prop function on click
         >
           <div className="flex flex-1 items-center gap-4">
-            <span className="bg-foundation-red-light-active flex size-8 items-center justify-center rounded-full">
+            <span className="bg-foundation-red-light-active flex size-8 flex-none items-center justify-center rounded-full">
               <PasswordCheckIcon className="size-5 text-red-500" />
             </span>
             <p className="text-slate-700">

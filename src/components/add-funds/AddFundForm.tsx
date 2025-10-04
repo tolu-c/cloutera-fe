@@ -84,7 +84,7 @@ export const AddFundForm = () => {
   return (
     <form
       onSubmit={handleSubmit(onSubmit)}
-      className="flex w-full flex-col gap-6 rounded-lg p-8"
+      className="flex w-full flex-col gap-6 rounded-lg px-4 lg:p-8"
     >
       <SelectInput
         options={paymentOptions}
@@ -95,7 +95,7 @@ export const AddFundForm = () => {
       <div className="flex w-full flex-col gap-2">
         <p className="text-grey-800 text-sm/5">Enter Amount</p>
 
-        <div className="flex gap-2">
+        <div className="flex flex-wrap gap-2">
           {amountOptions.map((amount, index) => (
             <button
               key={index}
@@ -105,7 +105,7 @@ export const AddFundForm = () => {
                 setSelectedAmount(amount);
               }}
               className={cn(
-                "shadow-100 flex flex-1 items-center justify-center rounded-lg p-4",
+                "shadow-100 flex items-center justify-center rounded-lg p-4 lg:flex-1",
                 {
                   "border-foundation-red-normal text-foundation-red-normal border":
                     selectedAmount === amount,

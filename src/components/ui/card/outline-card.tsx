@@ -11,7 +11,7 @@ export const OutlineCard = ({
   return (
     <div
       className={cn(
-        "border-fade-light flex w-full flex-col items-start gap-8 rounded-xl border bg-white p-6 px-4 lg:px-6",
+        "border-fade-light flex w-full flex-col items-start gap-8 overflow-hidden rounded-xl border bg-white p-6 px-4 lg:px-6",
         className,
       )}
       {...props}
@@ -22,7 +22,9 @@ export const OutlineCard = ({
 };
 
 const OutlineCardTitle = ({ title }: { title: string }) => (
-  <h3 className="text-neutral-black text-xl font-semibold">{title}</h3>
+  <h3 className="text-neutral-black text-base font-semibold lg:text-xl">
+    {title}
+  </h3>
 );
 
 OutlineCard.Title = OutlineCardTitle;
