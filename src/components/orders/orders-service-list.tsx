@@ -15,8 +15,6 @@ export const OrdersServiceList = ({ onSelectService }: ServiceListProps) => {
   const selectService = (service: string) => {
     setSelectedService(service);
     if (onSelectService) {
-      console.log("service", service);
-      console.log("decode service", decodeURIComponent(service));
       onSelectService(decodeURIComponent(service));
     }
   };
