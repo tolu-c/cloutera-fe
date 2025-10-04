@@ -23,8 +23,6 @@ export const TwoFactorAuthEmailSelection = ({
   const handleContinue = () => {
     if (selectedOption === "registered") {
       onContinue(email);
-    } else if (selectedOption === "different" && customEmail) {
-      onContinue(customEmail);
     } else {
       console.error("Please enter a valid email address.");
     }
