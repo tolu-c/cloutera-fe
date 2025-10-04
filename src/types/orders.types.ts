@@ -51,7 +51,13 @@ export interface AdminOrderItem extends TimeStamp {
     firstName: string;
     lastName: string;
   };
-  serviceId: string | null;
+  serviceId: {
+    category: string;
+    name: string;
+    serviceId: number;
+    type: string;
+    _id: string;
+  } | null;
   link: string;
   quantity: number;
   charge: number;
