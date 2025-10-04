@@ -13,6 +13,7 @@ import { ErrorDisplay } from "@/components/ui/error";
 import { TawkTo } from "./tawkto";
 import { SessionProvider } from "next-auth/react";
 import { NotificationProvider } from "../context/notification";
+import { Analytics } from "@vercel/analytics/react";
 
 interface AppProviderProps {
   children: ReactNode;
@@ -36,7 +37,10 @@ export const AppProvider = ({ children }: AppProviderProps) => (
       >
         <QueryClientProvider client={queryClient}>
           <SessionProvider>
-            <NotificationProvider>{children}</NotificationProvider>
+            <NotificationProvider>
+              <Analytics />
+              {children}
+            </NotificationProvider>
           </SessionProvider>
           <TawkTo />
         </QueryClientProvider>
