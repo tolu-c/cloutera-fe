@@ -86,7 +86,7 @@ export const OtpInput = ({ length, action }: OtpInputProps) => {
   };
 
   return (
-    <div className="flex w-full flex-none items-center gap-4">
+    <div className="flex w-full flex-none items-center gap-2 lg:gap-4">
       {otpValues.map((value, index) => (
         <input
           key={`otp-input-${index}`}
@@ -102,7 +102,7 @@ export const OtpInput = ({ length, action }: OtpInputProps) => {
           onPaste={(e) => handleOtpPaste(e, index)}
           onKeyDown={(e) => handleKeyDown(e, index)}
           className={cn(
-            "focus:border-foundation-red-normal size-16 rounded-lg border-[1.5px] border-slate-200 text-center focus:ring-0 focus:outline-none",
+            "focus:border-foundation-red-normal flex size-12 items-center justify-center rounded-lg border-[1.5px] border-slate-200 text-center focus:ring-0 focus:outline-none lg:size-16",
           )}
         />
       ))}

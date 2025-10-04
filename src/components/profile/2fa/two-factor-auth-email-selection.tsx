@@ -18,7 +18,7 @@ export const TwoFactorAuthEmailSelection = ({
   const [selectedOption, setSelectedOption] = useState<
     "registered" | "different"
   >("registered");
-  const [customEmail, setCustomEmail] = useState<string>("");
+  const [customEmail] = useState<string>("");
 
   const handleContinue = () => {
     if (selectedOption === "registered") {
@@ -43,26 +43,27 @@ export const TwoFactorAuthEmailSelection = ({
           </button>
           <OutlineCard.Title title="2 Factor Authentication" />
         </div>
-        <div className="flex flex-col gap-6 rounded-xl border border-gray-200 p-6">
-          <p className="text-2xl font-medium text-slate-800">
+
+        <div className="flex w-full flex-col gap-6 rounded-xl border border-gray-200 p-2 lg:p-6">
+          <p className="text-sm font-medium text-slate-800 lg:text-2xl">
             We&apos;ll send a one-time code via email.
           </p>
 
           <div className="space-y-4">
             {/* Registered Email Option */}
             <label
-              className={`border-foundation-red-light focus:border-foundation-red-normal hover:border-foundation-red-normal flex cursor-pointer items-center gap-2 rounded-lg border p-4 transition-colors duration-200 ${
+              className={`border-foundation-red-light focus:border-foundation-red-normal hover:border-foundation-red-normal flex cursor-pointer items-center justify-between gap-2 rounded-lg border p-4 transition-colors duration-200 ${
                 selectedOption === "registered"
                   ? "bg-foundation-red-white"
                   : "bg-white"
               }`}
             >
-              <span className="text-grey-900 text-base">
+              <span className="text-grey-900 w-full text-sm lg:text-base">
                 Use your registered email{" "}
                 <span className="font-medium">({email})</span>
               </span>
               <span
-                className="border-foundation-red-normal ml-2 flex h-4 w-4 items-center justify-center rounded-full border-2"
+                className="border-foundation-red-normal flex size-4 flex-none items-center justify-center rounded-full border-2"
                 onClick={() => setSelectedOption("registered")}
                 tabIndex={0}
                 role="radio"
@@ -86,55 +87,6 @@ export const TwoFactorAuthEmailSelection = ({
                 className="sr-only"
                 tabIndex={-1}
               />
-            </label>
-
-            {/* Different Email Option */}
-            <label
-              className={`hover:border-foundation-red-normal-hover flex cursor-pointer flex-col gap-2 rounded-lg border p-4 transition-colors duration-200 ${
-                selectedOption === "different"
-                  ? "border-foundation-red-normal bg-foundation-red-white"
-                  : "border-foundation-red-light bg-white"
-              }`}
-            >
-              <div className="flex w-full items-center justify-between">
-                <span className="text-grey-900 text-base">
-                  Use a different email address
-                </span>
-                <span
-                  className="border-foundation-red-normal flex h-4 w-4 items-center justify-center rounded-full border-2"
-                  onClick={() => setSelectedOption("different")}
-                  tabIndex={0}
-                  role="radio"
-                  aria-checked={selectedOption === "different"}
-                  aria-label="Use different email address"
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter" || e.key === " ")
-                      setSelectedOption("different");
-                  }}
-                >
-                  {selectedOption === "different" && (
-                    <span className="bg-foundation-red-normal block h-2 w-2 rounded-full" />
-                  )}
-                </span>
-              </div>
-              <input
-                type="radio"
-                name="emailOption"
-                value="different"
-                checked={selectedOption === "different"}
-                onChange={() => setSelectedOption("different")}
-                className="sr-only"
-                tabIndex={-1}
-              />
-              {selectedOption === "different" && (
-                <input
-                  type="email"
-                  className="border-grey-300 focus:border-foundation-red-normal focus:ring-foundation-red-normal-hover block h-14 w-full rounded-[6px] border bg-white p-4 focus:outline-none sm:text-sm"
-                  placeholder=""
-                  value={customEmail}
-                  onChange={(e) => setCustomEmail(e.target.value)}
-                />
-              )}
             </label>
           </div>
 

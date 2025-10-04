@@ -4,3 +4,9 @@ export const CLOUTERA_TOKEN = "cloutera.token";
 export const CLOUTERA_USER_EMAIL = "cloutera.user.email";
 export const CLOUTERA_USER_PASSWORD = "cloutera.user.password";
 export const CLOUTERA_USER = "cloutera.user";
+export const SELECTED_SERVICE_CATEGORIES = [
+  "Facebook - Followers",
+  "IG Followers",
+  "TikTok - Followers",
+  "Twitter - Views",
+] as const;

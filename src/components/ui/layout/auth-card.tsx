@@ -15,7 +15,7 @@ const AuthCard = ({
   showSocialLogin = true,
 }: AuthCardProps) => {
   return (
-    <div className="flex w-full max-w-[454px] flex-col items-start gap-8">
+    <div className="flex w-full flex-col items-start gap-8 lg:max-w-[454px]">
       <div className="flex flex-col items-start gap-2">
         <h3 className="text-cloutera-black text-4xl/11 font-semibold">
           {title}
