@@ -23,7 +23,7 @@ const Card = ({
   return (
     <div
       className={cn(
-        "flex h-30 min-w-68 flex-col gap-2 rounded-3xl bg-white p-6",
+        "flex h-23 w-full flex-col gap-2 rounded-3xl bg-white p-6 lg:h-30 lg:min-w-68",
         className,
         {
           "card--gradient text-white": gradient,
@@ -32,7 +32,7 @@ const Card = ({
       )}
     >
       <div className="flex w-full items-start gap-2">
-        <p className="flex-1 text-base">{title}</p>
+        <p className="flex-1 text-xs lg:text-base">{title}</p>
 
         <span>{icon}</span>
       </div>
@@ -40,7 +40,7 @@ const Card = ({
       <div className="flex w-full items-start gap-2">
         <p
           className={cn(
-            "flex-1 text-[32px] leading-10 font-semibold",
+            "max-w-3/4 flex-1 truncate text-base/6 font-semibold lg:text-[32px] lg:leading-10",
             amountSize,
           )}
         >

@@ -17,7 +17,7 @@ export const OrdersAccountInfo = () => {
   const { data, isLoading } = useGetAccountStatus();
   const account = data?.data;
   return (
-    <div className="grid w-full grid-cols-1 gap-6 p-6 lg:w-auto lg:grid-cols-3">
+    <div className="grid w-full grid-cols-2 gap-2 p-6 lg:w-auto lg:grid-cols-3 lg:gap-6">
       {isLoading && <p>loading...</p>}
 
       {account && (
@@ -26,6 +26,7 @@ export const OrdersAccountInfo = () => {
             title="Account Status"
             value={`Level ${account.accountStatus}`}
             icon={<AccountStatusIcon className="size-4 text-white" />}
+            className="col-span-2"
             gradient
           />
           <Card

@@ -15,10 +15,14 @@ import {
 } from "@/assets/icons";
 import Image from "next/image";
 import Link from "next/link";
-import { useDisclosure } from "@/hooks";
+import { useDisclosure, useLocalStorage } from "@/hooks";
 import { Fragment } from "react";
 import { Modal } from "../modal";
 import { LogoutConfirmationModal } from "./logout-confirmation-modal";
+import { useGetAccountStatus } from "@/queries/account";
+import { formatAmount } from "@/utils";
+import { User } from "@/types";
+import { CLOUTERA_USER } from "@/types/constants";
 
 const sidebarLinks = [
   { label: "New Orders", href: "/order", icon: <NewOrderIcon /> },
@@ -37,8 +41,14 @@ type SidebarProps = {
 
 const Sidebar = ({ open, close, className }: SidebarProps) => {
   const pathname = usePathname();
+
   const [logout, { open: openLogoutModal, close: closeLogoutModal }] =
     useDisclosure(false);
+
+  const { getItem } = useLocalStorage<User>(CLOUTERA_USER);
+  const user = getItem();
+  const { data } = useGetAccountStatus();
+  const account = data?.data;
 
   const content = (
     <Fragment>
@@ -71,10 +81,12 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
               </div>
               <div className="flex flex-col gap-0.5">
                 <span className="text-base font-medium text-gray-900">
-                  Oludotun
+                  {user?.firstName || ""}
                 </span>
                 <div className="text-foundation-red-normal text-xs font-bold">
-                  #<span className="font-medium">3,000,000.00</span>
+                  <span className="font-medium">
+                    {formatAmount(account?.accountBalance || 0)}
+                  </span>
                 </div>
               </div>
             </div>

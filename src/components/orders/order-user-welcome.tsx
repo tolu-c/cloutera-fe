@@ -9,7 +9,7 @@ export const OrderUserWelcome = () => {
   const user = getItem();
 
   return (
-    <p className="px-4 text-2xl font-light">
+    <p className="px-4 text-base font-medium lg:text-2xl lg:font-light">
       <span className="text-foundation-red-normal font-medium">
         Hello {user ? user.firstName : null}!
       </span>{" "}

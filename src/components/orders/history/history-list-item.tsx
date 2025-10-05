@@ -1,6 +1,7 @@
 import { Badge, DataCell } from "@/components/ui";
 import { OrderItem } from "@/types/orders.types";
-import { formatAmount } from "@/utils";
+import { formatAmount, formatDateTime } from "@/utils";
+import { DateTimeFormat } from "@/types/enums";
 
 interface HistoryListItemProps {
   order: OrderItem;
@@ -18,11 +19,15 @@ export const HistoryListItem = ({ order }: HistoryListItemProps) => {
         {formatAmount(charge)}
       </DataCell>
       <DataCell className="basis-1/9 text-current">{quantity}</DataCell>
-      <DataCell className="basis-2/9 text-current">{serviceId.name}</DataCell>
+      <DataCell className="basis-2/9 text-current">
+        {serviceId?.name || ""}
+      </DataCell>
       <DataCell className="basis-1/9 text-current">
         <Badge status={status} />
       </DataCell>
-      <DataCell className="basis-1/9 text-current">{updatedAt}</DataCell>
+      <DataCell className="basis-1/9 text-current">
+        {formatDateTime(updatedAt, DateTimeFormat.DayDateMonthYear)}
+      </DataCell>
     </div>
   );
 };
