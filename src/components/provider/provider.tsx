@@ -11,7 +11,6 @@ import {
 import { queryConfig } from "@/lib/react-query";
 import { ErrorDisplay } from "@/components/ui/error";
 import { TawkTo } from "./tawkto";
-import { SessionProvider } from "next-auth/react";
 import { NotificationProvider } from "../context/notification";
 import { Analytics } from "@vercel/analytics/react";
 
@@ -36,12 +35,10 @@ export const AppProvider = ({ children }: AppProviderProps) => (
         )}
       >
         <QueryClientProvider client={queryClient}>
-          <SessionProvider>
-            <NotificationProvider>
-              <Analytics />
-              {children}
-            </NotificationProvider>
-          </SessionProvider>
+          <NotificationProvider>
+            <Analytics />
+            {children}
+          </NotificationProvider>
           <TawkTo />
         </QueryClientProvider>
       </ErrorBoundary>
