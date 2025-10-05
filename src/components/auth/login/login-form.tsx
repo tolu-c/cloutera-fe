@@ -29,7 +29,7 @@ const LoginForm = () => {
       setItem(token);
       router.replace(routes.customer.order);
     }
-  }, [searchParams, router]);
+  }, [searchParams, router, setItem]);
 
   const {
     register,
