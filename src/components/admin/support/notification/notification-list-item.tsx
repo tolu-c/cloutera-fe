@@ -5,7 +5,7 @@ import { useDisclosure } from "@/hooks";
 import { ConfirmationModal, DataCell, Popover } from "@/components/ui";
 import { formatDateTime } from "@/utils";
 import { DateTimeFormat } from "@/types/enums";
-import { CancelIcon, EllipsisIcon, EyeIcon } from "@/assets/icons";
+import { EllipsisIcon, EyeIcon } from "@/assets/icons";
 import { AppNotification } from "@/types/notifications.types";
 import { useDeleteNotification } from "@/mutations/notifications";
 import { NotificationItemModal } from "@/components/admin/support/notification/notification-item-modal";
@@ -75,8 +75,6 @@ export const NotificationListItem = ({
                 onClick={openDeleteNotification}
               >
                 <p className="text-foundation-red-normal text-sm">Delete</p>
-
-                <CancelIcon className="text-foundation-red-normal size-5" />
               </button>
             </Popover>
           </div>

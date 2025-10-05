@@ -11,6 +11,7 @@ export interface CustomerStats {
 export interface GetCustomersParams extends BaseParams {
   search?: string;
   status?: UserStatus;
+  role?: string;
   page?: number;
   limit?: number;
 }

@@ -9,14 +9,29 @@ import { HistoryList } from "./history-list";
 import { VideoIcon } from "@/assets/icons";
 import { useGetUserOrders } from "@/queries/orders";
 import { OrderStatus } from "@/types/enums";
+import { OrderHistoryFilterForm } from "./order-history-filter-form";
 
 export const OrderHistory = () => {
   const [search, setSearch] = useState<string | undefined>(undefined);
-  const [status, setStatus] = useState<OrderStatus>(OrderStatus.All);
+  const [status, setStatus] = useState<OrderStatus | "">(OrderStatus.All);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(50);
+  const [filters, setFilters] = useState<{ status: OrderStatus | "" }>({
+    status: "",
+  });
 
   const orderStatuses = Object.values(OrderStatus);
+  const statusOptions = orderStatuses.map((s) => ({ label: s, value: s }));
+
+  function handleApplyFilter({ status }: { status: OrderStatus | "" }) {
+    setFilters({ status });
+    setStatus(status || OrderStatus.All);
+  }
+
+  function handleClearFilter() {
+    setFilters({ status: "" });
+    setStatus(OrderStatus.All);
+  }
 
   const handlePageChange = (newPage: number) => {
     setPage(newPage);
@@ -29,7 +44,10 @@ export const OrderHistory = () => {
 
   const { isLoading, data } = useGetUserOrders({
     search,
-    status: status === OrderStatus.All ? undefined : status,
+    status:
+      filters.status && filters.status !== OrderStatus.All
+        ? filters.status
+        : undefined,
     page,
     limit,
   });
@@ -39,26 +57,33 @@ export const OrderHistory = () => {
     <Fragment>
       <div className="w-full overflow-hidden p-4 pb-0">
         <HistoryTabs
-          currentTab={status}
+          currentTab={status || OrderStatus.All}
           setActiveTabAction={setStatus}
           tabs={orderStatuses}
         />
       </div>
-
       <div className="flex w-full flex-col items-start gap-4 p-4">
         <div className="flex h-full w-full flex-col items-start gap-3 lg:h-14 lg:flex-row lg:items-center lg:justify-between">
-          <Searchbar onSendSearchValue={(value) => setSearch(value)} />
+          <Searchbar
+            onSendSearchValue={(value) => setSearch(value)}
+            filterComponent={
+              <OrderHistoryFilterForm
+                statusOptions={statusOptions}
+                clearFilterAction={handleClearFilter}
+                applyFilterAction={handleApplyFilter}
+                closeAction={() => {}}
+              />
+            }
+          />
 
           <div className="flex items-center gap-2">
             <Link href="/order">
               <Button width="max">New Order</Button>
             </Link>
-
             <Link href="https://www.youtube.com" target="_blank">
               <Button
                 state="outline"
                 icon={<VideoIcon className="text-current" />}
-                width="max"
               >
                 Watch Tutorial
               </Button>

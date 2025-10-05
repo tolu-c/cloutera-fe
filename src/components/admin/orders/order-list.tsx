@@ -1,23 +1,69 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import { AdminCard, DataCell, Loading, Pagination } from "@/components/ui";
 import { Searchbar } from "@/components/form";
 import { OrderListItem } from "@/components/admin/orders";
 import { usePagination } from "@/hooks";
 import { useGetAdminOrders } from "@/queries/orders";
+import { OrderFilterForm } from "./order-filter-form";
 
 export const OrderList = () => {
   const [search, setSearch] = useState<string | undefined>(undefined);
+  const [filters, setFilters] = useState<{ status: string; customer: string }>({
+    status: "",
+    customer: "",
+  });
 
   const { page, limit, handlePageChange, handleLimitChange } = usePagination();
+
+  const statusOptions = [
+    { label: "Pending", value: "pending" },
+    { label: "Completed", value: "completed" },
+    { label: "Cancelled", value: "cancelled" },
+  ];
+  const customerOptions = [
+    { label: "All", value: "" },
+    // Add more customer options dynamically
+  ];
+
+  function handleApplyFilter({
+    status,
+    customer,
+  }: {
+    status: string;
+    customer: string;
+  }) {
+    setFilters({ status, customer });
+  }
+
+  function handleClearFilter() {
+    setFilters({ status: "", customer: "" });
+  }
 
   const { isLoading, data } = useGetAdminOrders({
     search,
     page,
     limit,
+    status: filters.status || undefined,
+    customer: filters.customer || undefined,
   });
+
+  // Memoize filtered order data
+  const filteredOrders = useMemo(() => {
+    if (!data?.data) return [];
+    return data.data.filter((order) => {
+      const matchesSearch =
+        !search ||
+        order._id?.toLowerCase().includes(search.toLowerCase()) ||
+        order.userId?.email?.toLowerCase().includes(search.toLowerCase());
+      const matchesStatus = !filters.status || order.status === filters.status;
+      const matchesCustomer =
+        !filters.customer || order.userId?.email === filters.customer;
+      return matchesSearch && matchesStatus && matchesCustomer;
+    });
+  }, [data, search, filters]);
 
   const pagination = data?.pagination;
 
@@ -29,6 +75,15 @@ export const OrderList = () => {
           onSendSearchValue={(value) => {
             setSearch(value);
           }}
+          filterComponent={
+            <OrderFilterForm
+              statusOptions={statusOptions}
+              customerOptions={customerOptions}
+              clearFilterAction={handleClearFilter}
+              applyFilterAction={handleApplyFilter}
+              closeAction={() => {}}
+            />
+          }
         />
       </div>
 
@@ -53,8 +108,8 @@ export const OrderList = () => {
 
         <div className="h-full">
           {!isLoading &&
-            data?.data &&
-            data.data.map((o) => <OrderListItem key={o._id} order={o} />)}
+            filteredOrders &&
+            filteredOrders.map((o) => <OrderListItem key={o._id} order={o} />)}
         </div>
 
         {pagination && (

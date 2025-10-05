@@ -16,6 +16,7 @@ import { cn } from "@/utils/cn";
 import { NotificationListItem } from "@/components/admin/support/notification/notification-list-item";
 import Link from "next/link";
 import { routes } from "@/utils/routes";
+import { NotificationFilterForm } from "./notification-filter-form";
 import {
   useGetNotificationStats,
   useGetScheduledNotifications,
@@ -23,12 +24,12 @@ import {
 } from "@/queries/notifications";
 import { usePagination } from "@/hooks";
 
-const tabs = Object.values(AdminNotification);
-
 export const Notification = () => {
   const [activeTab, setActiveTab] = useState<AdminNotification>(
     AdminNotification.Sent,
   );
+  // Removed unused filters and searchValue state
+  const tabs = Object.values(AdminNotification);
   const [search, setSearch] = useState<string | undefined>(undefined);
 
   const { page, limit, handlePageChange, handleLimitChange } = usePagination();
@@ -90,6 +91,22 @@ export const Notification = () => {
     setSearch("");
   }
 
+  // Example recipient options, replace with real data as needed
+  const recipientOptions = [
+    { label: "All", value: "" },
+    { label: "User", value: "user" },
+    { label: "Admin", value: "admin" },
+  ];
+  const tabOptions = tabs.map((tab) => ({ label: tab, value: tab }));
+
+  function handleApplyFilter({ tab }: { tab: AdminNotification | "" }) {
+    if (tab) setActiveTab(tab as AdminNotification);
+  }
+
+  function handleClearFilter() {
+    setActiveTab(AdminNotification.Sent);
+  }
+
   return (
     <Fragment>
       <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
@@ -107,12 +124,10 @@ export const Notification = () => {
           Icon={ApplicationNotificationIcon}
         />
       </div>
-
       <div className="flex w-full flex-col gap-4">
         <p className="text-light-black text-xl font-semibold">
           All Notifications
         </p>
-
         <AdminCard>
           <div className="bg-grey-text-50 flex w-max items-center rounded-lg px-1 py-0.5">
             {tabs.map((tab) => (
@@ -131,15 +146,24 @@ export const Notification = () => {
               </button>
             ))}
           </div>
-
           <div className="flex w-full justify-between">
-            <Searchbar onSendSearchValue={setSearch} />
+            <Searchbar
+              onSendSearchValue={setSearch}
+              filterComponent={
+                <NotificationFilterForm
+                  tabOptions={tabOptions}
+                  recipientOptions={recipientOptions}
+                  clearFilterAction={handleClearFilter}
+                  applyFilterAction={handleApplyFilter}
+                  closeAction={() => {}}
+                />
+              }
+            />
 
             <Link href={routes.admin.newNotification}>
               <Button width="max">Send New Notification</Button>
             </Link>
           </div>
-
           <div className="flex h-full w-full flex-col">
             <div className="border-grey-text-200 w-full border-b bg-[#F7F7F7]">
               <div className="text-grey-text-950 grid grid-cols-6 text-base font-semibold">
@@ -153,10 +177,9 @@ export const Notification = () => {
                 <DataCell className="p-4">Action</DataCell>
               </div>
             </div>
-
-            {notificationsLoading && <Loading />}
             {/* loading */}
             <div className="h-full">
+              {notificationsLoading && <Loading />}
               {!notificationsLoading &&
                 notificationsData &&
                 notificationsData.map((notification) => (
@@ -166,7 +189,6 @@ export const Notification = () => {
                   />
                 ))}
             </div>
-
             {/* pagination */}
             {notificationsPagination && (
               <Pagination

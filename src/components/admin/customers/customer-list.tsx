@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import {
   AdminCard,
@@ -14,19 +14,73 @@ import { ExportAsIcon } from "@/assets/icons";
 import { CustomerListItem } from "@/components/admin/customers";
 import { useGetCustomers } from "@/queries/customers";
 import { usePagination } from "@/hooks";
+import { CustomerFilterForm } from "./customer-filter-form";
+import { UserStatus } from "@/types/enums";
 
 export const CustomerList = () => {
   const [search, setSearch] = useState<string | undefined>(undefined);
+  const [filters, setFilters] = useState<{
+    status: UserStatus | "";
+    role: string;
+  }>({
+    status: "",
+    role: "",
+  });
 
   const { page, limit, handlePageChange, handleLimitChange } = usePagination();
+
+  const statusOptions = [
+    { label: "Active", value: UserStatus.Active },
+    { label: "Inactive", value: UserStatus.Inactive },
+    { label: "Blocked", value: UserStatus.Blocked },
+  ];
+  const roleOptions = [
+    { label: "Admin", value: "admin" },
+    { label: "User", value: "user" },
+  ];
 
   const { isLoading, data } = useGetCustomers({
     search,
     page,
     limit,
+    status: filters.status ? filters.status : undefined,
+    role: filters.role ? filters.role : undefined,
   });
 
   const pagination = data?.pagination;
+
+  // Memoize filtered customer data
+  const filteredCustomers = useMemo(() => {
+    if (!data?.data) return [];
+    return data.data.filter((user) => {
+      const searchValue = search?.toLowerCase() || "";
+      const matchesSearch =
+        !search ||
+        user.firstName?.toLowerCase().includes(searchValue) ||
+        user.lastName?.toLowerCase().includes(searchValue) ||
+        user.email?.toLowerCase().includes(searchValue) ||
+        user.username?.toLowerCase().includes(searchValue);
+      const matchesStatus = !filters.status || user.status === filters.status;
+      const matchesRole = !filters.role || user.role === filters.role;
+      return matchesSearch && matchesStatus && matchesRole;
+    });
+  }, [data, search, filters]);
+
+  function handleApplyFilter({
+    status,
+    role,
+  }: {
+    status: UserStatus | "";
+    role: string;
+  }) {
+    setFilters({ status, role });
+    // Optionally refetch or filter data here
+  }
+
+  function handleClearFilter() {
+    setFilters({ status: "", role: "" });
+    // Optionally reset filter here
+  }
 
   return (
     <AdminCard className="gap-0 p-0">
@@ -34,6 +88,15 @@ export const CustomerList = () => {
         <Searchbar
           className="w-85"
           onSendSearchValue={(value) => setSearch(value)}
+          filterComponent={
+            <CustomerFilterForm
+              statusOptions={statusOptions}
+              roleOptions={roleOptions}
+              clearFilterAction={handleClearFilter}
+              applyFilterAction={handleApplyFilter}
+              closeAction={() => {}}
+            />
+          }
         />
 
         <Button
@@ -61,8 +124,8 @@ export const CustomerList = () => {
         {isLoading && <Loading />}
         <div className="h-full">
           {!isLoading &&
-            data?.data &&
-            data.data.map((user) => (
+            filteredCustomers &&
+            filteredCustomers.map((user) => (
               <CustomerListItem key={user._id} user={user} />
             ))}
         </div>
