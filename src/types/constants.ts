@@ -10,3 +10,5 @@ export const SELECTED_SERVICE_CATEGORIES = [
   "TikTok - Followers",
   "Twitter - Views",
 ] as const;
+
+export const BASE_URL = process.env.NEXT_PUBLIC_API_URL || "";
