@@ -7,3 +7,4 @@ export * from "./block-user-button";
 export * from "./customer-information";
 export * from "./customer-order-history-list";
 export * from "./customer-order-history-list-item";
+export * from "./customer-user-activity";

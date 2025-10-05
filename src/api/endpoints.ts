@@ -37,6 +37,11 @@ export const endpoints = {
     edit: (faqId: string) => `/faqs/${faqId}/edit`,
     deleteFaq: (faqId: string) => `/faqs/${faqId}/delete`,
   },
+  notifications: {
+    list: "/notifications/",
+    view: (id: string) => `/notifications/${id}`,
+    markAsRead: (id: string) => `/notifications/${id}`,
+  },
   admin: {
     customers: {
       getStats: "/admin/users/stats",
@@ -54,6 +59,19 @@ export const endpoints = {
     dashboard: {
       dashboardStats: "/admin/dashboard/stats",
       dashboardTrends: "/admin/dashboard/trends",
+    },
+    activity: {
+      adminActivities: "/activity/",
+      userActivities: (userId: string) => `/activity/${userId}`,
+    },
+    notifications: {
+      add: "/notifications/add",
+      addSchedule: "/notifications/add/schedule",
+      addRecurring: "/notifications/add/recurring",
+      stats: "/notifications/stats",
+      sentNotifications: "/notifications/sent",
+      scheduledNotifications: "/notifications/scheduled",
+      deleteNotification: (id: string) => `/notifications/${id}`,
     },
   },
 };

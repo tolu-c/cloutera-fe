@@ -2,42 +2,32 @@
 
 import { useState } from "react";
 import { cn } from "@/utils/cn";
-import { useGetServiceCategories } from "@/queries/services/get-service-categories";
-import { Loading } from "../ui";
+import { SELECTED_SERVICE_CATEGORIES } from "@/types/constants";
 
 interface ServiceListProps {
   onSelectService?: (service: string) => void;
 }
 export const OrdersServiceList = ({ onSelectService }: ServiceListProps) => {
-  const [categoriesLength, setCategoriesLength] = useState(5);
-  const [selectedService, setSelectedService] = useState<string>("");
-
-  const { data, isLoading } = useGetServiceCategories();
+  const [selectedService, setSelectedService] = useState<string | undefined>(
+    undefined,
+  );
 
   const selectService = (service: string) => {
     setSelectedService(service);
     if (onSelectService) {
-      onSelectService(service);
+      onSelectService(decodeURIComponent(service));
     }
   };
 
-  if (isLoading) {
-    return <Loading />;
-  }
-
-  if (!data?.data.categories) {
-    return null;
-  }
-
   return (
-    <div className="flex w-full flex-wrap items-start gap-2 p-4">
+    <div className="flex w-full flex-wrap items-start gap-2 px-2 lg:p-4">
       <button
         className="text-foundation-red-normal h-11 rounded-full bg-white px-4 py-2 text-sm/5 font-semibold shadow-md"
-        onClick={() => setSelectedService("")}
+        onClick={() => setSelectedService(undefined)}
       >
         All
       </button>
-      {data.data.categories.slice(0, categoriesLength).map((service, index) => (
+      {SELECTED_SERVICE_CATEGORIES.map((service, index) => (
         <button
           key={index}
           onClick={() => selectService(service)}
@@ -53,12 +43,6 @@ export const OrdersServiceList = ({ onSelectService }: ServiceListProps) => {
           {service}
         </button>
       ))}
-      <button
-        className="text-foundation-red-normal h-11 rounded-full bg-white px-4 py-2 text-sm/5 font-semibold shadow-md"
-        onClick={() => setCategoriesLength((prev) => prev + 10)}
-      >
-        Load more...
-      </button>
     </div>
   );
 };

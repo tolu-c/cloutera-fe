@@ -1,30 +1,95 @@
 "use client";
 
-import { Fragment, useState, useMemo } from "react";
+import { Fragment, useMemo, useState } from "react";
 import { SupportCard } from "@/components/admin/support";
 import { ApplicationNotificationIcon } from "@/assets/icons";
 import { Searchbar } from "@/components/form";
-import { AdminCard, Button, DataCell } from "@/components/ui";
+import {
+  AdminCard,
+  Button,
+  DataCell,
+  Loading,
+  Pagination,
+} from "@/components/ui";
 import { AdminNotification } from "@/types/enums";
 import { cn } from "@/utils/cn";
 import { NotificationListItem } from "@/components/admin/support/notification/notification-list-item";
 import Link from "next/link";
 import { routes } from "@/utils/routes";
 import { NotificationFilterForm } from "./notification-filter-form";
+import {
+  useGetNotificationStats,
+  useGetScheduledNotifications,
+  useGetSentNotifications,
+} from "@/queries/notifications";
+import { usePagination } from "@/hooks";
 
 export const Notification = () => {
   const [activeTab, setActiveTab] = useState<AdminNotification>(
     AdminNotification.Sent,
   );
-  const [filters, setFilters] = useState<{
-    tab: AdminNotification | "";
-    recipient: string;
-  }>({
-    tab: "",
-    recipient: "",
-  });
-  const [searchValue, setSearchValue] = useState("");
+  // Removed unused filters and searchValue state
   const tabs = Object.values(AdminNotification);
+  const [search, setSearch] = useState<string | undefined>(undefined);
+
+  const { page, limit, handlePageChange, handleLimitChange } = usePagination();
+
+  const { data, isLoading } = useGetNotificationStats();
+
+  const shouldFetchScheduled = activeTab === AdminNotification.Scheduled;
+  const shouldFetchSent = activeTab === AdminNotification.Sent;
+
+  const {
+    data: scheduledNotifications,
+    isLoading: scheduledNotificationsLoading,
+  } = useGetScheduledNotifications(
+    { search, page, limit },
+    shouldFetchScheduled,
+  );
+  const { data: sentNotifications, isLoading: sentNotificationsLoading } =
+    useGetSentNotifications(
+      {
+        search,
+        page,
+        limit,
+      },
+      shouldFetchSent,
+    );
+
+  const { notificationsData, notificationsPagination, notificationsLoading } =
+    useMemo(() => {
+      const loading = shouldFetchScheduled
+        ? scheduledNotificationsLoading
+        : sentNotificationsLoading;
+
+      const data =
+        activeTab === AdminNotification.Sent
+          ? sentNotifications?.data || []
+          : scheduledNotifications?.data || [];
+
+      const pagination =
+        activeTab === AdminNotification.Sent
+          ? sentNotifications?.pagination
+          : scheduledNotifications?.pagination;
+
+      return {
+        notificationsData: data,
+        notificationsPagination: pagination,
+        notificationsLoading: loading,
+      };
+    }, [
+      activeTab,
+      sentNotifications,
+      scheduledNotifications,
+      sentNotificationsLoading,
+      scheduledNotificationsLoading,
+      shouldFetchScheduled,
+    ]);
+
+  function handleTabChange(tab: AdminNotification) {
+    setActiveTab(tab);
+    setSearch("");
+  }
 
   // Example recipient options, replace with real data as needed
   const recipientOptions = [
@@ -34,70 +99,27 @@ export const Notification = () => {
   ];
   const tabOptions = tabs.map((tab) => ({ label: tab, value: tab }));
 
-  function handleApplyFilter({
-    tab,
-    recipient,
-  }: {
-    tab: AdminNotification | "";
-    recipient: string;
-  }) {
-    setFilters({ tab, recipient });
+  function handleApplyFilter({ tab }: { tab: AdminNotification | "" }) {
     if (tab) setActiveTab(tab as AdminNotification);
   }
 
   function handleClearFilter() {
-    setFilters({ tab: "", recipient: "" });
     setActiveTab(AdminNotification.Sent);
   }
-
-  const notifications = [
-    {
-      id: "1",
-      title: "Security Alert",
-      message: "Dear customers please setup your..",
-      recipient: "All",
-      date: "2022-08-20 16:17:34",
-      tab: AdminNotification.Sent,
-    },
-    {
-      id: "2",
-      title: "System Update",
-      message: "System will be down for maintenance.",
-      recipient: "Admin",
-      date: "2022-09-01 10:00:00",
-      tab: AdminNotification.Scheduled,
-    },
-    // ...more notifications
-  ];
-
-  // Filtering logic
-  const filteredNotifications = useMemo(
-    () =>
-      notifications.filter((n) => {
-        const matchesTab = !filters.tab || n.tab === filters.tab;
-        const matchesRecipient =
-          !filters.recipient || n.recipient === filters.recipient;
-        const matchesSearch =
-          !searchValue ||
-          n.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-          n.message.toLowerCase().includes(searchValue.toLowerCase());
-        return matchesTab && matchesRecipient && matchesSearch;
-      }),
-    [notifications, filters, searchValue],
-  );
 
   return (
     <Fragment>
       <div className="grid w-full grid-cols-1 gap-6 lg:grid-cols-2">
+        {isLoading && <Loading />}
         <SupportCard
           title="Total Notifications Sent"
-          value={100000}
+          value={data?.data.sent ?? 0}
           className="bg-foundation-red-white text-foundation-red-normal"
           Icon={ApplicationNotificationIcon}
         />
         <SupportCard
           title="Total Notifications Scheduled"
-          value={40000}
+          value={data?.data.scheduled ?? 0}
           className="bg-pending-bg text-pending"
           Icon={ApplicationNotificationIcon}
         />
@@ -118,7 +140,7 @@ export const Notification = () => {
                     "text-grey-text-800 tab-shadow bg-white": tab === activeTab,
                   },
                 )}
-                onClick={() => setActiveTab(tab)}
+                onClick={() => handleTabChange(tab)}
               >
                 {tab}
               </button>
@@ -126,7 +148,7 @@ export const Notification = () => {
           </div>
           <div className="flex w-full justify-between">
             <Searchbar
-              onSendSearchValue={setSearchValue}
+              onSendSearchValue={setSearch}
               filterComponent={
                 <NotificationFilterForm
                   tabOptions={tabOptions}
@@ -137,6 +159,7 @@ export const Notification = () => {
                 />
               }
             />
+
             <Link href={routes.admin.newNotification}>
               <Button width="max">Send New Notification</Button>
             </Link>
@@ -156,14 +179,28 @@ export const Notification = () => {
             </div>
             {/* loading */}
             <div className="h-full">
-              {filteredNotifications.map((notification) => (
-                <NotificationListItem
-                  key={notification.id}
-                  notification={notification}
-                />
-              ))}
+              {notificationsLoading && <Loading />}
+              {!notificationsLoading &&
+                notificationsData &&
+                notificationsData.map((notification) => (
+                  <NotificationListItem
+                    key={notification._id}
+                    notification={notification}
+                  />
+                ))}
             </div>
             {/* pagination */}
+            {notificationsPagination && (
+              <Pagination
+                current={notificationsPagination.current}
+                pages={notificationsPagination.pages}
+                limit={notificationsPagination.limit}
+                hasPrev={notificationsPagination.hasPrev}
+                hasNext={notificationsPagination.hasNext}
+                onLimitChange={handleLimitChange}
+                onPageChange={handlePageChange}
+              />
+            )}
           </div>
         </AdminCard>
       </div>

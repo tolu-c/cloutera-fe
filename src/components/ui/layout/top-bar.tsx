@@ -8,14 +8,19 @@ import {
 import { Fragment, useState } from "react";
 import Sidebar from "./side-bar";
 import Image from "next/image";
-import { useGetPageTitle, useLocalStorage } from "@/hooks";
+import { useDisclosure, useGetPageTitle, useLocalStorage } from "@/hooks";
 import { CLOUTERA_USER } from "@/types/constants";
 import { User } from "@/types";
 import Link from "next/link";
+import { useGetNotifications } from "@/queries/notifications";
+import { NotificationListPopover } from "@/components/admin/support/notification";
 
 const TopBar = () => {
   const pageTitle = useGetPageTitle();
   const [sidebarOpen, setSidebarOpen] = useState(false);
+  const [viewNotifications, { open, close }] = useDisclosure();
+
+  const { data } = useGetNotifications();
 
   const { getItem } = useLocalStorage<User>(CLOUTERA_USER);
   const user = getItem();
@@ -23,7 +28,7 @@ const TopBar = () => {
   return (
     <Fragment>
       <div className="bg-foundation-red-normal flex h-22 w-full items-center justify-center">
-        <div className="flex h-10 w-full max-w-7xl items-center justify-between">
+        <div className="flex h-10 w-full max-w-7xl items-center justify-between px-2">
           <div className="flex items-center gap-4">
             <button
               className="cursor-pointer"
@@ -33,10 +38,22 @@ const TopBar = () => {
             </button>
             <p className="text-xl text-white capitalize">{pageTitle}</p>
           </div>
+
           <div className="flex items-center gap-4">
-            <div className="relative">
+            <div className="relative" onClick={open}>
               <NotificationIcon className="size-4 text-white" />
+
+              {data?.data && data.data.length > 0 && (
+                <span className="bg-accent-1 absolute top-2 right-2.5 size-1 rounded-full" />
+              )}
+
+              <NotificationListPopover
+                open={viewNotifications}
+                close={close}
+                notifications={data?.data || []}
+              />
             </div>
+
             <div className="flex items-center gap-2 px-3">
               <p className="text-base/5 font-medium text-white capitalize">
                 {user?.firstName}
@@ -60,6 +77,7 @@ const TopBar = () => {
           </div>
         </div>
       </div>
+
       <Sidebar open={sidebarOpen} close={() => setSidebarOpen(false)}></Sidebar>
     </Fragment>
   );

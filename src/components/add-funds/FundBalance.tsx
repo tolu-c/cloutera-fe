@@ -9,7 +9,7 @@ export const FundBalance = () => {
   const { data } = useGetAccountStatus();
   const account = data?.data;
   return (
-    <div>
+    <div className="px-4 lg:px-8">
       <Card
         title="Balance"
         value={formatAmount(account?.accountBalance ?? 0)}

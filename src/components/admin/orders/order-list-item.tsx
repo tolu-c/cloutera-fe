@@ -29,7 +29,7 @@ export const OrderListItem = ({ order }: OrderListItemProps) => {
       </DataCell>
       <DataCell className="p-4">{formatAmount(charge)}</DataCell>
       <DataCell className="p-4">{quantity}</DataCell>
-      <DataCell className="p-4">{serviceId ?? "-"}</DataCell>
+      <DataCell className="p-4">{serviceId?.serviceId ?? "-"}</DataCell>
       <DataCell className="p-4">
         <Badge status={status} />
       </DataCell>

@@ -55,7 +55,7 @@ export const Pagination = ({
   const visiblePages = pages > 1 ? getVisiblePages() : [1];
 
   return (
-    <div className="flex h-10 w-full justify-between gap-4">
+    <div className="flex h-10 w-full flex-col items-center gap-4 lg:flex-row lg:justify-between">
       <div className="flex items-center gap-4 text-sm">
         <span className="text-foundation-red-normal/70 text-sm font-light">
           Items per page:
