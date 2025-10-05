@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useState, useMemo } from "react";
 
 import { SupportCard } from "@/components/admin/support";
 import { MessageQuestionLineIcon } from "@/assets/icons";
@@ -16,15 +16,15 @@ export const SupportFaq = () => {
 
   const { isLoading, data } = useGetFaqList();
 
-  const faqList = data?.data
-    ? search === ""
-      ? data.data
-      : data.data.filter(
-          (faq) =>
-            (faq.question.toLowerCase() ?? "").includes(search.toLowerCase()) ||
-            (faq.answer.toLowerCase() ?? "").includes(search.toLowerCase()),
-        )
-    : [];
+  const faqList = useMemo(() => {
+    if (!data?.data) return [];
+    if (search === "") return data.data;
+    return data.data.filter(
+      (faq) =>
+        (faq.question.toLowerCase() ?? "").includes(search.toLowerCase()) ||
+        (faq.answer.toLowerCase() ?? "").includes(search.toLowerCase()),
+    );
+  }, [data, search]);
 
   return (
     <Fragment>

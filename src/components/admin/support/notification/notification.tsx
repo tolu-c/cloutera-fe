@@ -1,6 +1,6 @@
 "use client";
 
-import { Fragment, useState } from "react";
+import { Fragment, useState, useMemo } from "react";
 import { SupportCard } from "@/components/admin/support";
 import { ApplicationNotificationIcon } from "@/assets/icons";
 import { Searchbar } from "@/components/form";
@@ -71,16 +71,20 @@ export const Notification = () => {
   ];
 
   // Filtering logic
-  const filteredNotifications = notifications.filter((n) => {
-    const matchesTab = !filters.tab || n.tab === filters.tab;
-    const matchesRecipient =
-      !filters.recipient || n.recipient === filters.recipient;
-    const matchesSearch =
-      !searchValue ||
-      n.title.toLowerCase().includes(searchValue.toLowerCase()) ||
-      n.message.toLowerCase().includes(searchValue.toLowerCase());
-    return matchesTab && matchesRecipient && matchesSearch;
-  });
+  const filteredNotifications = useMemo(
+    () =>
+      notifications.filter((n) => {
+        const matchesTab = !filters.tab || n.tab === filters.tab;
+        const matchesRecipient =
+          !filters.recipient || n.recipient === filters.recipient;
+        const matchesSearch =
+          !searchValue ||
+          n.title.toLowerCase().includes(searchValue.toLowerCase()) ||
+          n.message.toLowerCase().includes(searchValue.toLowerCase());
+        return matchesTab && matchesRecipient && matchesSearch;
+      }),
+    [notifications, filters, searchValue],
+  );
 
   return (
     <Fragment>

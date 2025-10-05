@@ -1,7 +1,7 @@
 "use client";
 
 import { FundHistoryCategory, TransactionStatus } from "@/types/enums";
-import { useState } from "react";
+import { useState, useMemo } from "react";
 import { Searchbar } from "../form";
 import { cn } from "@/utils/cn";
 import { Badge, DataCell, Pagination } from "../ui";
@@ -30,17 +30,20 @@ export const FundsHistory = () => {
   const pagination = data?.pagination;
 
   // Client-side filtering
-  const filteredData =
-    data?.data?.filter((item) => {
-      const matchesSearch =
-        searchValue === "" ||
-        item.transactionId.toLowerCase().includes(searchValue.toLowerCase());
-      const matchesCategory =
-        !filters.category ||
-        item.type.toString() === filters.category.toString();
-      const matchesStatus = !filters.status || item.status === filters.status;
-      return matchesSearch && matchesCategory && matchesStatus;
-    }) || [];
+  const filteredData = useMemo(() => {
+    return (
+      data?.data?.filter((item) => {
+        const matchesSearch =
+          searchValue === "" ||
+          item.transactionId.toLowerCase().includes(searchValue.toLowerCase());
+        const matchesCategory =
+          !filters.category ||
+          item.type.toString() === filters.category.toString();
+        const matchesStatus = !filters.status || item.status === filters.status;
+        return matchesSearch && matchesCategory && matchesStatus;
+      }) || []
+    );
+  }, [data, searchValue, filters]);
 
   const categoryOptions = tabs.map((tab) => ({ label: tab, value: tab }));
   const statusOptions = Object.values(TransactionStatus).map((s) => ({

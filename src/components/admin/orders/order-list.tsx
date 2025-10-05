@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useMemo } from "react";
 
 import { AdminCard, DataCell, Loading, Pagination } from "@/components/ui";
 import { Searchbar } from "@/components/form";
@@ -50,6 +50,21 @@ export const OrderList = () => {
     customer: filters.customer || undefined,
   });
 
+  // Memoize filtered order data
+  const filteredOrders = useMemo(() => {
+    if (!data?.data) return [];
+    return data.data.filter((order) => {
+      const matchesSearch =
+        !search ||
+        order._id?.toLowerCase().includes(search.toLowerCase()) ||
+        order.userId?.email?.toLowerCase().includes(search.toLowerCase());
+      const matchesStatus = !filters.status || order.status === filters.status;
+      const matchesCustomer =
+        !filters.customer || order.userId?.email === filters.customer;
+      return matchesSearch && matchesStatus && matchesCustomer;
+    });
+  }, [data, search, filters]);
+
   const pagination = data?.pagination;
 
   return (
@@ -93,8 +108,8 @@ export const OrderList = () => {
 
         <div className="h-full">
           {!isLoading &&
-            data?.data &&
-            data.data.map((o) => <OrderListItem key={o._id} order={o} />)}
+            filteredOrders &&
+            filteredOrders.map((o) => <OrderListItem key={o._id} order={o} />)}
         </div>
 
         {pagination && (
