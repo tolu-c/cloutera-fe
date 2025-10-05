@@ -6,6 +6,7 @@ export const routes = {
   customer: {
     order: "/order",
     addFunds: "/add-funds",
+    profile: "/profile",
   },
   admin: {
     dashboard: "/admin/dashboard",

@@ -27,21 +27,23 @@ const TopBar = () => {
 
   return (
     <Fragment>
-      <div className="bg-foundation-red-normal flex h-22 w-full items-center justify-center">
-        <div className="flex h-10 w-full max-w-7xl items-center justify-between px-2">
+      <div className="lg:bg-foundation-red-normal flex h-12 w-full items-center justify-center bg-white lg:h-22">
+        <div className="flex h-10 w-full max-w-7xl items-center justify-between px-6 lg:px-2">
           <div className="flex items-center gap-4">
             <button
               className="cursor-pointer"
               onClick={() => setSidebarOpen(true)}
             >
-              <DashboardFillIcon className="size-6 text-white" />
+              <DashboardFillIcon className="text-foundation-red-normal size-6 lg:text-white" />
             </button>
-            <p className="text-xl text-white capitalize">{pageTitle}</p>
+            <p className="text-xl text-black capitalize lg:text-white">
+              {pageTitle}
+            </p>
           </div>
 
           <div className="flex items-center gap-4">
             <div className="relative" onClick={open}>
-              <NotificationIcon className="size-4 text-white" />
+              <NotificationIcon className="size-4 text-black lg:text-white" />
 
               {data?.data && data.data.length > 0 && (
                 <span className="bg-accent-1 absolute top-2 right-2.5 size-1 rounded-full" />
@@ -54,7 +56,7 @@ const TopBar = () => {
               />
             </div>
 
-            <div className="flex items-center gap-2 px-3">
+            <div className="hidden items-center gap-2 px-3 lg:flex">
               <p className="text-base/5 font-medium text-white capitalize">
                 {user?.firstName}
               </p>

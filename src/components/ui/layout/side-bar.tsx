@@ -23,6 +23,7 @@ import { useGetAccountStatus } from "@/queries/account";
 import { formatAmount } from "@/utils";
 import { User } from "@/types";
 import { CLOUTERA_USER } from "@/types/constants";
+import { routes } from "@/utils/routes";
 
 const sidebarLinks = [
   { label: "New Orders", href: "/order", icon: <NewOrderIcon /> },
@@ -79,7 +80,10 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
                   className="object-cover object-center"
                 />
               </div>
-              <div className="flex flex-col gap-0.5">
+              <Link
+                href={routes.customer.profile}
+                className="flex flex-col gap-0.5"
+              >
                 <span className="text-base font-medium text-gray-900">
                   {user?.firstName || ""}
                 </span>
@@ -88,7 +92,7 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
                     {formatAmount(account?.accountBalance || 0)}
                   </span>
                 </div>
-              </div>
+              </Link>
             </div>
           </div>
           <nav className="flex flex-1 flex-col gap-4">
