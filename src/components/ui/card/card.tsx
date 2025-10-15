@@ -40,7 +40,7 @@ const Card = ({
       <div className="flex w-full items-start gap-2">
         <p
           className={cn(
-            "max-w-3/4 flex-1 truncate text-base/6 font-semibold lg:text-[32px] lg:leading-10",
+            "max-w-3/4 flex-1 text-base/6 font-semibold lg:text-[32px] lg:leading-10",
             amountSize,
           )}
         >

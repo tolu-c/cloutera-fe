@@ -11,7 +11,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddFundOptions } from "@/types/enums";
 import { useAddFund, useInitializePayment } from "@/mutations/account";
-import PaystackPop from "@paystack/inline-js";
+// import PaystackPop from "@paystack/inline-js";
 import { useLocalStorage } from "@/hooks";
 import { User } from "@/types";
 import { CLOUTERA_USER } from "@/types/constants";
@@ -58,7 +58,9 @@ export const AddFundForm = () => {
       });
 
       if (res.data.access_code && res.data.reference) {
-        const popup = new PaystackPop();
+        const PayStackPop = (await import("@paystack/inline-js")).default;
+
+        const popup = new PayStackPop();
 
         popup.resumeTransaction(res.data.access_code, {
           onSuccess: () => {
