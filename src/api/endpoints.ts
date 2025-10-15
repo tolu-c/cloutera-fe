@@ -29,6 +29,8 @@ export const endpoints = {
     addFund: "/account/add-fund",
     accountStatus: "/account/status",
     getFundsHistory: "/account/funds/history",
+    initializePayment: "/account/initialize-payment",
+    verifyPayment: (reference: string) => `account/verify-payment/${reference}`,
   },
   faq: {
     list: "/faqs/",

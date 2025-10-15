@@ -53,7 +53,7 @@ export enum FundHistoryCategory {
 }
 
 export enum AddFundOptions {
-  FlutterWave = "FlutterWave",
+  PayStack = "PayStack",
 }
 
 export enum TransactionStatus {

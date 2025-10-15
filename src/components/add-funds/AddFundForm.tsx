@@ -10,21 +10,27 @@ import { addFundSchema } from "@/types/schema";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { AddFundOptions } from "@/types/enums";
-import { useAddFund } from "@/mutations/account";
-import { useFlutterwave, closePaymentModal } from "flutterwave-react-v3";
-import {
-  FlutterwaveConfig,
-  FlutterWaveResponse,
-} from "flutterwave-react-v3/dist/types";
+import { useAddFund, useInitializePayment } from "@/mutations/account";
+import PaystackPop from "@paystack/inline-js";
+import { useLocalStorage } from "@/hooks";
+import { User } from "@/types";
+import { CLOUTERA_USER } from "@/types/constants";
+import { useAccount } from "@/services/account";
 
 type FormData = z.infer<typeof addFundSchema>;
 
 export const AddFundForm = () => {
   const [selectedAmount, setSelectedAmount] = useState<number | null>(null);
 
-  const { isPending, mutateAsync: submit } = useAddFund();
+  const { getItem } = useLocalStorage<User>(CLOUTERA_USER);
+  const user = getItem();
 
-  const amountOptions = [500, 1000, 2000, 5000];
+  const { isPending, mutateAsync: submit } = useAddFund();
+  const { isPending: initializingPayment, mutateAsync: initializePayment } =
+    useInitializePayment();
+  const { handleVerifyPayment } = useAccount();
+
+  const amountOptions = [500, 1000, 2000, 5000] as const;
 
   const paymentOptions = Object.entries(AddFundOptions).map(([key, value]) => ({
     label: key,
@@ -40,45 +46,36 @@ export const AddFundForm = () => {
     resolver: zodResolver(addFundSchema),
     defaultValues: {
       amount: selectedAmount ?? undefined,
-      paymentMethod: AddFundOptions.FlutterWave,
+      paymentMethod: AddFundOptions.PayStack,
     },
   });
-  const handleFlutterwave = useFlutterwave;
 
   const onSubmit: SubmitHandler<FormData> = async (data) => {
-    const config: FlutterwaveConfig = {
-      public_key: process.env.NEXT_PUBLIC_FLUTTERWAVE_KEY as string,
-      tx_ref: String(Date.now()),
-      amount: data.amount,
-      currency: "NGN",
-      payment_options: "card,mobilemoney,ussd",
-      customer: {
-        email: "webdevtolu@protonmail.com",
-        phone_number: "08141272488",
-        name: "Tolu Test",
-      },
-      customizations: {
-        title: "Fund My Cloutera Wallet",
-        description: `Funding my wallet with ${formatAmount(data.amount)}`,
-        logo: "https://st2.depositphotos.com/4403291/7418/v/450/depositphotos_74189661-stock-illustration-online-shop-log.jpg",
-      },
-    };
+    if (user?.email) {
+      const res = await initializePayment({
+        email: user?.email,
+        amount: String(data.amount),
+      });
 
-    const handleFlutterPayment = handleFlutterwave(config);
+      if (res.data.access_code && res.data.reference) {
+        const popup = new PaystackPop();
 
-    handleFlutterPayment({
-      callback: async (res: FlutterWaveResponse) => {
-        const { amount, status, tx_ref } = res;
-        await submit({
-          amount,
-          status,
-          tx_reference: tx_ref,
-          paymentMethod: data.paymentMethod,
+        popup.resumeTransaction(res.data.access_code, {
+          onSuccess: () => {
+            handleVerifyPayment(res.data.reference).then((res2) => {
+              const { amount, status, reference } = res2.data;
+
+              submit({
+                amount,
+                status,
+                tx_reference: reference,
+                paymentMethod: data.paymentMethod,
+              });
+            });
+          },
         });
-        closePaymentModal();
-      },
-      onClose: () => {},
-    });
+      }
+    }
   };
 
   return (
@@ -127,7 +124,7 @@ export const AddFundForm = () => {
         {...register("amount", { valueAsNumber: true })}
       />
 
-      <Button type="submit" disabled={isPending}>
+      <Button type="submit" disabled={isPending || initializingPayment}>
         Proceed
       </Button>
     </form>

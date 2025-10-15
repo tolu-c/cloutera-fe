@@ -6,7 +6,10 @@ import {
   AccountStatusResponse,
   AddFundRequest,
   AddFundResponse,
+  InitializePaymentRequest,
+  InitializePaymentResponse,
   Transaction,
+  VerifyPaymentResponse,
 } from "@/types/account.types";
 import { ApiAuthModes } from "@/types/enums";
 import { AxiosResponse } from "axios";
@@ -16,7 +19,25 @@ export const useAccount = () => {
 
   const authApi = useAxiosApi(ApiAuthModes.BearerToken, handleError);
 
-  const { addFund, accountStatus, getFundsHistory } = endpoints.account;
+  const {
+    addFund,
+    accountStatus,
+    getFundsHistory,
+    initializePayment,
+    verifyPayment,
+  } = endpoints.account;
+
+  async function handleVerifyPayment(reference: string) {
+    const res: AxiosResponse<ApiDataResponse<VerifyPaymentResponse>> =
+      await authApi.get(verifyPayment(reference));
+    return res.data;
+  }
+
+  async function handleInitializePayment(data: InitializePaymentRequest) {
+    const res: AxiosResponse<ApiDataResponse<InitializePaymentResponse>> =
+      await authApi.post(initializePayment, data);
+    return res.data;
+  }
 
   const handleAddFund = async (data: AddFundRequest) => {
     const res: AxiosResponse<ApiDataResponse<AddFundResponse>> =
@@ -42,5 +63,7 @@ export const useAccount = () => {
     handleAddFund,
     handleGetAccountStatus,
     handleGetFundHistory,
+    handleInitializePayment,
+    handleVerifyPayment,
   };
 };

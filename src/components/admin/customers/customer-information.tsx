@@ -7,7 +7,7 @@ import {
   ShoppingCartIcon,
   VerifiedTickIcon,
 } from "@/assets/icons";
-import { formatAmount, formatDateTime } from "@/utils";
+import { formatAmount, formatDateTime, formatNumber } from "@/utils";
 import { useGetCustomer, useGetCustomerAccount } from "@/queries/customers";
 import { DateTimeFormat } from "@/types/enums";
 import { Fragment } from "react";
@@ -89,7 +89,7 @@ export const CustomerInformation = ({
                 <div className="grid grid-cols-1 gap-4 lg:grid-cols-2">
                   <Card
                     title="Total Orders"
-                    value={formatAmount(account.orders.totalOrders)}
+                    value={formatNumber(account.orders.totalOrders)}
                     icon={
                       <ShoppingCartIcon className="text-foundation-red-normal size-4" />
                     }

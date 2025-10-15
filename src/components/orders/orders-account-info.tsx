@@ -8,7 +8,7 @@ import {
 } from "@/assets/icons";
 import { Card } from "@/components/ui";
 import { useGetAccountStatus } from "@/queries/account";
-import { formatAmount } from "@/utils";
+import { formatAmount, formatNumber } from "@/utils";
 import { Fragment } from "react";
 import Link from "next/link";
 import { routes } from "@/utils/routes";
@@ -16,6 +16,7 @@ import { routes } from "@/utils/routes";
 export const OrdersAccountInfo = () => {
   const { data, isLoading } = useGetAccountStatus();
   const account = data?.data;
+
   return (
     <div className="grid w-full grid-cols-2 gap-2 p-6 lg:w-auto lg:grid-cols-3 lg:gap-6">
       {isLoading && <p>loading...</p>}
@@ -26,12 +27,12 @@ export const OrdersAccountInfo = () => {
             title="Account Status"
             value={`Level ${account.accountStatus}`}
             icon={<AccountStatusIcon className="size-4 text-white" />}
-            className="col-span-2"
+            className="col-span-2 lg:col-span-1"
             gradient
           />
           <Card
             title="Total Orders"
-            value={formatAmount(account.orders.totalAmount)}
+            value={formatNumber(account.orders.totalAmount)}
             icon={
               <ShoppingCartIcon className="text-foundation-red-normal size-4" />
             }

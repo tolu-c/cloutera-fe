@@ -82,6 +82,7 @@ const Sidebar = ({ open, close, className }: SidebarProps) => {
               </div>
               <Link
                 href={routes.customer.profile}
+                onClick={close}
                 className="flex flex-col gap-0.5"
               >
                 <span className="text-base font-medium text-gray-900">
