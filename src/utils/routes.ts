@@ -5,6 +5,7 @@ export const routes = {
   },
   customer: {
     order: "/order",
+    orderHistory: "/order/history",
     addFunds: "/add-funds",
     profile: "/profile",
   },

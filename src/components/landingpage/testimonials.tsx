@@ -1,22 +1,36 @@
-import { ArrowLeftIcon, ArrowRightIcon } from "@/assets/icons";
-import Image from "next/image";
+"use client";
 
-// Define an interface for testimonial data
-interface Testimonial {
-  quote: string;
-  author: string;
-  title: string;
-  avatarSrc: string;
-}
+import Image from "next/image";
+import { useEffect, useState } from "react";
+
+import { ArrowLeftIcon, ArrowRightIcon } from "@/assets/icons";
+import { TESTIMONIALS } from "@/types/constants";
 
 export const TestimonialsSection = () => {
-  const testimonial: Testimonial = {
-    quote:
-      "Integer consectetur. Integer metus sollicitudin eu tellus. Consequat tortor neque diam vulputate semper pretium. Elementum id et aliquet consectetur.",
-    author: "Malik Adeleke",
-    title: "Brand Owner",
-    avatarSrc: "/images/testimonialAvatar.png",
+  const [currentIndex, setCurrentIndex] = useState(0);
+
+  const goToPrevious = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === 0 ? TESTIMONIALS.length - 1 : prevIndex - 1,
+    );
   };
+
+  const goToNext = () => {
+    setCurrentIndex((prevIndex) =>
+      prevIndex === TESTIMONIALS.length - 1 ? 0 : prevIndex + 1,
+    );
+  };
+
+  // auto rotate testimonials
+  useEffect(() => {
+    const interval = setInterval(() => {
+      goToNext();
+    }, 3000);
+
+    return () => clearInterval(interval);
+  }, [currentIndex]);
+
+  const currentTestimonial = TESTIMONIALS[currentIndex];
 
   return (
     <section className="bg-white py-16">
@@ -38,12 +52,14 @@ export const TestimonialsSection = () => {
               <button
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-colors duration-200 hover:bg-red-600"
                 aria-label="Previous testimonial"
+                onClick={goToPrevious}
               >
                 <ArrowLeftIcon />
               </button>
               <button
                 className="flex h-10 w-10 items-center justify-center rounded-full bg-red-500 text-white transition-colors duration-200 hover:bg-red-600"
                 aria-label="Next testimonial"
+                onClick={goToNext}
               >
                 <ArrowRightIcon />
               </button>
@@ -60,21 +76,23 @@ export const TestimonialsSection = () => {
               Quality Services
             </h3>
             <p className="relative z-10 mb-6 text-lg text-gray-600">
-              {testimonial.quote}
+              {currentTestimonial.quote}
             </p>
             <div className="flex items-center space-x-4">
               <Image
-                src={testimonial.avatarSrc}
-                alt={testimonial.author}
+                src={currentTestimonial.avatarSrc}
+                alt={currentTestimonial.author}
                 width={64}
                 height={64}
                 className="rounded-full border-2 border-red-500 object-cover"
               />
               <div>
                 <p className="text-lg font-semibold text-gray-900">
-                  {testimonial.author}
+                  {currentTestimonial.author}
                 </p>
-                <p className="text-sm text-gray-500">{testimonial.title}</p>
+                <p className="text-sm text-gray-500">
+                  {currentTestimonial.title}
+                </p>
               </div>
             </div>
           </div>

@@ -53,11 +53,16 @@ export const Services = ({ showList = true }: ServicesProps) => {
     setSearchValue(value);
   };
 
+  const handleSetCategory = (value: string) => {
+    setSearchValue("");
+    setCurrentCategory(value);
+  };
+
   return (
     <Fragment>
       {showList && (
         <OrdersServiceList
-          onSelectService={(category) => setCurrentCategory(category)}
+          onSelectService={(category) => handleSetCategory(category || "")}
         />
       )}
       <div className="flex w-full flex-col items-start gap-4 p-4">

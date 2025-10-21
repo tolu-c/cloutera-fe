@@ -37,7 +37,7 @@ const Card = ({
         <span>{icon}</span>
       </div>
 
-      <div className="flex w-full items-start gap-2">
+      <div className="flex w-full items-start justify-between gap-2">
         <p
           className={cn(
             "max-w-3/4 flex-1 text-base/6 font-semibold lg:text-[32px] lg:leading-10",

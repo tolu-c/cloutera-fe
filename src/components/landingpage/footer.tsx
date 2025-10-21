@@ -1,7 +1,8 @@
-import React from "react";
 import Link from "next/link";
-import ClouteraLogo from "../ui/logo";
 import Image from "next/image";
+import React from "react";
+
+import ClouteraLogo from "../ui/logo";
 
 export const Footer = () => {
   return (
@@ -31,7 +32,7 @@ export const Footer = () => {
               <input
                 type="email"
                 placeholder="Enter your email address"
-                className="bg-opacity-20 w-full flex-grow pl-2.5 text-white placeholder-white/50 transition-all duration-300 focus:border-transparent focus:ring-2 focus:ring-white focus:outline-none sm:w-auto lg:pl-10"
+                className="bg-opacity-20 w-full flex-grow pl-2.5 text-white placeholder-white/50 transition-all duration-300 outline-none focus:border-transparent focus:outline-none sm:w-auto lg:pl-10"
               />
               <button
                 type="submit"

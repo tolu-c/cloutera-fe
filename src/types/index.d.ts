@@ -137,3 +137,10 @@ export interface TimeStamp {
   createdAt: string;
   updatedAt: string;
 }
+
+export interface Testimonial {
+  quote: string;
+  author: string;
+  title: string;
+  avatarSrc: string;
+}

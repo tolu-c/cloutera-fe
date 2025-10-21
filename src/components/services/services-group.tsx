@@ -4,7 +4,8 @@ import { ServicesList } from "@/components/services/services-list";
 import { useGetServices } from "@/queries/get-services";
 import { ServiceItem } from "@/types/services.types";
 import { Loading, Pagination } from "../ui";
-import { useState } from "react";
+import { usePagination } from "@/hooks";
+import { useMemo } from "react";
 
 interface ServicesGroupProps {
   search: string;
@@ -12,9 +13,7 @@ interface ServicesGroupProps {
 }
 
 export const ServicesGroup = ({ search, category }: ServicesGroupProps) => {
-  const [page, setPage] = useState(1);
-  const [limit, setLimit] = useState(50);
-
+  const { page, limit, handleLimitChange, handlePageChange } = usePagination();
   const { data, isLoading } = useGetServices({
     page,
     limit,
@@ -22,45 +21,42 @@ export const ServicesGroup = ({ search, category }: ServicesGroupProps) => {
     category,
   });
 
+  const groupedData = useMemo(() => {
+    return (
+      data?.data?.reduce(
+        (acc: { [key: string]: ServiceItem[] }, service: ServiceItem) => {
+          if (!acc[service.category]) {
+            acc[service.category] = [];
+          }
+          acc[service.category].push(service);
+          return acc;
+        },
+        {},
+      ) || {}
+    );
+  }, [data?.data]);
+
+  const result = useMemo(() => {
+    return Object.entries(groupedData).map(([cat, services]) => ({
+      category: cat,
+      services,
+    }));
+  }, [groupedData]);
+
   if (isLoading) {
     return <Loading />;
   }
 
   if (!data?.data) {
-    return null;
+    return <div>No services found</div>;
   }
 
   const pagination = data.pagination;
 
-  const groupedData = data?.data?.reduce(
-    (acc: { [key: string]: ServiceItem[] }, service: ServiceItem) => {
-      if (!acc[service.category]) {
-        acc[service.category] = [];
-      }
-      acc[service.category].push(service);
-      return acc;
-    },
-    {},
-  );
-
-  const result = Object.entries(groupedData).map(([category, services]) => ({
-    category,
-    services,
-  }));
-
-  const handlePageChange = (newPage: number) => {
-    setPage(newPage);
-  };
-
-  const handleLimitChange = (newLimit: number) => {
-    setLimit(newLimit);
-    setPage(1); // Reset to first page when changing limit
-  };
-
   return (
     <div className="flex w-full flex-col items-start gap-2">
-      {result.map(({ category, services }, index) => (
-        <ServicesList key={index} title={category} services={services} />
+      {result.map(({ category, services }) => (
+        <ServicesList key={category} title={category} services={services} />
       ))}
       {pagination && (
         <Pagination

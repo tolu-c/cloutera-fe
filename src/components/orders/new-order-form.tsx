@@ -20,13 +20,16 @@ type FormData = z.infer<typeof newOrderSchema>;
 
 interface NewOrderFormProps {
   serviceId?: string;
+  selectedServiceCategory?: string;
 }
 
-export const NewOrderForm = ({ serviceId }: NewOrderFormProps) => {
+export const NewOrderForm = ({
+  serviceId,
+  selectedServiceCategory,
+}: NewOrderFormProps) => {
   const [searchValue, setSearchValue] = useState<string | undefined>(undefined);
 
   const router = useRouter();
-  // const [selectedCategory, setSelectedCategory] = useState("");
 
   const {
     register,
@@ -105,6 +108,15 @@ export const NewOrderForm = ({ serviceId }: NewOrderFormProps) => {
     }
   }, [serviceId, singleServiceData, setValue]);
 
+  // Update category when selectedServiceCategory changes
+  useEffect(() => {
+    if (selectedServiceCategory) {
+      setValue("category", selectedServiceCategory);
+    } else if (selectedServiceCategory === undefined && !serviceId) {
+      setValue("category", "");
+    }
+  }, [selectedServiceCategory, setValue, serviceId]);
+
   // Reset service when the category changes (unless pre-filled)
   useEffect(() => {
     if (selectedCategory && !serviceId) {
@@ -144,7 +156,7 @@ export const NewOrderForm = ({ serviceId }: NewOrderFormProps) => {
       className="flex w-full flex-col items-start gap-6"
     >
       <Searchbar
-        className="w-full"
+        className="w-full lg:w-full"
         onSendSearchValue={(value) => setSearchValue(value)}
         filterComponent={
           <OrderFilterForm

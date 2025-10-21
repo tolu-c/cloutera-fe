@@ -1,11 +1,10 @@
 import {
-  NewOrderForm,
   OrdersAccountInfo,
   OrdersServiceDescription,
-  OrdersServiceList,
   OrderUserWelcome,
 } from "@/components/orders";
 import type { Metadata } from "next";
+import { OrdersServiceContainer } from "@/components/orders/order-service-container";
 
 export const metadata: Metadata = {
   title: "Cloutera | Order",
@@ -27,15 +26,7 @@ const OrderPage = async ({
       </div>
 
       <div className="grid w-full grid-cols-1 lg:grid-cols-5">
-        <div className="flex flex-col gap-6 bg-white px-4 py-0 lg:col-span-3 lg:py-8">
-          <div className="bg-foundation-red-normal flex w-full items-center justify-start rounded-lg px-4 py-2.5 text-base/4 text-white">
-            Service
-          </div>
-
-          <OrdersServiceList />
-
-          <NewOrderForm serviceId={serviceId} />
-        </div>
+        <OrdersServiceContainer serviceId={serviceId} />
 
         <OrdersServiceDescription />
       </div>

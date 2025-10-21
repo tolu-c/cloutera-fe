@@ -34,15 +34,15 @@ export const FeatureCard = ({
 export const FeaturesSection = () => {
   const featuresData: FeatureCardProps[] = [
     {
-      title: "Secure Payments",
+      title: "Secure Transactions",
       description:
-        "Every Transaction Uses Advanced Encryption, Keeping Your Financial Data Safe And Compliant With Global Standards.",
+        "Every transaction is protected with advanced encryption, ensuring your payments and account details remain safe while you enjoy seamless social media growth.",
       ImageSrc: "/images/card.svg",
     },
     {
       title: "Super Fast Delivery!",
       description:
-        "Parents Can Monitor Fee Statuses, While Schools Get Real-Time Insights Into Collections And Outstanding Balances.",
+        "Our automated system processes your orders within seconds, ensuring fast, reliable, and seamless delivery every time.",
       ImageSrc: "/images/rocket.svg",
     },
     {
