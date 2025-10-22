@@ -8,7 +8,7 @@ export const useGetUserOrders = (params: GetOrdersParams) => {
   return useQuery({
     queryKey: ["orders", params],
     queryFn: () => handleGetUserOrders(params),
-    staleTime: Infinity,
+    staleTime: 60 * 3,
     gcTime: Infinity,
   });
 };

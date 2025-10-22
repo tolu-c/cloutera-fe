@@ -14,7 +14,9 @@ export const HistoryListItem = ({ order }: HistoryListItemProps) => {
   return (
     <div className="border-grey-200 flex w-full flex-col items-start rounded-lg bg-white shadow-sm lg:h-14 lg:flex-row lg:items-center lg:border-b lg:shadow-none">
       <DataCell className="basis-1/9 text-current">{orderId}</DataCell>
-      <DataCell className="basis-2/9 text-current">{link}</DataCell>
+      <DataCell className="line-clamp-2 basis-2/9 text-current">
+        {link}
+      </DataCell>
       <DataCell className="basis-1/9 text-current">
         {formatAmount(charge)}
       </DataCell>

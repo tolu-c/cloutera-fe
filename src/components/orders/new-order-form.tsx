@@ -141,8 +141,9 @@ export const NewOrderForm = ({
     category: string;
     service: string;
   }) {
-    if (category) setValue("category", category);
-    if (service) setValue("service", service);
+    // Prevent form submission when applying filters
+    if (category) setValue("category", category, { shouldValidate: false });
+    if (service) setValue("service", service, { shouldValidate: false });
   }
 
   function handleClearFilter() {
@@ -161,7 +162,6 @@ export const NewOrderForm = ({
         filterComponent={
           <OrderFilterForm
             categoryOptions={categoryOptions}
-            serviceOptions={serviceOptions}
             clearFilterAction={handleClearFilter}
             applyFilterAction={handleApplyFilter}
             closeAction={() => {}}

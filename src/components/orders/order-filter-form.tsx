@@ -4,7 +4,9 @@ import { SelectInput } from "@/components/form";
 import { LabelValuePair } from "@/types";
 import { Button } from "@/components/ui";
 import { SubmitHandler, useForm } from "react-hook-form";
-import { useEffect } from "react";
+import { useEffect, useMemo } from "react";
+import { useGetServices } from "@/queries/get-services";
+import { ServiceItem } from "@/types/services.types";
 
 interface OrderFilters {
   category: string;
@@ -13,7 +15,6 @@ interface OrderFilters {
 
 interface OrderFilterFormProps {
   categoryOptions: LabelValuePair[];
-  serviceOptions: LabelValuePair[];
   clearFilterAction: () => void;
   applyFilterAction: (filters: OrderFilters) => void;
   closeAction: () => void;
@@ -21,7 +22,6 @@ interface OrderFilterFormProps {
 
 export const OrderFilterForm = ({
   categoryOptions,
-  serviceOptions,
   clearFilterAction,
   applyFilterAction,
   closeAction,
@@ -41,6 +41,21 @@ export const OrderFilterForm = ({
   });
 
   const selectedCategory = watch("category");
+
+  // Fetch services filtered by the selected category in the filter form
+  const { data: filteredServicesData } = useGetServices({
+    category: selectedCategory || undefined,
+  });
+
+  // Generate service options based on filtered data
+  const serviceOptions = useMemo(
+    () =>
+      filteredServicesData?.data?.map((service: ServiceItem) => ({
+        label: `${service.name} - Rate: ${service.rate}/${service.min}-${service.max}`,
+        value: service.serviceId.toString(),
+      })) || [],
+    [filteredServicesData],
+  );
 
   useEffect(() => {
     setValue("service", "");
@@ -63,7 +78,7 @@ export const OrderFilterForm = ({
       className="flex w-full flex-col gap-3"
     >
       <SelectInput
-        options={categoryOptions}
+        options={[{ label: "All Categories", value: "" }, ...categoryOptions]}
         label="Category"
         aria-placeholder="Select Category"
         error={errors.category?.message}
@@ -71,10 +86,11 @@ export const OrderFilterForm = ({
       />
 
       <SelectInput
-        options={serviceOptions}
+        options={[{ label: "Select Service", value: "" }, ...serviceOptions]}
         label="Service"
         aria-placeholder="Select Service"
         error={errors.service?.message}
+        disabled={!selectedCategory}
         {...register("service")}
       />
 

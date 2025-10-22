@@ -6,7 +6,7 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { OrderStatus } from "@/types/enums";
 
 interface OrderHistoryFilters {
-  status: OrderStatus | "";
+  status: OrderStatus;
 }
 
 interface OrderHistoryFilterFormProps {
@@ -14,6 +14,7 @@ interface OrderHistoryFilterFormProps {
   clearFilterAction: () => void;
   applyFilterAction: (filters: OrderHistoryFilters) => void;
   closeAction: () => void;
+  status: OrderStatus;
 }
 
 export const OrderHistoryFilterForm = ({
@@ -21,6 +22,7 @@ export const OrderHistoryFilterForm = ({
   clearFilterAction,
   applyFilterAction,
   closeAction,
+  status,
 }: OrderHistoryFilterFormProps) => {
   const {
     register,
@@ -29,7 +31,7 @@ export const OrderHistoryFilterForm = ({
     formState: { errors },
   } = useForm<OrderHistoryFilters>({
     defaultValues: {
-      status: "",
+      status,
     },
   });
 

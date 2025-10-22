@@ -13,23 +13,18 @@ import { OrderHistoryFilterForm } from "./order-history-filter-form";
 
 export const OrderHistory = () => {
   const [search, setSearch] = useState<string | undefined>(undefined);
-  const [status, setStatus] = useState<OrderStatus | "">(OrderStatus.All);
+  const [status, setStatus] = useState<OrderStatus>(OrderStatus.All);
   const [page, setPage] = useState(1);
   const [limit, setLimit] = useState(50);
-  const [filters, setFilters] = useState<{ status: OrderStatus | "" }>({
-    status: "",
-  });
 
   const orderStatuses = Object.values(OrderStatus);
   const statusOptions = orderStatuses.map((s) => ({ label: s, value: s }));
 
-  function handleApplyFilter({ status }: { status: OrderStatus | "" }) {
-    setFilters({ status });
-    setStatus(status || OrderStatus.All);
+  function handleApplyFilter({ status }: { status: OrderStatus }) {
+    setStatus(status);
   }
 
   function handleClearFilter() {
-    setFilters({ status: "" });
     setStatus(OrderStatus.All);
   }
 
@@ -44,10 +39,11 @@ export const OrderHistory = () => {
 
   const { isLoading, data } = useGetUserOrders({
     search,
-    status:
-      filters.status && filters.status !== OrderStatus.All
-        ? filters.status
-        : undefined,
+    status: status
+      ? status === OrderStatus.All
+        ? undefined
+        : status
+      : undefined,
     page,
     limit,
   });
@@ -71,6 +67,7 @@ export const OrderHistory = () => {
                 statusOptions={statusOptions}
                 clearFilterAction={handleClearFilter}
                 applyFilterAction={handleApplyFilter}
+                status={status}
                 closeAction={() => {}}
               />
             }

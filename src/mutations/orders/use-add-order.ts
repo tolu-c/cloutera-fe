@@ -19,7 +19,8 @@ export const useAddOrder = () => {
         status: NotificationStatus.Success,
         message: res.message,
       });
-      queryClient.invalidateQueries({ queryKey: ["orders"] });
+      void queryClient.invalidateQueries({ queryKey: ["orders"] });
+      void queryClient.invalidateQueries({ queryKey: ["accountStatus"] });
     },
   });
 };
